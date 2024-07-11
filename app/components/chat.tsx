@@ -7,11 +7,32 @@ import Markdown from "react-markdown";
 // @ts-expect-error - no types for this yet
 import { AssistantStreamEvent } from "openai/resources/beta/assistants/assistants";
 import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/runs/runs";
+import CustomMarkdown from "./CustomMarkdown";
 
 type MessageProps = {
   role: "user" | "assistant" | "code";
   text: string;
 };
+
+function linkTargetBlank(markdown) {
+// Regular expression to match Markdown links
+const markdownLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+
+// Function to replace each Markdown link with the target attribute
+const updatedMarkdown = markdown.replace(markdownLinkRegex, (match, text, url) => {
+    return `[${text}](${url}){:target="_blank"}`;
+});
+
+return updatedMarkdown;
+}
+
+const removeAnnotations = (text)=> {
+  // Use regex to find and remove all annotations in the form 【...】
+  return text.replace(/【.*?】/g, '');
+}
+
+
+
 
 const UserMessage = ({ text }: { text: string }) => {
   return <div className={styles.userMessage}>{text}</div>;
@@ -20,7 +41,7 @@ const UserMessage = ({ text }: { text: string }) => {
 const AssistantMessage = ({ text }: { text: string }) => {
   return (
     <div className={styles.assistantMessage}>
-      <Markdown>{text}</Markdown>
+      <CustomMarkdown markdown={text} />
     </div>
   );
 };
@@ -39,11 +60,12 @@ const CodeMessage = ({ text }: { text: string }) => {
 };
 
 const Message = ({ role, text }: MessageProps) => {
+  
   switch (role) {
     case "user":
       return <UserMessage text={text} />;
     case "assistant":
-      return <AssistantMessage text={text} />;
+      return <AssistantMessage text={removeAnnotations(text)} />;
     case "code":
       return <CodeMessage text={text} />;
     default:
@@ -143,9 +165,6 @@ const Chat = ({
     if (delta.value != null) {
       appendToLastMessage(delta.value);
     };
-    if (delta.annotations != null) {
-      annotateLastMessage(delta.annotations);
-    }
   };
 
   // imageFileDone - show image in chat
@@ -228,25 +247,6 @@ const Chat = ({
   const appendMessage = (role, text) => {
     setMessages((prevMessages) => [...prevMessages, { role, text }]);
   };
-
-  const annotateLastMessage = (annotations) => {
-    setMessages((prevMessages) => {
-      const lastMessage = prevMessages[prevMessages.length - 1];
-      const updatedLastMessage = {
-        ...lastMessage,
-      };
-      annotations.forEach((annotation) => {
-        if (annotation.type === 'file_path') {
-          updatedLastMessage.text = updatedLastMessage.text.replaceAll(
-            annotation.text,
-            `/api/files/${annotation.file_path.file_id}`
-          );
-        }
-      })
-      return [...prevMessages.slice(0, -1), updatedLastMessage];
-    });
-    
-  }
 
   return (
     <div className={styles.chatContainer}>
