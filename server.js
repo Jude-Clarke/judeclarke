@@ -14,8 +14,6 @@ app.use(bodyParser.json());
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     // dbName: 'clarkebotDB' // Specify the database name
     dbName: "testDB" // DB for testing
 });
