@@ -3,30 +3,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./chat.module.css";
 import { AssistantStream } from "openai/lib/AssistantStream";
-import Markdown from "react-markdown";
 // @ts-expect-error - no types for this yet
 import { AssistantStreamEvent } from "openai/resources/beta/assistants/assistants";
 import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/runs/runs";
 import CustomMarkdown from "./CustomMarkdown";
+import { PulseLoader } from "react-spinners";
 
 type MessageProps = {
   role: "user" | "assistant" | "code";
   text: string;
 };
 
-function linkTargetBlank(markdown) {
-// Regular expression to match Markdown links
-const markdownLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
 
-// Function to replace each Markdown link with the target attribute
-const updatedMarkdown = markdown.replace(markdownLinkRegex, (match, text, url) => {
-    return `[${text}](${url}){:target="_blank"}`;
-});
-
-return updatedMarkdown;
-}
-
-const removeAnnotations = (text)=> {
+const removeAnnotations = (text: string)=> {
   // Use regex to find and remove all annotations in the form 【...】
   return text.replace(/【.*?】/g, '');
 }
@@ -79,6 +68,17 @@ type ChatProps = {
   ) => Promise<string>;
 };
 
+
+
+
+
+
+
+
+
+
+
+
 const Chat = ({
   functionCallHandler = () => Promise.resolve(""), // default to return empty string
 }: ChatProps) => {
@@ -86,6 +86,11 @@ const Chat = ({
   const [messages, setMessages] = useState([]);
   const [inputDisabled, setInputDisabled] = useState(false);
   const [threadId, setThreadId] = useState("");
+
+  // loading variables
+  const [loading, setLoading] = useState(false);
+  const loadingRef = useRef(null); // Reference for the loading div
+
 
   // automatically scroll to bottom of chat
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -150,9 +155,11 @@ const Chat = ({
     ]);
     setUserInput("");
     setInputDisabled(true);
+    setLoading(true);
     scrollToBottom();
   };
 
+  
   /* Stream Event Handlers */
 
   // textCreated - create new assistant message
@@ -203,7 +210,7 @@ const Chat = ({
   };
 
   // handleRunCompleted - re-enable the input form
-  const handleRunCompleted = () => {
+  const handleRunCompleted = async () => {   
     setInputDisabled(false);
   };
 
@@ -235,6 +242,8 @@ const Chat = ({
 
   const appendToLastMessage = (text) => {
     setMessages((prevMessages) => {
+      setLoading(false);
+      
       const lastMessage = prevMessages[prevMessages.length - 1];
       const updatedLastMessage = {
         ...lastMessage,
@@ -245,8 +254,13 @@ const Chat = ({
   };
 
   const appendMessage = (role, text) => {
-    setMessages((prevMessages) => [...prevMessages, { role, text }]);
+    setMessages((prevMessages) => {
+      const updatedMessages = [...prevMessages, { role, text }];
+      console.log("Messages after response update: ", updatedMessages);
+      return updatedMessages;
+    })
   };
+
 
   return (
     <div className={styles.chatContainer}>
@@ -254,6 +268,7 @@ const Chat = ({
         {messages.map((msg, index) => (
           <Message key={index} role={msg.role} text={msg.text} />
         ))}
+        {loading && <div ref={loadingRef} className="text-center opacity-30"><PulseLoader /></div>}
         <div ref={messagesEndRef} />
       </div>
       <form
