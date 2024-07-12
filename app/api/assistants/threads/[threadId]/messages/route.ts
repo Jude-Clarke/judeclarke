@@ -31,106 +31,106 @@ export async function POST(request, { params: { threadId } }) {
     console.error("Error: ", error);
     return new Response("Error occured", {status: 500 });
   } 
-  // finally {
+  finally {
 
-  //   // DATABASE LOGIC
-  //   const MONGODB_URI = process.env.MONGODB_URI;
+    // DATABASE LOGIC
+    const MONGODB_URI = process.env.MONGODB_URI;
 
-  //   // Connect to MongoDB
-  //   mongoose.connect(MONGODB_URI, {
-  //       // dbName: 'clarkebotDB' // Specify the database name
-  //       dbName: "testDB" // DB for testing
-  //   });
-  //   const db = mongoose.connection;
-  //   db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-  //   db.once('open', () => {
-  //       console.log('Connected to MongoDB');
-  //   });
+    // Connect to MongoDB
+    mongoose.connect(MONGODB_URI, {
+        // dbName: 'clarkebotDB' // Specify the database name
+        dbName: "testDB" // DB for testing
+    });
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+    db.once('open', () => {
+        console.log('Connected to MongoDB');
+    });
 
-  //   // MongoDB Schema and Model
-  //   const threadSchema = new mongoose.Schema({
-  //       userMessage: String,
-  //       threadId: String,
-  //       messages: [{ role: String, content: String }],
-  //   });
+    // MongoDB Schema and Model
+    const threadSchema = new mongoose.Schema({
+        userMessage: String,
+        threadId: String,
+        messages: [{ role: String, content: String }],
+    });
 
-  //   // Specify the collection name explicitly
-  //   const Thread = mongoose.model('Thread', threadSchema);
+    // Specify the collection name explicitly
+    const Thread = mongoose.models.Thread || mongoose.model('Thread', threadSchema);
 
-  //   // DATABASE LOGIC
-
-
-  //   // Save the user message to the database
-  //   const content = messageContent;
-  //   const stream = messageStream;
-  //   const updateUserMessage = async ()=> {
-  //   await Thread.updateOne(
-  //       { threadId },
-  //       { $push: { messages: { role: "user", content } } },
-  //       { upsert: true }
-  //     );
-  //   }
-  //   updateUserMessage();
+    // DATABASE LOGIC
 
 
-  //   // Temporary variable to store the response
-  //   let assistantResponse = '';
+    // Save the user message to the database
+    const content = messageContent;
+    const stream = messageStream;
+    const updateUserMessage = async ()=> {
+    await Thread.updateOne(
+        { threadId },
+        { $push: { messages: { role: "user", content } } },
+        { upsert: true }
+      );
+    }
+    updateUserMessage();
 
-  //   // Set up AssistantStream to handle events and save messages to the database
-  //   const assistantStream = AssistantStream.fromReadableStream(stream.toReadableStream());
 
-  //   assistantStream.on("textCreated", () => {
-  //     console.log("Assistant is creating a new message...");
-  //   });
+    // Temporary variable to store the response
+    let assistantResponse = '';
 
-  //   assistantStream.on("textDelta", (delta) => {
-  //     if (delta.value != null) {
-  //       assistantResponse += delta.value; // Collect the response tokens
-  //     }
-  //   });
+    // Set up AssistantStream to handle events and save messages to the database
+    const assistantStream = AssistantStream.fromReadableStream(stream.toReadableStream());
 
-  //   assistantStream.on("imageFileDone", async (image) => {
-  //     await Thread.updateOne(
-  //       { threadId },
-  //       { $push: { messages: { role: "assistant", content: `![${image.file_id}](/api/files/${image.file_id})` } } }
-  //     );
-  //   });
+    assistantStream.on("textCreated", () => {
+      console.log("Assistant is creating a new message...");
+    });
 
-  //   assistantStream.on("toolCallCreated", (toolCall) => {
-  //     if (toolCall.type != "code_interpreter") return;
-  //     // Handle tool call if needed
-  //   });
+    assistantStream.on("textDelta", (delta) => {
+      if (delta.value != null) {
+        assistantResponse += delta.value; // Collect the response tokens
+      }
+    });
 
-  //   assistantStream.on("toolCallDelta", (delta, snapshot) => {
-  //     if (delta.type != "code_interpreter") return;
-  //     if (!delta.code_interpreter.input) return;
-  //     // Handle tool call delta if needed
-  //   });
+    assistantStream.on("imageFileDone", async (image) => {
+      await Thread.updateOne(
+        { threadId },
+        { $push: { messages: { role: "assistant", content: `![${image.file_id}](/api/files/${image.file_id})` } } }
+      );
+    });
 
-  //   assistantStream.on("event", async (event) => {
-  //     if (event.event === "thread.run.requires_action") {
-  //       await handleRequiresAction(event);
-  //     }
-  //     if (event.event === "thread.run.completed") {
-  //       await handleRunCompleted(event);
-  //     }
-  //   });
+    assistantStream.on("toolCallCreated", (toolCall) => {
+      if (toolCall.type != "code_interpreter") return;
+      // Handle tool call if needed
+    });
 
-  //   // Function to handle requires_action event
-  //   const handleRequiresAction = async (event) => {
-  //     const runId = event.data.id;
-  //     const toolCalls = event.data.required_action.submit_tool_outputs.tool_calls;
-  //   };
+    assistantStream.on("toolCallDelta", (delta, snapshot) => {
+      if (delta.type != "code_interpreter") return;
+      if (!delta.code_interpreter.input) return;
+      // Handle tool call delta if needed
+    });
 
-  //   // Function to handle run.completed event
-  //   const handleRunCompleted = async (event) => {
-  //     // Save the complete assistant response to the database
-  //     await Thread.updateOne(
-  //       { threadId },
-  //       { $push: { messages: { role: "assistant", content: assistantResponse } } }
-  //     );
-  //   };
-  // }
+    assistantStream.on("event", async (event) => {
+      if (event.event === "thread.run.requires_action") {
+        await handleRequiresAction(event);
+      }
+      if (event.event === "thread.run.completed") {
+        await handleRunCompleted(event);
+      }
+    });
+
+    // Function to handle requires_action event
+    const handleRequiresAction = async (event) => {
+      const runId = event.data.id;
+      const toolCalls = event.data.required_action.submit_tool_outputs.tool_calls;
+    };
+
+    // Function to handle run.completed event
+    const handleRunCompleted = async (event) => {
+      // Save the complete assistant response to the database
+      await Thread.updateOne(
+        { threadId },
+        { $push: { messages: { role: "assistant", content: assistantResponse } } }
+      );
+    };
+  }
 }
 
 

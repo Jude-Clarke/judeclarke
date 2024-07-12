@@ -256,7 +256,6 @@ const Chat = ({
   const appendMessage = (role, text) => {
     setMessages((prevMessages) => {
       const updatedMessages = [...prevMessages, { role, text }];
-      console.log("Messages after response update: ", updatedMessages);
       return updatedMessages;
     })
   };
