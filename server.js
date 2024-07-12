@@ -14,8 +14,7 @@ app.use(bodyParser.json());
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI, {
-    // dbName: 'clarkebotDB' // Specify the database name
-    dbName: "testDB" // DB for testing
+    dbName: process.env.DB // DB for testing
 });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
