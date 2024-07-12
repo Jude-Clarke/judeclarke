@@ -8,34 +8,6 @@ export const runtime = "nodejs";
 
 
 
-
-// DATABASE LOGIC
-const MONGODB_URI = process.env.MONGODB_URI;
-
-// Connect to MongoDB
-mongoose.connect(MONGODB_URI, {
-    // dbName: 'clarkebotDB' // Specify the database name
-    dbName: "testDB" // DB for testing
-});
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-    console.log('Connected to MongoDB');
-});
-
-// MongoDB Schema and Model
-const threadSchema = new mongoose.Schema({
-    userMessage: String,
-    threadId: String,
-    messages: [{ role: String, content: String }],
-});
-
-// Specify the collection name explicitly
-const Thread = mongoose.model('Thread', threadSchema);
-
-// DATABASE LOGIC
-
-
 // Send a new message to a thread
 export async function POST(request, { params: { threadId } }) {
   let messageContent;
@@ -59,6 +31,34 @@ export async function POST(request, { params: { threadId } }) {
     console.error("Error: ", error);
     return new Response("Error occured", {status: 500 });
   } finally {
+
+    // DATABASE LOGIC
+    const MONGODB_URI = process.env.MONGODB_URI;
+
+    // Connect to MongoDB
+    mongoose.connect(MONGODB_URI, {
+        // dbName: 'clarkebotDB' // Specify the database name
+        dbName: "testDB" // DB for testing
+    });
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+    db.once('open', () => {
+        console.log('Connected to MongoDB');
+    });
+
+    // MongoDB Schema and Model
+    const threadSchema = new mongoose.Schema({
+        userMessage: String,
+        threadId: String,
+        messages: [{ role: String, content: String }],
+    });
+
+    // Specify the collection name explicitly
+    const Thread = mongoose.model('Thread', threadSchema);
+
+    // DATABASE LOGIC
+
+
     // Save the user message to the database
     const content = messageContent;
     const stream = messageStream;
