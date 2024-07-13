@@ -1,15 +1,50 @@
 .chatContainer {
   display: flex;
   flex-direction: column-reverse;
-  height: 100%;
   width: 100%;
+  max-width: 384px;
+  background-color: #fff;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  border: 1px #d1d5db solid;
+  border-radius: 8px;
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  overflow: hidden;
+  z-index: 50;
+}
+.toggleButton {
+  width: 100%;
+  padding: 8px;
+  font-weight: bold;
+  background-color: #3b82f6;
+  color: #fff;
+  border: 3px #3b82f6 solid;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  box-shadow: 0 5px 5px -5px #333;
+  cursor: pointer;
+  order: 3;
+}
+
+.loading {
+  height: 340px;
+  opacity: 30%;
+  position: relative;
+}
+.loadingBottom {
+  position: relative;
+  top: 44px;
 }
 
 .inputForm {
   display: flex;
   width: 100%;
   padding: 10px;
-  padding-bottom: 40px;
+  padding-bottom: 30px;
+  box-shadow: 0 -5px 5px -5px #333;
   order: 1;
 }
 
@@ -25,13 +60,13 @@
 
 .input:focus {
   outline: none !important;
-  border-color: #000;
+  border-color: #222;
   background-color: white;
 }
 
 .button {
   padding: 8px 24px;
-  background-color: #000;
+  background-color: #222;
   color: white;
   border: none;
   font-size: 1em;
@@ -43,6 +78,7 @@
 }
 
 .messages {
+  height: 384px;
   flex-grow: 1;
   overflow-y: auto;
   padding: 10px;
@@ -72,7 +108,7 @@
 .userMessage {
   align-self: flex-end;
   color: #fff;
-  background-color: #000;
+  background-color: #222;
 }
 
 .assistantMessage {

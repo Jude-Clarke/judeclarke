@@ -86,20 +86,27 @@ const Chat = ({
   const [messages, setMessages] = useState([]);
   const [inputDisabled, setInputDisabled] = useState(false);
   const [threadId, setThreadId] = useState("");
+  const [messageOffset, setMessageOffset] = useState(0);
 
   // loading variables
   const [loading, setLoading] = useState(false);
   const loadingRef = useRef(null); // Reference for the loading div
+  const loadingBottomRef = useRef(null)
 
 
   // automatically scroll to bottom of chat
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    if (loading && loadingRef.current) {
+      loadingBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+}, [loading, messages]);
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  // };
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [messages]);
 
   // create a new threadID when chat component created
   useEffect(() => {
@@ -156,7 +163,7 @@ const Chat = ({
     setUserInput("");
     setInputDisabled(true);
     setLoading(true);
-    scrollToBottom();
+    // scrollToBottom();
   };
 
   
@@ -261,19 +268,33 @@ const Chat = ({
   };
 
 
+  const [isOpen, setIsOpen] = useState(false); // State to toggle chat window
+
+
   return (
     <div className={styles.chatContainer}>
-      <div className={styles.messages}>
-        {messages.map((msg, index) => (
-          <Message key={index} role={msg.role} text={msg.text} />
-        ))}
-        {loading && <div ref={loadingRef} className="text-center opacity-30"><PulseLoader /></div>}
-        <div ref={messagesEndRef} />
-      </div>
-      <form
-        onSubmit={handleSubmit}
-        className={`${styles.inputForm} ${styles.clearfix}`}
+      <button 
+        className={styles.toggleButton}
+        onClick={() => setIsOpen(!isOpen)}
       >
+        {isOpen ? 'Close Chat' : 'Ask JudeGPT'}
+      </button>
+      {isOpen && (
+        <>
+        <div id="messagesDiv" className={styles.messages}>
+          {messages.map((msg, index) => (
+            <Message key={index} role={msg.role} text={msg.text} />
+          ))}
+          {loading && <div ref={loadingRef} className={styles.loading}>
+            <PulseLoader />
+            <div id="loadingBottom" ref={loadingBottomRef} className={styles.loadingBottom}> </div>
+          </div>}
+          <div id="endRef" ref={messagesEndRef} />
+        </div>
+        <form
+          onSubmit={handleSubmit}
+          className={`${styles.inputForm} ${styles.clearfix}`}
+        >
         <input
           type="text"
           className={styles.input}
@@ -289,6 +310,8 @@ const Chat = ({
           Send
         </button>
       </form>
+        </>
+      )}
     </div>
   );
 };
