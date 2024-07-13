@@ -272,7 +272,7 @@ const Chat = ({
 
 
   return (
-    <div className={styles.chatContainer}>
+    <div className={styles.chatContainer + " " + (isOpen && styles.open)}>
       <button 
         className={styles.toggleButton}
         onClick={() => setIsOpen(!isOpen)}
