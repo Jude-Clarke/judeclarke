@@ -2,6 +2,7 @@ import { assistantId } from "@/app/assistant-config";
 import { openai } from "@/app/openai";
 import mongoose from "mongoose";
 import { AssistantStream } from "openai/lib/AssistantStream";
+import moment from "moment";
 
 export const runtime = "nodejs";
 
@@ -51,7 +52,7 @@ export async function POST(request, { params: { threadId } }) {
     const threadSchema = new mongoose.Schema({
         userMessage: String,
         threadId: String,
-        messages: [{ role: String, content: String }],
+        messages: [{ role: String, content: String, timeStamp: String}],
     });
 
     // Specify the collection name explicitly
@@ -66,7 +67,7 @@ export async function POST(request, { params: { threadId } }) {
     const updateUserMessage = async ()=> {
     await Thread.updateOne(
         { threadId },
-        { $push: { messages: { role: "user", content } } },
+        { $push: { messages: { role: "user", content, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a') } } },
         { upsert: true }
       );
     }
@@ -92,7 +93,7 @@ export async function POST(request, { params: { threadId } }) {
     assistantStream.on("imageFileDone", async (image) => {
       await Thread.updateOne(
         { threadId },
-        { $push: { messages: { role: "assistant", content: `![${image.file_id}](/api/files/${image.file_id})` } } }
+        { $push: { messages: { role: "assistant", content: `![${image.file_id}](/api/files/${image.file_id})`, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a') } } }
       );
     });
 
@@ -127,7 +128,7 @@ export async function POST(request, { params: { threadId } }) {
       // Save the complete assistant response to the database
       await Thread.updateOne(
         { threadId },
-        { $push: { messages: { role: "assistant", content: assistantResponse } } }
+        { $push: { messages: { role: "assistant", content: assistantResponse, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a') } } }
       );
     };
   }
