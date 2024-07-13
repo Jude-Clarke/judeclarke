@@ -171,3 +171,10 @@ pre {
     bottom: 145px;
   }
 }
+
+
+.centerChat {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

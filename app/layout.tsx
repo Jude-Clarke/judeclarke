@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
+import Chat from "./components/Chat/chat";
 
 export const metadata = {
   title: "Assistants API Quickstart",
@@ -13,8 +14,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         {children}
+        <div className="centerChat">
+          <Chat />
+        </div>
       </body>
     </html>
   );
