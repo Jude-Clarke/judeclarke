@@ -70,15 +70,6 @@ type ChatProps = {
 
 
 
-
-
-
-
-
-
-
-
-
 const Chat = ({
   functionCallHandler = () => Promise.resolve(""), // default to return empty string
 }: ChatProps) => {
@@ -86,7 +77,6 @@ const Chat = ({
   const [messages, setMessages] = useState([]);
   const [inputDisabled, setInputDisabled] = useState(false);
   const [threadId, setThreadId] = useState("");
-  const [messageOffset, setMessageOffset] = useState(0);
 
   // loading variables
   const [loading, setLoading] = useState(false);
@@ -317,3 +307,6 @@ const Chat = ({
 };
 
 export default Chat;
+
+
+// Next, add purple gradient to toggle button and user text like resume button on judeclarke.com

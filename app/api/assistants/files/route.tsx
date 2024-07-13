@@ -42,16 +42,16 @@ export async function GET() {
   return Response.json(filesArray);
 }
 
-// delete file from assistant's vector store
-export async function DELETE(request) {
-  const body = await request.json();
-  const fileId = body.fileId;
+// // delete file from assistant's vector store
+// export async function DELETE(request) {
+//   const body = await request.json();
+//   const fileId = body.fileId;
 
-  const vectorStoreId = await getOrCreateVectorStore(); // get or create vector store
-  await openai.beta.vectorStores.files.del(vectorStoreId, fileId); // delete file from vector store
+//   const vectorStoreId = await getOrCreateVectorStore(); // get or create vector store
+//   await openai.beta.vectorStores.files.del(vectorStoreId, fileId); // delete file from vector store
 
-  return new Response();
-}
+//   return new Response();
+// }
 
 /* Helper functions */
 
