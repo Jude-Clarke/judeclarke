@@ -26,7 +26,7 @@
   order: 3;
 
   text-decoration: none;
-  padding: 16px 0;
+  padding: 8px 0;
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
@@ -67,7 +67,7 @@
   column-gap: 6px;
   width: 100%;
   padding: 10px 10px 20px 10px;
-  box-shadow: 0 -2px 4px -5px #323232;
+  box-shadow: 0 -2px 4px -5px #191924ee;
   z-index: 20;
   order: 1;
 }
@@ -89,7 +89,7 @@
 
 .button {
   padding: 10px 30px;
-  background-color: #222;
+  background-color: #191924;
   color: white;
   border: none;
   font-size: 1em;
@@ -131,7 +131,7 @@
 .userMessage {
   align-self: flex-end;
   color: #fff;
-  background-color: #222;
+  background-color: #191924ee;
 }
 
 .assistantMessage {
@@ -170,6 +170,9 @@
   }
   .button {
     flex-grow: 0;
+  }
+  .toggleButton {
+    padding: 16px 0;
   }
 }
 
