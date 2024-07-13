@@ -130,3 +130,15 @@
   color: #b8b8b8;
   margin-right: 8px;
 }
+
+@media (min-width: 768px) {
+  .chatContainer {
+      max-width: 28rem /* 448px */;
+  }
+}
+
+@media (min-width: 1024px) {
+  .chatContainer {
+      max-width: 32rem /* 512px */;
+  }
+}
