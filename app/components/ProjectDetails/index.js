@@ -1,0 +1,302 @@
+"use client"
+import { CloseRounded, GitHub, LinkedIn } from '@mui/icons-material';
+import { Modal } from '@mui/material';
+import React, {useEffect, useRef} from 'react'
+import styled from 'styled-components'
+import Carousel from '../Carousel';
+import { useRouter } from 'next/navigation';
+import styles from "./index.module.css"
+import Image from 'next/image';
+
+const Container = styled.div`
+width: 100%;
+height: 100%;
+position: absolute;
+top: 0;
+left: 0;
+background-color: #000000a7;
+display: flex;
+align-items: top;
+justify-content: center;
+overflow-y: scroll;
+transition: all 0.5s ease;
+`;
+
+const Wrapper = styled.div`
+max-width: 800px;
+width: 100%;
+border-radius: 16px;
+margin: 50px 12px;
+height: min-content;
+background-color: #171721;
+color: #F2F3F4;
+padding: 20px;
+display: flex;
+flex-direction: column;
+position: relative;
+`;
+
+const Title = styled.div`
+  font-size: 28px;
+  font-weight: 600;
+  color: #F2F3F4;
+  margin: 8px 6px 0px 6px;
+  @media only screen and (max-width: 600px) {
+      font-size: 24px;
+      margin: 6px 6px 0px 6px;
+  }
+`;
+
+const Date = styled.div`
+    font-size: 16px;
+    margin: 2px 6px;
+    font-weight: 400;
+    color: #b1b2b3;
+    @media only screen and (max-width: 768px){
+        font-size: 12px;
+    }
+`
+
+
+
+const Desc = styled.div`
+    font-size: 16px;
+    font-weight: 400;
+    color: #F2F3F4;
+    margin: 8px 6px;
+    @media only screen and (max-width: 600px) {
+        font-size: 14px;
+        margin: 6px 6px;
+    }
+`;
+
+const Label = styled.div`
+    font-size: 20px;
+    font-weight: 600;
+    color: #F2F3F4;
+    margin: 8px 6px;
+    @media only screen and (max-width: 600px) {
+        font-size: 16px;
+        margin: 8px 6px;
+    }
+`;
+
+const Tags = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    margin: 8px 0px;
+    @media only screen and (max-width: 600px) {
+        margin: 4px 0px;
+    }
+`;
+
+const Tag = styled.div`
+    font-size: 14px;
+    font-weight: 400;
+    color: #854CE6;
+    margin: 4px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background-color: #854CE620;
+    @media only screen and (max-width: 600px) {
+        font-size: 12px;
+    }
+`;
+
+const Contributors = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 12px 6px;
+    @media only screen and (max-width: 600px) {
+        margin: 4px 6px;
+    }
+`;
+
+const Contributor = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+    gap: 24px;
+    flex-wrap: wrap;
+`;
+
+
+const ContributorName = styled.div`
+    font-size: 16px;
+    font-weight: 500;
+    min-width: 160px;
+    color: #F2F3F4;
+    @media only screen and (max-width: 600px) {
+        font-size: 14px;
+    }
+`;
+
+const Role = styled.div`
+    font-size: 12px;
+    font-weight: 200;
+    margin-left: 46px;
+    opacity: 80%;
+    min-width: 160px;
+    @media only screen and (min-width: 600px) {
+        font-size: 16px;
+        // font-weight: 500;
+        opacity: 100%;
+    }
+`;
+
+const ContributorContainer = styled.div`
+display: flex;
+align-items: center;
+justify-content: flex-start;
+flex: 1;
+gap: 12px;
+`;
+
+const ContributorSocials = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    gap: 12px;
+    width: 60px;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        width: 24px;
+    }
+`
+
+
+const ButtonGroup = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin: 12px 0px;
+    gap: 12px;
+`;
+
+const Button = styled.a`
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #F2F3F4;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: #854CE6;
+    ${({ dull }) => dull && `
+        background-color: #1C1E27;
+        color: #b1b2b3;
+        &:hover {
+            background-color: #1C1C2799;
+        }
+    `}
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.5s ease;
+    &:hover {
+        background-color: #854CE699;
+    }
+    @media only screen and (max-width: 600px) {
+        font-size: 12px;
+    }
+`;
+
+const index = ({ openModal, setOpenModal }) => {
+    const project = openModal?.project;
+    const menuRef = useRef();
+    const router = useRouter();
+
+    useEffect(() => {
+        const handler = (e) => {
+            if(!(menuRef.current && menuRef.current.contains(e.target))){
+                setOpenModal(false);
+                // Find a way to change the url without routing
+                // router.push("/");
+
+            }
+        };
+
+        document.addEventListener("mousedown", handler);
+
+        return() =>{
+            document.removeEventListener("mousedown", handler);
+        }
+    }, [])
+
+    return (
+        <Modal open={true} onClose={() => setOpenModal({ state: false, project: null })}>
+            <Container>
+                <Wrapper ref={menuRef}>
+                    <CloseRounded
+                        style={{
+                            position: "absolute",
+                            top: "10px",
+                            right: "20px",
+                            cursor: "pointer",
+                        }}
+                        onClick={() => setOpenModal({ state: false, project: null })}
+                    />
+                    
+                    <Title>{project?.title}</Title>
+                    <Date>{project.date}</Date>
+                    <Tags>
+                        {project?.tags.map((tag, index) => (
+                            <Tag key={index}>{tag}</Tag>
+                        ))}
+                    </Tags>
+                    <Desc>{project?.description}</Desc>
+                    {project?.slides.length === 1 && project.webapp ?
+                     <a href={project?.webapp} target='new'><Carousel slides={project?.slides} /></a> : 
+                     <Carousel slides={project?.slides} />}
+                    
+                    <ButtonGroup>
+                        { project?.github &&
+                            <Button dull href={project?.github} target='new'>View Code</Button>
+                        }
+                        { project?.webapp &&
+                            <Button href={project?.webapp} target='new'>View Live App</Button>
+                        }
+                    </ButtonGroup>
+                    {project.contributors && (
+                        <>
+                            <Label>Contributors</Label>
+                            <Contributors>
+                                {project?.contributors.map((contributor, index) => (
+                                    <Contributor key={index}>
+                                        <ContributorContainer>
+                                            <Image src={contributor.img} alt={`headshot of ${contributor.name}`} className={styles["contributor-image"]}/>
+                                            <ContributorName>{contributor.name}</ContributorName>
+                                            <ContributorSocials>
+                                                { contributor.linkedin &&
+                                                    <a href={contributor.linkedin} target="new">
+                                                    <LinkedIn />
+                                                    </a>
+                                                }
+                                                { contributor.github &&
+                                                    <a href={contributor.github} target="new">
+                                                    <GitHub />
+                                                    </a>
+                                                }
+                                            </ContributorSocials>
+                                        </ContributorContainer>
+                                        <ContributorContainer>
+                                            <Role>
+                                                {contributor.role}
+                                            </Role>
+                                        </ContributorContainer>
+                                    </Contributor>
+                                ))}
+                            </Contributors>
+                        </>
+                    )}
+                </Wrapper>
+            </Container>
+
+        </Modal>
+    )
+}
+
+export default index
