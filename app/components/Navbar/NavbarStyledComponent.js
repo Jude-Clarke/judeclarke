@@ -12,7 +12,7 @@ export const Nav = styled.div`
     top: 0;
     z-index: 10;
     @media (max-width: 960px) {
-        trastion: 0.8s all ease;
+        transition: 0.8s all ease;
     }
 `;
 export const NavContainer = styled.div`
@@ -62,7 +62,7 @@ export const NavLink = styled.a`
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
-    :hover {
+    &:hover {
       color: #854CE6;
     }
 
@@ -86,7 +86,7 @@ export const CtaButton = styled.a`
   text-decoration: none;
   font-size: 16px;
   transition: all 0.6s ease-in-out;
-    :hover {
+    &:hover {
       background: #854CE6;
       color: #ffffff;     
     }
@@ -161,7 +161,7 @@ export const MobileMenuLink = styled(LinkR)`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  :hover {
+  &:hover {
     color: #854CE6;
   }
 
@@ -185,7 +185,7 @@ export const MobileMenuButton = styled.a`
   font-size: 16px;
   transition: all 0.6s ease-in-out;
 
-  :hover {
+  &:hover {
     background: #854CE6;
     color: #ffffff;
   }
@@ -197,7 +197,7 @@ export  const MobileLink = styled.a`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  :hover {
+  &:hover {
     color: #854CE6;
   }
 

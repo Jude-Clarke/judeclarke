@@ -68,8 +68,8 @@ export const ToggleButton = styled.div`
     border-radius: 6px;
     cursor: pointer;
     text-transform: uppercase;
-    ${({ active }) =>
-        active && `
+    ${({ $active }) =>
+        $active && `
     background: #854CE620;
     `
     }
