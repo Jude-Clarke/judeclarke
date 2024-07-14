@@ -10,12 +10,18 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const mobileNavRef = useRef();
+  const toggleButtonRef = useRef();
 
     useEffect(() => {
         const handler = (e) => {
-            if(!(mobileNavRef.current && mobileNavRef.current.contains(e.target))){
-                setIsOpen(false);
-            }
+          if (
+            mobileNavRef.current && 
+            !mobileNavRef.current.contains(e.target) &&
+            toggleButtonRef.current && 
+            !toggleButtonRef.current.contains(e.target)
+          ) {
+            setIsOpen(false);
+          }
         };
 
         document.addEventListener("mousedown", handler);
@@ -50,7 +56,6 @@ const Navbar = () => {
 
     const toggleIsOpen = () => {
       setIsOpen(prevIsOpen => !prevIsOpen);
-      console.log("Is Open? ", !isOpen);
     };
     
 
@@ -69,7 +74,7 @@ const Navbar = () => {
             <DiCssdeck size="3rem" /> <Span>Portfolio</Span>
           </span>
         </NavLogo>
-        <MobileIcon id="hamburger" onClick={toggleIsOpen}>
+        <MobileIcon id="hamburger" onClick={toggleIsOpen} ref={toggleButtonRef}>
           <FaBars
             
           />
