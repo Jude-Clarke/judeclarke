@@ -4,11 +4,8 @@ const inter = Inter({ subsets: ["latin"] });
 import Chat from "./components/Chat/chat";
 
 export const metadata = {
-  title: "Assistants API Quickstart",
-  description: "A quickstart template using the Assistants API with OpenAI",
-  icons: {
-    icon: "/openai.svg",
-  },
+  title: "Hire Jude Clarke | Full Stack Engineer | React | UI Engineer",
+  description: "5 years building engaging UI/UX and CRUD routes, including 18 months at a New York startup to completely replatform and redesign their web application in React. To learn how I can contribute to your company, ask me to demonstrate some of my web applications for you!",
 };
 
 export default function RootLayout({ children }) {
