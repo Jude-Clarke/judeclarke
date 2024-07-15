@@ -73,24 +73,22 @@ div.button-container {
     padding: 0 6px;
 }
 a.cta-button {
-    background: #854CE6;
     border: 1.8px solid #854CE6;
     justify-content: center;
     display: flex;
     align-items: center;
-    width: max-content;
     height: 70%;
     border-radius: 20px;
-    color: #ffffff;
+    color: #854CE6;
     cursor: pointer;
-    padding: 10px 16px;
+    padding: 0 20px;
     font-weight: 500;
     text-decoration: none;
     font-size: 16px;
     transition: all 0.2s ease-in-out;
 }
 a.cta-button:hover {
-    background: #854CE640;
+    background: #854CE6;
     color: #ffffff;   
 }
 
@@ -195,6 +193,12 @@ a.mobile-link .active {
         font-size: 1.5rem;
         cursor: pointer;
         color: #F2F3F4;
+    }
+    a.cta-button {
+        padding: 8px 20px;
+        background: rgb(133, 76, 230);
+        color: white;
+        width: max-content;
     }
   }
 @media (max-width: 640px) {
