@@ -1,27 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-:root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   font-family: 'Poppins', sans-serif;
-}
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    
 }
 
 
@@ -48,6 +31,7 @@
     width: min-content;
   }
 }
+
 /* Swiper styles */
 .swiper {
   width: 100%;
@@ -72,13 +56,6 @@ html {
   overflow-x: hidden;
   background: #191825;
 }
-
-body {
-  margin: 0px !important;
-  padding: 0;
-  font-family: 'Montserrat', sans-serif;
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -96,27 +73,6 @@ a {
   justify-content: center;
   align-items: center;
 }
-
-.logo {
-  width: 32px;
-  height: 32px;
-  position: absolute;
-  margin: 16px;
-  top: 0;
-  right: 0;
-}
-
-@media (max-width: 1100px) {
-  .logo {
-    display: none;
-  }
-}
-
-ul,
-ol {
-  padding-left: 20px;
-}
-
 
 pre {
   margin: -4px -16px;
@@ -154,15 +110,6 @@ pre {
   width: 100%;
   height: auto;
 }
-
-@media only screen and (max-width: 500px){
-  .swiper-button-prev:after, .swiper-button-next:after {
-  
-    position: absolute;
-    bottom: 145px;
-  }
-}
-
 
 .centerChat {
   width: 100%;
