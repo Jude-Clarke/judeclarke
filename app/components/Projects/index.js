@@ -1,10 +1,10 @@
 "use client"
 import React from 'react';
 import { useState, useRef } from 'react';
-import { Container, Wrapper, Title, Desc, CardContainer, ToggleButtonGroup, ToggleButton, Divider } from './ProjectsStyle';
 import ProjectCard from '../Cards/ProjectCards';
 import { projects } from '../../data/constants';
 import { useRouter } from 'next/navigation';
+import styles from "./index.module.css"
 
 
 const Projects = ({openModal,setOpenModal}) => {
@@ -19,38 +19,20 @@ const Projects = ({openModal,setOpenModal}) => {
     setToggle(option)
   }
   return (
-    <Container id="projects" ref={projectsSectionRef}>
-      <Wrapper>
-        <Title>Projects</Title>
-        <Desc>
+    <div id="projects" ref={projectsSectionRef} className={styles.container}>
+      <div className={styles.wrapper}>
+        <div className={styles.title}>Projects</div>
+        <div className={styles.desc}>
           I've worked on a wide range of applications. From design to development, here are some of my projects.
-        </Desc>
-        <ToggleButtonGroup >
-          {toggle === 'all' ?
-            <ToggleButton $active value="all" onClick={() => handleToggleClick("all")}>All</ToggleButton>
-            :
-            <ToggleButton value="all" onClick={() => setToggle('all')}>All</ToggleButton>
-          }
-          <Divider />
-          {toggle === 'React' ?
-            <ToggleButton $active value="react apps" onClick={() => handleToggleClick("React")}>react apps</ToggleButton>
-            :
-            <ToggleButton value="react apps" onClick={() => handleToggleClick("React")}>react apps</ToggleButton>
-          }
-          <Divider />
-          {toggle === 'Node Js' ?
-            <ToggleButton $active value="node.js apps" onClick={() => handleToggleClick("Node Js")}>node.js apps</ToggleButton>
-            :
-            <ToggleButton value="node.js apps" onClick={() => handleToggleClick("Node Js")}>node.js apps</ToggleButton>
-          }
-          {/* <Divider />
-          {toggle === 'machine learning' ?
-            <ToggleButton $active value="machine learning" onClick={() => setToggle('machine learning')}>MACHINE LEARNING</ToggleButton>
-            :
-            <ToggleButton value="machine learning" onClick={() => setToggle('machine learning')}>MACHINE LEARNING</ToggleButton>
-          } */}
-        </ToggleButtonGroup>
-        <CardContainer>
+        </div>
+        <div className={styles["toggle-button-group"]} >
+            <div value="all" className={styles["toggle-button"] + " " + (toggle === "all" && styles.active)} onClick={() => handleToggleClick("all")}>All</div>
+            <div className={styles.divider} />
+            <div value="react apps" className={styles["toggle-button"] + " " + (toggle === "React" && styles.active)} onClick={() => handleToggleClick("React")}>react apps</div>
+            <div className={styles.divider} />
+            <div value="node.js apps" className={styles["toggle-button"] + " " + (toggle === "Node Js" && styles.active)} onClick={() => handleToggleClick("Node Js")}>node.js apps</div>
+        </div>
+        <div className={styles["card-container"]}>
           {toggle === 'all' && projects
             .map((project) => (
               <ProjectCard projectsSectionRef ={projectsSectionRef} key={project.id} project={project} openModal={openModal} setOpenModal={setOpenModal}/>
@@ -60,9 +42,9 @@ const Projects = ({openModal,setOpenModal}) => {
             .map((project) => (
               <ProjectCard projectsSectionRef ={projectsSectionRef} key={project.id} project={project} openModal={openModal} setOpenModal={setOpenModal}/>
             ))}
-        </CardContainer>
-      </Wrapper>
-    </Container>
+        </div>
+      </div>
+    </div>
   )
 }
 

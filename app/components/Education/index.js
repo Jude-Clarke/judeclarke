@@ -1,6 +1,5 @@
 
 import React from 'react'
-import styled from 'styled-components'
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
@@ -9,84 +8,18 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import { education } from '../../data/constants';
 import EducationCard from '../Cards/EducationCard';
-
-const Container = styled.div`
-    padding-top: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-    align-items: center;
-    padding: 0px 0px 60px 0px;
-    @media (max-width: 960px) {
-        padding: 0px;
-    }
-`;
-
-const Wrapper = styled.div`
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1350px;
-    padding: 40px 0px 0px 0px;
-    gap: 12px;
-    @media (max-width: 960px) {
-        flex-direction: column;
-    }
-`;
-
-const Title = styled.div`
-font-size: 42px;
-text-align: center;
-font-weight: 600;
-margin-top: 20px;
-  color: #F2F3F4;
-  @media (max-width: 768px) {
-      margin-top: 12px;
-      font-size: 32px;
-  }
-`;
-
-const Desc = styled.div`
-    font-size: 18px;
-    text-align: center;
-    max-width: 600px;
-    color: #b1b2b3;
-    @media (max-width: 768px) {
-        margin-top: 12px;
-        font-size: 16px;
-    }
-`;
-
-const TimelineSection = styled.div`
-    width: 100%;
-    max-width: 1000px;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    @media (max-width: 660px) {
-        align-items: end;
-    }
-`;
-
+import styles from "./index.module.css";
 
 
 const index = () => {
     return (
-        <Container id="education">
-            <Wrapper>
-                <Title>Education</Title>
-                <Desc>
+        <div id="education" className={styles.container}>
+            <div className={styles.wrapper}>
+                <div className={styles.title}>Education</div>
+                <div className={styles.desc}>
                     I'm a bilingual self-taught full-stack engineer with a Master's in Business Administration.
-                </Desc>
-                <TimelineSection>
+                </div>
+                <div className={styles["timeline-section"]}>
                     <Timeline sx={{ "alignSelf": "center" }}>
                         {education.map((education,index) => (
                             <TimelineItem key={education.id} >
@@ -100,10 +33,9 @@ const index = () => {
                             </TimelineItem>
                         ))}
                     </Timeline>
-
-                </TimelineSection>
-            </Wrapper>
-        </Container>
+                </div>
+            </div>
+        </div>
     )
 }
 

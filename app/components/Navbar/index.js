@@ -1,9 +1,9 @@
 "use client"
 import React, { useState, useEffect, useRef } from "react";
-import { Nav, NavLink, NavContainer, Span, NavLogo, NavItems, CtaButton, ButtonContainer, MobileIcon, MobileMenu, MobileLink } from './NavbarStyledComponent'
 import { DiCssdeck } from "react-icons/di";
 import { FaBars } from "react-icons/fa";
 import { Bio } from '../../data/constants';
+import styles from "./index.module.css";
 
 
 const Navbar = () => {
@@ -40,8 +40,8 @@ const Navbar = () => {
       const mobileNavContainer = document.getElementById("mobileNavContainer");
 
       if(navDiv) {
-        navDiv.style.height = (window.scrollY < 75 ? "80px" : "60px");
-        navDiv.style.opacity = (window.scrollY < 75 ? "100%" : "95%");
+        navDiv.style.height = (window.scrollY < 74 ? "80px" : "60px");
+        navDiv.style.opacity = (window.scrollY < 74 ? "100%" : "95%");
       }
       if(hamburger) {
         hamburger.style.top = (window.scrollY < 75 ? "0" : "-4px");
@@ -60,9 +60,9 @@ const Navbar = () => {
     
 
   return (
-    <Nav id="navbar">
-      <NavContainer>
-        <NavLogo href="/">
+    <div id="navbar" className={styles.navbar}>
+      <div className={styles["nav-container"]}>
+        <a href="#" className={styles["nav-logo"]}>
           <span
             style={{
               display: "flex",
@@ -71,69 +71,73 @@ const Navbar = () => {
               cursor: "pointer",
             }}
           >
-            <DiCssdeck size="3rem" /> <Span>Portfolio</Span>
+            <DiCssdeck size="3rem" /> <span className={styles["logo-text"]}>Portfolio</span>
           </span>
-        </NavLogo>
-        <MobileIcon id="hamburger" onClick={toggleIsOpen} ref={toggleButtonRef}>
+        </a>
+        <div id="hamburger" onClick={toggleIsOpen} ref={toggleButtonRef} className={styles["mobile-icon"]}>
           <FaBars
             
           />
-        </MobileIcon>
-        <NavItems>
-          <NavLink href="/">Home</NavLink>
-          <NavLink href="#skills">Skills</NavLink>
-          <NavLink href="#experience">Experience</NavLink>
-          <NavLink href="#projects">Projects</NavLink>
-          <NavLink href="#education">Education</NavLink>
-        </NavItems>
-        <ButtonContainer>
-          <CtaButton href={Bio.resume} target="_blank">Resume</CtaButton>
-        </ButtonContainer>
-      </NavContainer>
+        </div>
+        <ul className={styles["nav-items"]}>
+          <a href="#" className={styles["nav-link"]}>Home</a>
+          <a href="#skills" className={styles["nav-link"]}>Skills</a>
+          <a href="#experience" className={styles["nav-link"]}>Experience</a>
+          <a href="#projects" className={styles["nav-link"]}>Projects</a>
+          <a href="#education" className={styles["nav-link"]}>Education</a>
+        </ul>
+        <div className={styles["button-container"]}>
+          <a href={Bio.resume} target="_blank" className={styles["cta-button"]}>Resume</a>
+        </div>
+      </div>
       {
-        isOpen && (
-          <MobileMenu id="mobileNavContainer" ref={mobileNavRef} isOpen={isOpen} isPageTop={isPageTop}>
-            <MobileLink
-              href="#about"
+          <div id="mobileNavContainer" ref={mobileNavRef} className={styles["mobile-menu"] + " " + (isPageTop && styles["page-top"]) + " " + (isOpen && styles.open)} isOpen={isOpen}>
+            <a
+              href="#"
+              className={styles["mobile-link"]}
               onClick={() => {
                 setIsOpen(!isOpen)
               }}
             >
               About
-            </MobileLink>
-            <MobileLink
+            </a>
+            <a
               href="#skills"
+              className={styles["mobile-link"]}
               onClick={() => {
                 setIsOpen(!isOpen)
               }}
             >
               Skills
-            </MobileLink>
-            <MobileLink
+            </a>
+            <a
               href="#experience"
+              className={styles["mobile-link"]}
               onClick={() => {
                 setIsOpen(!isOpen)
               }}
             >
               Experience
-            </MobileLink>
-            <MobileLink
+            </a>
+            <a
               href="#projects"
+              className={styles["mobile-link"]}
               onClick={() => {
                 setIsOpen(!isOpen)
               }}
             >
               Projects
-            </MobileLink>
-            <MobileLink
+            </a>
+            <a
               href="#education"
+              className={styles["mobile-link"]}
               onClick={() => {
                 setIsOpen(!isOpen)
               }}
             >
               Education
-            </MobileLink>
-            <CtaButton
+            </a>
+            <a
               style={{
                 padding: "10px 16px",
                 background: "#854CE6",
@@ -144,11 +148,10 @@ const Navbar = () => {
               target="_blank"
             >
               Resume
-            </CtaButton>
-          </MobileMenu>
-        )
+            </a>
+          </div>
       }
-    </Nav>
+    </div>
   )
 }
 

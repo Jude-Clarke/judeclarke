@@ -1,159 +1,29 @@
 import React from 'react'
-import styled from 'styled-components'
 import styles from "./EducationCard.module.css";
 import Image from 'next/image';
-
-const Document = styled.img`
-    display: none;
-    height: 70px;
-    width: fit-content;
-    background-color: #000;
-    border-radius: 10px;
-    &:hover{
-        cursor: pointer;
-        opacity: 0.8;
-    }
-`
-
-const Description = styled.div`
-    width: 100%;
-    font-size: 15px;
-    font-weight: 400;
-    color: #F2F3F499;
-    margin-bottom: 10px;
-    @media only screen and (max-width: 768px){
-        font-size: 12px;
-    }
-`
-
-const Span = styled.span`
-overflow: hidden;
-display: -webkit-box;
-max-width: 100%;
--webkit-line-clamp: 4;
--webkit-box-orient: vertical;
-text-overflow: ellipsis;
-`
-
-const Card = styled.a`
-    width: 650px;
-    border-radius: 10px;
-    box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
-    text-decoration: none;
-    padding: 12px 16px;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transition: all 0.3s ease-in-out;
-    &:hover{
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
-        transform: translateY(-5px);
-    }
-    @media only screen and (max-width: 768px){
-        padding: 10px;
-        gap: 8px;
-        width: 300px;
-    }
-
-    &:hover ${Document}{
-        display: flex;
-    }
-
-    &:hover ${Span}{
-        overflow: visible;
-        -webkit-line-clamp: unset;
-
-    }
-    border: 0.1px solid #854CE6;
-    @media only screen and (max-width: 768px) {
-        & ${Document}{
-            display: flex;
-        }
-    
-        & ${Span}{
-            overflow: visible;
-            -webkit-line-clamp: unset;
-    
-        }
-        border: 0.1px solid #854CE6;
-    }
-`
-
-const Top = styled.div`
-    width: 100%;
-    display: flex;
-    gap: 12px
-`
-
-const Body = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column; 
-`
-
-
-const Name = styled.div`
-    font-size: 18px;
-    font-weight: 600;
-    color: #F2F3F499;
-    @media only screen and (max-width: 768px){
-        font-size: 14px;
-    }
-`
-
-const Degree = styled.div`
-    font-size: 14px;
-    font-weight: 500;
-    color: #b1b2b399;
-    @media only screen and (max-width: 768px){
-        font-size: 12px;
-    }
-`
-
-const Date = styled.div`
-    font-size: 12px;
-    font-weight: 400;
-    color: #b1b2b380;
-    @media only screen and (max-width: 768px){
-        font-size: 10px;
-    }
-`
-
-const GPA = styled.div`
-    font-size: 14px;
-    font-weight: 500;
-    color: #b1b2b399;
-    @media only screen and (max-width: 768px){
-        font-size: 12px;
-    }
-`
-
 
 
 const EducationCard = ({ education }) => {
     return (
-        <Card href={education.link || "javascript:void(0)"} target={education.link ? "_blank" : ""}>
-            <Top>
+        <a className={styles.card} href={education.link || "javascript:void(0)"} target={education.link ? "_blank" : ""}>
+            <div className={styles.top}>
                 <Image src={education.img} alt="image" className={styles["education-image"]} />
-                <Body>
-                    <Name>{education.school}</Name>
-                    <Degree>{education.degree}</Degree>
-                    <Date>{education.date}</Date>
-                </Body>
-            </Top>
+                <div className={styles.body}>
+                    <div className={styles.name}>{education.school}</div>
+                    <div className={styles.degree}>{education.degree}</div>
+                    <div className={styles.date}>{education.date}</div>
+                </div>
+            </div>
             {education.gpa &&
-                <GPA><b>GPA: </b>{education.gpa}</GPA>
+                <div className={styles.gpa}><b>GPA: </b>{education.gpa}</div>
             }
             {education.grade &&
-                <GPA><b>Grade: {education.grade}</b></GPA>
+                <div className={styles.gpa}><b>Grade: {education.grade}</b></div>
             }
-            <Description>
-                <Span>{education.desc}</Span>
-            </Description>
-        </Card>
+            <div className={styles.description}>
+                <div className={styles.desc}>{education.desc}</div>
+            </div>
+        </a>
     )
 }
 

@@ -1,3 +1,55 @@
+img.document {
+    display: none;
+    height: 70px;
+    width: fit-content;
+    border-radius: 10px;
+}
+img.document:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+div.description {
+    width: 100%;
+    font-size: 15px;
+    font-weight: 400;
+    color: #F2F3F499;
+    margin-bottom: 10px;
+}
+span.desc {
+    overflow: hidden;
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+a.card {
+    width: 650px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    text-decoration: none;
+    padding: 12px 16px;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.3s ease-in-out;
+    border: 0.1px solid #306EE8;
+    box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
+}
+a.card:hover {
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+}
+a.card:hover .document {
+    display: flex;
+}
+a.card:hover .desc {
+    overflow: visible;
+    -webkit-line-clamp: unset;
+}
 .experience-image {
     height: 50px;
     width: 50px;
@@ -5,9 +57,78 @@
     border-radius: 10px;
     margin-top: 4px;
 }
+div.top {
+    width: 100%;
+    display: flex;
+    gap: 12px
+}
+div.body {
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+}
+div.role {
+    font-size: 18px;
+    font-weight: 600;
+    color: #F2F3F499;
+}
+div.company {
+    font-size: 14px;
+    font-weight: 500;
+    color: #b1b2b399;
+}
+div.date {
+    font-size: 12px;
+    font-weight: 400;
+    color: #b1b2b380;
+}
+div.skills {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    margin-top: -10px;
+}
+div.item-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+div.skill {
+    font-size: 15px;
+    font-weight: 400;
+    color:#F2F3F499;
+}
+
 
 @media only screen and (max-width: 768px){
+    div.description {
+        font-size: 12px;
+    }
+    a.card {
+        padding: 10px;
+        gap: 8px;
+        width: 300px;
+    }
+    a.card .document {
+        display: flex;
+    }
+    a.card .desc {
+        overflow: visible;
+        -webkit-line-clamp: unset;
+    }
     .experience-image {
         height: 40px;
+    }
+    div.role {
+        font-size: 14px;
+    }
+    div.company {
+        font-size: 12px;
+    }
+    div.date {
+        font-size: 10px;
+    }
+    div.skill {
+        font-size: 12px;
     }
 }
