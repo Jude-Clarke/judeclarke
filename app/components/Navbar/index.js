@@ -64,12 +64,7 @@ const Navbar = () => {
       <div className={styles["nav-container"]}>
         <a href="#" className={styles["nav-logo"]}>
           <span
-            style={{
-              display: "flex",
-              alignItems: "center",
-              color: "white",
-              cursor: "pointer",
-            }}
+            className={styles["logo-span"]}
           >
             <DiCssdeck size="3rem" /> <span className={styles["logo-text"]}>Portfolio</span>
           </span>
@@ -138,14 +133,9 @@ const Navbar = () => {
               Education
             </a>
             <a
-              style={{
-                padding: "10px 16px",
-                background: "#854CE6",
-                color: "white",
-                width: "max-content"
-              }}
               href={Bio.resume}
               target="_blank"
+              className={styles["cta-button"]}
             >
               Resume
             </a>

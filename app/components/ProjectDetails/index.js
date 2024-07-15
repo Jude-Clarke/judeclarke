@@ -34,12 +34,7 @@ const index = ({ openModal, setOpenModal }) => {
             <div className={styles.container}>
                 <div className={styles.wrapper} ref={menuRef}>
                     <CloseRounded
-                        style={{
-                            position: "absolute",
-                            top: "10px",
-                            right: "20px",
-                            cursor: "pointer",
-                        }}
+                        className={styles["close-rounded"]}
                         onClick={() => setOpenModal({ state: false, project: null })}
                     />
                     
