@@ -74,11 +74,14 @@
 
 .input {
   flex-grow: 1;
+  width: 100%;
+  min-width: 250px;
   padding: 16px 24px;
   border-radius: 60px;
   border: 2px solid transparent;
   font-size: 1em;
   background-color: #efefef;
+  flex: 6;
 }
 
 .input:focus {
@@ -87,13 +90,14 @@
   background-color: white;
 }
 
-.button {
+.inputForm .button {
   padding: 10px 30px;
   background-color: #191924;
   color: white;
   border: none;
   font-size: 1em;
   border-radius: 60px; /* Removed duplicate border-radius property */
+  flex: 1;
 }
 
 .button:disabled {
