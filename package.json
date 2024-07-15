@@ -46,6 +46,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.5.1",
     "@types/node": "20.12.7",
     "@types/react": "18.2.79",
     "babel-plugin-styled-components": "^2.1.4",
