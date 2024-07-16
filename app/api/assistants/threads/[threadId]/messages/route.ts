@@ -67,7 +67,7 @@ export async function POST(request, { params: { threadId } }) {
     const updateUserMessage = async ()=> {
     await Thread.updateOne(
         { threadId },
-        { $push: { messages: { role: "user", content, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a') } } },
+        { $push: { messages: { role: "user", content, timeStamp: moment.utc() || new Date() } } },
         { upsert: true }
       );
     }
@@ -93,7 +93,7 @@ export async function POST(request, { params: { threadId } }) {
     assistantStream.on("imageFileDone", async (image) => {
       await Thread.updateOne(
         { threadId },
-        { $push: { messages: { role: "assistant", content: `![${image.file_id}](/api/files/${image.file_id})`, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a') } } }
+        { $push: { messages: { role: "assistant", content: `![${image.file_id}](/api/files/${image.file_id})`, timeStamp: moment.utc() || new Date() } } }
       );
     });
 
@@ -128,7 +128,7 @@ export async function POST(request, { params: { threadId } }) {
       // Save the complete assistant response to the database
       await Thread.updateOne(
         { threadId },
-        { $push: { messages: { role: "assistant", content: assistantResponse, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a') } } }
+        { $push: { messages: { role: "assistant", content: assistantResponse, timeStamp: moment.utc() || new Date() } } }
       );
     };
   }
