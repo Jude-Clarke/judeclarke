@@ -589,7 +589,12 @@ export const Bio = {
           desc: "The biggest challenge for me was integrating it into a functional chatbot that stores conversations for me to review later in a database. The Assistants API was still in beta, so there were not a lot of available resources on the internet. It took me two weeks of trial and error, researching alternate solutions, reading documentation, and replatforming to Next.js to accommodate my newly built Node backend with a MongoDB database."
         }
       ],
-      tags: ["React", "Next.js", "Node Js", "Express Js", "OpenAI", "Assistants API", "ChatGPT", "MongoDB", "Postman", "CSS", "JavaScript"]
+      tags: ["React", "Next.js", "Node Js", "Express Js", "OpenAI", "Assistants API", "ChatGPT", "MongoDB", "Postman", "CSS", "JavaScript"],
+      category: "web app",
+      webapp: "/",
+      contributors: [
+        contributorJude,
+      ],
     },
     {
       id: 1,
