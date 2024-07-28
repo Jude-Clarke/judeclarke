@@ -567,6 +567,31 @@ export const Bio = {
       ],
     },
     {
+      id: 4,
+      title: "JudeGPT",
+      date: "July 2024",
+      description:
+      "I trained and built a GPT using OpenAI’s Assistants API. This project is meant to facilitate the hiring process for recruiters and hiring managers while simultaneously showcasing my ability to quickly adapt to recent advancements in technology and trends.",
+      slides: [
+        {
+          id: 0,
+          image: media.projectImages.judeGPT.homepage,
+          desc: "During my job search, I wanted to showcase my ability to keep up with the latest technological trends, and find practical use cases for them. In November of 2023, OpenAI released ChatGPT, and it broke the internet. I bought a course on AI and Prompt engineering in December of 2023. Through it, I learned some of the possibilities for integrating AI into my workflow. I’d been keeping an eye on OpenAi’s gpt-3 since 2020, but with the launch of ChatGPT also came the Assistants API which enabled me to train my own GPT model on proprietary data."
+        },
+        {
+          id: 1,
+          image: media.projectImages.judeGPT.playground,
+          desc: "I created an OpenAI assistant, and trained it on my resume, my website, and some other documents related to my professional background. I wrote and refined instructions for the assistant to improve the accuracy and efficiency of its responses. I also conducted beta testing with former colleagues and hiring managers to learn how I could further improve its performance."
+        },
+        {
+          id: 2,
+          image: media.projectImages.judeGPT.docs,
+          desc: "The biggest challenge for me was integrating it into a functional chatbot that stores conversations for me to review later in a database. The Assistants API was still in beta, so there were not a lot of available resources on the internet. It took me two weeks of trial and error, researching alternate solutions, reading documentation, and replatforming to Next.js to accommodate my newly built Node backend with a MongoDB database."
+        }
+      ],
+      tags: ["React", "Next.js", "Node Js", "Express Js", "OpenAI", "Assistants API", "ChatGPT", "MongoDB", "Postman", "CSS", "JavaScript"]
+    },
+    {
       id: 1,
       title: "Shofolio",
       date: "Jan 2022 - Nov 2022",
@@ -610,7 +635,7 @@ export const Bio = {
       tags: [
         "Node Js",
         "Express Js",
-        "MongoDb",
+        "MongoDB",
         "EJS",
         "NodeMailer",
         "Passport Js",
@@ -694,7 +719,7 @@ export const Bio = {
         },
       ],
       tags: [
-        "MongoDb",
+        "MongoDB",
         "Node Js",
         "Express Js",
         "EJS",
@@ -728,7 +753,7 @@ export const Bio = {
       contributors: [
         contributorJude,
       ],
-    },
+    }
     // {
     //   id: 4,
     //   title: "BendlyJean.com",

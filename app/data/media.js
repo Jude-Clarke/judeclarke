@@ -146,6 +146,11 @@ const projectImages = {
     },
     igClone: {
         homepage: "https://res.cloudinary.com/ddsywkqnf/image/upload/v1719365331/projects/ig-clone/Screen_Shot_2024-06-25_at_7.28.28_PM_fxzxbd.png"
+    },
+    judeGPT: {
+        homepage: "https://res.cloudinary.com/ddsywkqnf/image/upload/v1722191389/projects/judegpt/Screen_Shot_2024-07-28_at_1.29.06_PM_rktasi.png",
+        playground: "https://res.cloudinary.com/ddsywkqnf/image/upload/v1722201855/projects/judegpt/Screen_Shot_2024-07-28_at_4.17.47_PM_tkuvg4.jpg",
+        docs: "https://res.cloudinary.com/ddsywkqnf/image/upload/v1722201915/projects/judegpt/Screen_Shot_2024-07-28_at_4.19.06_PM_meq2ig.png"
     }
 }
 
