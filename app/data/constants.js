@@ -12,7 +12,7 @@ export const Bio = {
       "5 years building engaging UI/UX and CRUD routes, including 18 months at a New York startup to completely replatform and redesign their web application in React. To learn how I can contribute to your company, ask me to demonstrate some of my web applications for you!",
     github: "https://github.com/jude-clarke",
     resume:
-      "https://drive.google.com/file/d/1cIXLHYITirZeZVyagSq7mYyAzWnRsI-L/view?usp=sharing",
+      "https://drive.google.com/file/d/1Z33Mj6YePgHYKk6PX7j_3zgQ8fh10ukH/view?usp=sharing",
     linkedin: "https://www.linkedin.com/in/judeclarke/",
   };
 
