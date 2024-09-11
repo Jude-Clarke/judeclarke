@@ -98,6 +98,10 @@
   font-size: 1em;
   border-radius: 60px; /* Removed duplicate border-radius property */
   flex: 1;
+  cursor: pointer
+}
+.inputForm .button:hover {
+  opacity: .95;
 }
 
 .button:disabled {

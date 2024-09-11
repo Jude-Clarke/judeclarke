@@ -86,7 +86,7 @@ const Navbar = () => {
         </div>
       </div>
       {
-          <div id="mobileNavContainer" ref={mobileNavRef} className={styles["mobile-menu"] + " " + (isPageTop && styles["page-top"]) + " " + (isOpen && styles.open)} isOpen={isOpen}>
+          <div id="mobileNavContainer" ref={mobileNavRef} className={styles["mobile-menu"] + " " + (isPageTop && styles["page-top"]) + " " + (isOpen && styles.open)}>
             <a
               href="#"
               className={styles["mobile-link"]}
