@@ -1,7 +1,7 @@
 // Link Icons
 import htmlIcon from "./link-icons/html5-icon.webp";
 import cssIcon from "./link-icons/CSS3-icon.webp";
-import angularIcon from "./link-icons/Angular-icon.webp";
+import pythonIcon from "./link-icons/Python-icon.webp";
 import typeScriptIcon from "./link-icons/Typescript-icon.webp";
 import ejsIcon from "./link-icons/ejs-icon.webp";
 import figmaIcon from "./link-icons/figma-icon.webp";
@@ -61,7 +61,7 @@ import kyleMiller from "./project-images/contributors/kyleMillerProfile.webp";
 const skillIcons = {
     htmlIcon: htmlIcon,
     cssIcon: cssIcon,
-    angularIcon: angularIcon,
+    pythonIcon: pythonIcon,
     typeScriptIcon: typeScriptIcon,
     ejsIcon: ejsIcon,
     figmaIcon: figmaIcon,

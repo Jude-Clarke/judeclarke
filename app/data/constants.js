@@ -56,10 +56,10 @@ export const Bio = {
           link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
         },
         {
-          name: "Angular",
+          name: "Python",
           image:
-            media.skillIcons.angularIcon,
-          link: "https://angular.io/",
+            media.skillIcons.pythonIcon,
+          link: "https://www.python.org/",
         },
         {
           name: "Tailwind",
