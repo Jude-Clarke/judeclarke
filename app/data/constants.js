@@ -56,12 +56,6 @@ export const Bio = {
           link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
         },
         {
-          name: "Python",
-          image:
-            media.skillIcons.pythonIcon,
-          link: "https://www.python.org/",
-        },
-        {
           name: "Tailwind",
           image:
             media.skillIcons.tailwindIcon,
@@ -112,6 +106,12 @@ export const Bio = {
           image:
             media.skillIcons.mongoDBIcon,
             link: "https://www.mongodb.com/"
+        },
+        {
+          name: "Python",
+          image:
+            media.skillIcons.pythonIcon,
+          link: "https://www.python.org/",
         },
         {
           name: "Graph Ql",
