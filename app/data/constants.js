@@ -185,6 +185,26 @@ export const Bio = {
           name: "VS Code",
           image: media.skillIcons.vsCodeIcon,
           link: "https://code.visualstudio.com/"
+        },
+        {
+          name: "Vite",
+          image: media.skillIcons.viteIcon,
+          link: "https://vite.dev/"
+        },
+        {
+          name: "Render",
+          image: media.skillIcons.renderIcon,
+          link: "https://render.com/"
+        },
+        {
+          name: "Vercel",
+          image: media.skillIcons.vercelIcon,
+          link: "https://vercel.com/"
+        },
+        {
+          name: "Netlify",
+          image: media.skillIcons.netlifyIcon,
+          link: "https://www.netlify.com/"
         }
       ],
     },

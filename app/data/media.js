@@ -38,10 +38,14 @@ import spanishIcon from "./link-icons/spanish-icon.webp";
 import emceeLogo from "./link-icons/emcees-logo.webp";
 import mkdsLogo from "./link-icons/mkds-logo.webp";
 import lwcsLogo from "./link-icons/lwcs-logo.webp";
-import warnerLogo from "./link-icons/warner-logo.png"
-import leeLogo from "./link-icons/lee-logo.webp"
-import udemyIcon from "./link-icons/udemy-icon.webp"
-import metaIcon from "./link-icons/meta-icon.webp"
+import warnerLogo from "./link-icons/warner-logo.png";
+import leeLogo from "./link-icons/lee-logo.webp";
+import udemyIcon from "./link-icons/udemy-icon.webp";
+import metaIcon from "./link-icons/meta-icon.webp";
+import viteIcon from "./link-icons/Vite-icon.webp";
+import renderIcon from "./link-icons/Render-icon.webp";
+import vercelIcon from "./link-icons/Vercel-icon.webp";
+import netlifyIcon from "./link-icons/Netlify-icon.webp";
 
 //contributors
 import judeClarke from "./project-images/contributors/judeClarkeProfile.jpg";
@@ -95,6 +99,10 @@ const skillIcons = {
     communicationIcon: communicationIcon,
     presentationIcon: presentationIcon,
     spanishIcon: spanishIcon,
+    viteIcon: viteIcon,
+    renderIcon: renderIcon,
+    vercelIcon: vercelIcon,
+    netlifyIcon: netlifyIcon
 }
 
 const experienceIcons = {
