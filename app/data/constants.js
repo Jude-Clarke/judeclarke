@@ -1,6 +1,9 @@
 import { media } from "./media";
 import yearsSince2020 from "../utils/calcExp";
 
+const resumeLink =
+  "https://drive.google.com/file/d/1TxjeN5xJJgN7Zv_Fcs0wQd5E3jV1U-uV/view?usp=sharing";
+
 export const Bio = {
   name: "Jude Clarke",
   roles: [
@@ -11,8 +14,7 @@ export const Bio = {
   ],
   description: `${yearsSince2020()} years building engaging UI/UX and CRUD routes, including 18 months at a New York startup to completely replatform and redesign their web application in React. To learn how I can contribute to your company, ask me to demonstrate some of my web applications for you!`,
   github: "https://github.com/jude-clarke",
-  resume:
-    "https://drive.google.com/file/d/1Z33Mj6YePgHYKk6PX7j_3zgQ8fh10ukH/view?usp=drive_link",
+  resume: resumeLink,
   linkedin: "https://www.linkedin.com/in/judeclarke/",
 };
 
@@ -282,7 +284,7 @@ export const experiences = [
       "Jira",
       "SCRUM",
     ],
-    doc: "https://drive.google.com/file/d/1NUgWiRLqWdEJOrUMQ-7vjuGBbpXrfXtu/view?usp=sharing",
+    doc: resumeLink,
   },
   {
     id: 1,
@@ -305,7 +307,7 @@ export const experiences = [
       "Google APIs",
       "Heroku",
     ],
-    doc: "https://drive.google.com/file/d/1NUgWiRLqWdEJOrUMQ-7vjuGBbpXrfXtu/view?usp=sharing",
+    doc: resumeLink,
   },
   {
     id: 2,
@@ -328,7 +330,7 @@ export const experiences = [
       "Google APIs",
       "Heroku",
     ],
-    doc: "https://drive.google.com/file/d/1NUgWiRLqWdEJOrUMQ-7vjuGBbpXrfXtu/view?usp=sharing",
+    doc: resumeLink,
   },
 ];
 
