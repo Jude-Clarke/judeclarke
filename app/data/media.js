@@ -2,10 +2,10 @@
 import htmlIcon from "./link-icons/html5-icon.webp";
 import cssIcon from "./link-icons/CSS3-icon.webp";
 import pythonIcon from "./link-icons/Python-icon.webp";
-import typeScriptIcon from "./link-icons/Typescript-icon.webp";
+import typescriptIcon from "./link-icons/Typescript-icon.webp";
 import ejsIcon from "./link-icons/ejs-icon.webp";
 import figmaIcon from "./link-icons/figma-icon.webp";
-import JavaScriptIcon from "./link-icons/JavaScript-icon.webp";
+import javascriptIcon from "./link-icons/JavaScript-icon.webp";
 import storybookIcon from "./link-icons/storybook-icon.webp";
 import tailwindIcon from "./link-icons/tailwind-icon.webp";
 import mongoDBIcon from "./link-icons/mongodb-icon.webp";
@@ -47,6 +47,9 @@ import renderIcon from "./link-icons/Render-icon.webp";
 import vercelIcon from "./link-icons/Vercel-icon.webp";
 import netlifyIcon from "./link-icons/Netlify-icon.webp";
 import reactNativeIcon from "./link-icons/react-native-icon.webp";
+import firebaseIcon from "./link-icons/firebase-icon.webp";
+import styledComponentsIcon from "./link-icons/styled-components-icon.webp";
+import sassIcon from "./link-icons/sass-icon.webp";
 
 //contributors
 import judeClarke from "./project-images/contributors/judeClarkeProfile.jpg";
@@ -66,10 +69,10 @@ const skillIcons = {
   cssIcon: cssIcon,
   pythonIcon: pythonIcon,
   reactNativeIcon: reactNativeIcon,
-  typeScriptIcon: typeScriptIcon,
+  typescriptIcon: typescriptIcon,
   ejsIcon: ejsIcon,
   figmaIcon: figmaIcon,
-  JavaScriptIcon: JavaScriptIcon,
+  javascriptIcon: javascriptIcon,
   storybookIcon: storybookIcon,
   tailwindIcon: tailwindIcon,
   mongoDBIcon: mongoDBIcon,
@@ -103,6 +106,9 @@ const skillIcons = {
   renderIcon: renderIcon,
   vercelIcon: vercelIcon,
   netlifyIcon: netlifyIcon,
+  firebaseIcon: firebaseIcon,
+  styledComponentsIcon: styledComponentsIcon,
+  sassIcon: sassIcon,
 };
 
 const experienceIcons = {
