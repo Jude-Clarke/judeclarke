@@ -63,6 +63,7 @@ import dianaFurka from "./project-images/contributors/dianaFurkaProfile.webp";
 import jennGnuyen from "./project-images/contributors/jennNguyenProfile.webp";
 import gregOxsen from "./project-images/contributors/gregOxsenProfile.webp";
 import kyleMiller from "./project-images/contributors/kyleMillerProfile.webp";
+import journey from "./project-images/contributors/journeyProfile.webp";
 
 const skillIcons = {
   htmlIcon: htmlIcon,
@@ -194,6 +195,10 @@ const projectImages = {
       "https://res.cloudinary.com/ddsywkqnf/image/upload/v1722201855/projects/judegpt/Screen_Shot_2024-07-28_at_4.17.47_PM_tkuvg4.jpg",
     docs: "https://res.cloudinary.com/ddsywkqnf/image/upload/v1722201915/projects/judegpt/Screen_Shot_2024-07-28_at_4.19.06_PM_meq2ig.png",
   },
+  royaltea: {
+    homepage:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1744248761/projects/royaltea/Screenshot_2025-04-08_at_10.33.02_AM_kbsx3a.png",
+  },
 };
 
 const contributors = {
@@ -208,6 +213,7 @@ const contributors = {
   jennGnuyen: jennGnuyen,
   gregOxsen: gregOxsen,
   kyleMiller: kyleMiller,
+  journey: journey,
 };
 
 export const media = {
