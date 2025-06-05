@@ -2,7 +2,7 @@ import { media } from "./media";
 import yearsSince2020 from "../utils/calcExp";
 
 const resumeLink =
-  "https://drive.google.com/file/d/1TxjeN5xJJgN7Zv_Fcs0wQd5E3jV1U-uV/view?usp=sharing";
+  "https://drive.google.com/file/d/1rJVKUYHyDCa68E_w7yLpQ05ChFn2mBRY/view?usp=drive_link";
 
 export const Bio = {
   name: "Jude Clarke",
