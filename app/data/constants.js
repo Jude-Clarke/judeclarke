@@ -329,7 +329,7 @@ export const experiences = [
     role: "Spanish/Computer Science Teacher",
     company: "Lake Wales Charter Schools",
     date: "Aug. 2019 - May 2022",
-    desc: "I built the Computer Science and Spanish Departments and websites of 2 schools, and lead engineering clubs with other STEM professionals. I also collaborated with an educational consultant to design and develop and edutech software as a service.",
+    desc: "I built the Computer Science and Spanish Departments and websites of 2 schools, and lead engineering clubs with other STEM professionals. I also collaborated with an educational consultant to design and develop an edutech software as a service.",
     skills: [
       "NodeJs",
       "ExpressJS",
