@@ -817,27 +817,6 @@ export const projects = [
     webapp: "https://hirejudeclarke.netlify.app",
     contributors: [contributorJude],
   },
-  // {
-  //   id: 4,
-  //   title: "BendlyJean.com",
-  //   date: "Dec 2020",
-  //   description:
-  //     "I designed and developed a responsive landing page to establish a brand of trust.",
-  //   slides: [
-  //     {
-  //       id: 0,
-  //       image: media.projectImages.bendlyJean.homepage,
-  //       desc: ""
-  //     },
-  //   ],
-  //   tags: ["HTML", "CSS", "JavaScript", "Email JS", "Calendly Embed"],
-  //   category: "web app",
-  //   github: "https://github.com/Jude-Clarke/Bendlyjean",
-  //   webapp: "https://jude-clarke.github.io/Bendlyjean/",
-  //   contributors: [
-  //     contributorJude,
-  //   ],
-  // },
 ];
 
 export const TimeLineData = [
