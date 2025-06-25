@@ -622,6 +622,7 @@ export const projects = [
       "JavaScript",
     ],
     category: "web app",
+    github: "https://github.com/Jude-Clarke/judeclarke",
     webapp: "/",
     contributors: [contributorJude],
   },
