@@ -12,36 +12,40 @@ import ProjectDetails from "./components/ProjectDetails";
 import ResumeButton from "./components/ResumeButton";
 import { Bio } from "./data/constants.js";
 import styles from "./page.module.css";
-
-
+import NavLogo from "./images/MKDS-logo.svg";
 
 const Home = () => {
-const [openModal, setOpenModal] = useState({ state: false, project: null });
+  const [openModal, setOpenModal] = useState({ state: false, project: null });
 
   return (
     <>
-        <Navbar />
-        <div className={styles.body}>
-          <HeroSection CTA={ResumeButton}/>
-          <div className={styles.wrapper}>
-            <Skills />
-            <Experience />
-          </div>
-            <Projects openModal={openModal} setOpenModal={setOpenModal} />
-          <div className={styles.wrapper}>
-            <Education />
-          <div className={styles["cta-btn-container"]}>
-            <a className={styles["resume-button"]} href={Bio.resume} target="_blank">My Resume</a>
-          </div>
-          </div>
-          <Footer />
-          {openModal.state &&
-            <ProjectDetails openModal={openModal} setOpenModal={setOpenModal} />
-          }
+      <Navbar navLogo={NavLogo} />
+      <div className={styles.body}>
+        <HeroSection CTA={ResumeButton} />
+        <div className={styles.wrapper}>
+          <Skills />
+          <Experience />
         </div>
+        <Projects openModal={openModal} setOpenModal={setOpenModal} />
+        <div className={styles.wrapper}>
+          <Education />
+          <div className={styles["cta-btn-container"]}>
+            <a
+              className={styles["resume-button"]}
+              href={Bio.resume}
+              target="_blank"
+            >
+              My Resume
+            </a>
+          </div>
+        </div>
+        <Footer />
+        {openModal.state && (
+          <ProjectDetails openModal={openModal} setOpenModal={setOpenModal} />
+        )}
+      </div>
     </>
-    
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

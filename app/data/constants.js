@@ -5,11 +5,12 @@ const resumeLink =
   "https://drive.google.com/file/d/1rJVKUYHyDCa68E_w7yLpQ05ChFn2mBRY/view?usp=sharing";
 
 export const Bio = {
-  name: "Jude Clarke",
+  name: "Jude Clarke, MBA",
   roles: [
-    "Full Stack Developer",
     "Software Engineer",
+    "Technical Consultant",
     "UI/UX Engineer",
+    "Full Stack Developer",
     "Front-End Engineer",
   ],
   description: `${yearsSince2020()} years building engaging UI/UX and CRUD routes, including 18 months at a New York startup to completely replatform and redesign their web application in React. To learn how I can contribute to your company, ask me to demonstrate some of my web applications for you!`,
@@ -279,7 +280,7 @@ export const experiences = [
   {
     id: 0,
     img: media.experienceIcons.mkdsLogo,
-    role: "Full-Stack Developer, UI Engineer",
+    role: "Fullstack Engineer, Technical Consultant",
     company: "Master Key Dev Solutions, LLC.",
     date: "February 2024 - Present",
     desc: "I architect and develop full-stack, applications and user experiences for my clients. I also provide them with consultations in my various areas of expertise to help them find scaleable, cost-effective solutions to the problems they want to solve.",
