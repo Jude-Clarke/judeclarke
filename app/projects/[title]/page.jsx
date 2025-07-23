@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useParams } from 'next/navigation.js';
+import { useParams } from "next/navigation.js";
 import Navbar from "../../components/Navbar/index.js";
 import HeroSection from "../../components/HeroSection/index.js";
 import Skills from "../../components/Skills/index.js";
@@ -12,9 +12,10 @@ import Education from "../../components/Education/index.js";
 import ProjectDetails from "../../components/ProjectDetails/index.js";
 import ResumeButton from "../../components/ResumeButton/index.js";
 import { Bio } from "../../data/constants.js";
-import { projects } from '../../data/constants.js';
+import { projects } from "../../data/constants.js";
 import _ from "lodash";
 import styles from "../../page.module.css";
+import NavLogo from "./images/MKDS-logo.svg";
 
 const projectPage = () => {
   const params = useParams();
@@ -23,7 +24,8 @@ const projectPage = () => {
   useEffect(() => {
     if (params.title) {
       const project = projects.find(
-        (proj) => _.kebabCase(proj.title.toLowerCase()) === params.title.toLowerCase()
+        (proj) =>
+          _.kebabCase(proj.title.toLowerCase()) === params.title.toLowerCase()
       );
 
       if (project) {
@@ -36,7 +38,7 @@ const projectPage = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar navLogo={NavLogo} />
       <div className={styles.body}>
         <HeroSection CTA={ResumeButton} />
         <div className={styles.wrapper}>
@@ -47,7 +49,12 @@ const projectPage = () => {
         <div className={styles.wrapper}>
           <Education />
           <div className={styles["cta-btn-container"]}>
-            <a className={styles["resume-button"]} href={Bio.resume} target="_blank" rel="noopener noreferrer">
+            <a
+              className={styles["resume-button"]}
+              href={Bio.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               My Resume
             </a>
           </div>
