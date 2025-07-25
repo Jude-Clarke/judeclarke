@@ -15,7 +15,7 @@ import { Bio } from "../../data/constants.js";
 import { projects } from "../../data/constants.js";
 import _ from "lodash";
 import styles from "../../page.module.css";
-import NavLogo from "./images/MKDS-logo.svg";
+import NavLogo from "../../images/MKDS-logo.svg";
 
 const projectPage = () => {
   const params = useParams();
