@@ -13,10 +13,10 @@ const index = () => {
   return (
     <div id="experience" className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.title}>Experience</div>
+        <div className={styles.title}>Career Timeline</div>
         <div className={styles.desc}>
-          Here's a summary of my experience in Software Engineering and building
-          applications.
+          Highlights from my experience in software engineering and application
+          development
         </div>
         <div className={styles["timeline-section"]}>
           <Timeline>

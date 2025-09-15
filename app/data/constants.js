@@ -1,19 +1,17 @@
 import { media } from "./media";
-import yearsSince2020 from "../utils/calcExp";
 
 const resumeLink =
   "https://drive.google.com/file/d/1TRoRULdUoTG2YLj2BK9LWws4hfrCmX-9/view?usp=sharing";
 
 export const Bio = {
-  name: "Jude Clarke, MBA",
+  name: "Jude",
   roles: [
     "Software Engineer",
-    "Technical Consultant",
+    "Tech Consultant",
     "UI/UX Engineer",
     "Full Stack Developer",
-    "Front-End Engineer",
   ],
-  description: `${yearsSince2020()} years building engaging UI/UX and CRUD routes, including 18 months at a New York startup to completely replatform and redesign their web application in React. To learn how I can contribute to your company, ask me to demonstrate some of my web applications for you!`,
+  description: `I develop engaging and scalable full-stack applications. Previously at a New York startup, I executed a full replatform and redesign in React. By collaborating with designers to build their design system, I was able to enhance product usability, brand consistency, and company efficiency. Ask me to demo my work! I'd love to deliver value for your team.`,
   github: "https://github.com/jude-clarke",
   resume: resumeLink,
   linkedin: "https://www.linkedin.com/in/judeclarke/",
@@ -81,16 +79,6 @@ export const skills = [
         link: "https://www.figma.com/",
       },
       {
-        name: "Storybook",
-        image: media.skillIcons.storybookIcon,
-        link: "https://storybook.js.org/",
-      },
-      {
-        name: "EJS",
-        image: media.skillIcons.ejsIcon,
-        link: "https://ejs.co/",
-      },
-      {
         name: "Email JS",
         image: media.skillIcons.emailJSIcon,
         link: "https://www.emailjs.com/",
@@ -111,19 +99,24 @@ export const skills = [
         link: "https://expressjs.com/",
       },
       {
+        name: "OpenAI APIs",
+        image: media.skillIcons.aiIcon,
+        link: "https://openai.com/api/",
+      },
+      {
         name: "Firebase",
         image: media.skillIcons.firebaseIcon,
         link: "https://firebase.google.com/",
       },
       {
-        name: "MongoDB",
-        image: media.skillIcons.mongoDBIcon,
-        link: "https://www.mongodb.com/",
-      },
-      {
         name: "Python",
         image: media.skillIcons.pythonIcon,
         link: "https://www.python.org/",
+      },
+      {
+        name: "MongoDB",
+        image: media.skillIcons.mongoDBIcon,
+        link: "https://www.mongodb.com/",
       },
       {
         name: "Graph Ql",
@@ -146,6 +139,11 @@ export const skills = [
     title: "Other Tech",
     skills: [
       {
+        name: "Google APIs",
+        image: media.skillIcons.googleApiIcon,
+        link: "https://developers.google.com/",
+      },
+      {
         name: "Heroku",
         image: media.skillIcons.herokuIcon,
         link: "https://www.heroku.com/",
@@ -166,11 +164,6 @@ export const skills = [
         link: "https://git-scm.com/",
       },
       {
-        name: "AI Prompt Engineering",
-        image: media.skillIcons.aiIcon,
-        link: "https://aws.amazon.com/what-is/prompt-engineering/",
-      },
-      {
         name: "CLI",
         image: media.skillIcons.cliIcon,
         link: "https://aws.amazon.com/what-is/cli/#:~:text=Here%20is%20how%20you%20open%20the%20CLI%20on%20Mac%3A,now%20enter%20a%20command%20prompt",
@@ -179,11 +172,6 @@ export const skills = [
         name: "Docker",
         image: media.skillIcons.dockerIcon,
         link: "https://www.docker.com/?utm_source=google&utm_medium=cpc&utm_campaign=BRAND_SEARCH_BRAND_AMER_NORAM&utm_term=docker&gad_source=1&gclid=CjwKCAjww_iwBhApEiwAuG6ccBcrAwuKxV6xeuS5bCTrQ8uqgHM-n3v1gFtlK_qddP-kM4hXzMwkUhoCjksQAvD_BwE",
-      },
-      {
-        name: "Google APIs",
-        image: media.skillIcons.googleApiIcon,
-        link: "https://developers.google.com/",
       },
       {
         name: "Jira",
@@ -221,6 +209,11 @@ export const skills = [
     title: "Soft Skills",
     skills: [
       {
+        name: "AI Prompt Engineering",
+        image: media.skillIcons.openaiIcon,
+        link: "https://aws.amazon.com/what-is/prompt-engineering/",
+      },
+      {
         name: "SCRUM",
         image: media.skillIcons.scrumIcon,
         link: "https://www.scrum.org/resources/what-scrum-module",
@@ -244,11 +237,6 @@ export const skills = [
         name: "Passion for Learning",
         image: media.skillIcons.learningIcon,
         link: "#projects",
-      },
-      {
-        name: "Teamwork",
-        image: media.skillIcons.teamworkIcon,
-        link: "#experience",
       },
       {
         name: "Verbal/Written Communication",
@@ -447,8 +435,34 @@ const contributorJude = {
 
 export const projects = [
   {
+    id: 6,
+    title: "CreatorsA2Z",
+    date: "January 2025 - March 2025",
+    description:
+      "I collaborated with CreatorsA2Z to translate Figma mockups into a live MVP using Next.js and Tailwind. Through continuous consultations, iterative development, and user-tested refinements, I delivered a polished landing page now used to onboard new creative influencers to the platform.",
+    slides: [
+      {
+        id: 0,
+        image: media.projectImages.creatorsA2Z.homepage,
+        desc: "Founder Diana Furka (my former VP of Design) approached me with a concept of a platfom she and her cofounders were designing. Given our prior experience working closely together at Emcee.com, She was confident in her decision to collaborate with me on the new product she was building. I was happy to accept the offer, and my role was to engineer her Figma designs into a live landing page. I collaborated with her to understand the user experience she wanted to create, and then built the landing page using Next.js and Tailwind CSS. I also provided ongoing consultations and iterative development to ensure that the final product met her vision and the needs of the target audience. She now uses this landing page to onboard new creative influencers to the platform solidifying their partnership.",
+      },
+    ],
+    tags: ["React", "Next.js", "Tailwind", "CSS", "JavaScript", "Figma"],
+    category: "web app",
+    webapp: "https://creatorsa2z.com/",
+    contributors: [
+      contributorJude,
+      {
+        name: "Diana Furka",
+        img: media.contributors.dianaFurka,
+        linkedin: "https://www.linkedin.com/in/furka/",
+        role: "Founder, Lead Designer",
+      },
+    ],
+  },
+  {
     id: 0,
-    title: "Emcee Studios",
+    title: "Emcee.com",
     date: "Nov 2022 - Feb 2024",
     description:
       "A social e-commerce platform that aims to connect social-media influencers with fashion brands to facilitate affiliate marketing and sales.",
@@ -529,11 +543,13 @@ export const projects = [
       "Next.js",
       "TypeScript",
       "Tailwind",
+      "Figma",
       "Storybook",
       "GraphQL",
       "Jira",
     ],
     category: "web app",
+    webapp: "https://emcee.com/",
     contributors: [
       contributorJude,
       {
@@ -591,22 +607,31 @@ export const projects = [
     title: "JudeGPT",
     date: "July 2024",
     description:
-      "I trained and built a GPT using OpenAI’s Assistants API. This project is meant to facilitate the hiring process for recruiters and hiring managers while simultaneously showcasing my ability to quickly adapt to recent advancements in technology and trends.",
+      "I trained and deployed an integrated chatbot using OpenAI's Assistants API to streamline the hiring process for recruiters and managers. Incorporated retrieval-augmented generation (RAG) to improve accuracy and relevance, while demonstrating my ability to quickly adapt to emerging AI technologies and trends.",
     slides: [
       {
         id: 0,
         image: media.projectImages.judeGPT.homepage,
-        desc: "During my job search, I wanted to showcase my ability to keep up with the latest technological trends, and find practical use cases for them. In November of 2023, OpenAI released ChatGPT, and it broke the internet. I bought a course on AI and Prompt engineering in December of 2023. Through it, I learned some of the possibilities for integrating AI into my workflow. I’d been keeping an eye on OpenAi’s gpt-3 since 2020, but with the launch of ChatGPT also came the Assistants API which enabled me to train my own GPT model on proprietary data.",
+        // desc: "During my job search, I wanted to showcase my ability to keep up with the latest technological trends, and find practical use cases for them. In November of 2023, OpenAI released ChatGPT, and it broke the internet. I bought a course on AI and Prompt engineering in December of 2023. Through it, I learned some of the possibilities for integrating AI into my workflow. I’d been keeping an eye on OpenAi’s gpt-3 since 2020, but with the launch of ChatGPT also came the Assistants API which enabled me to train my own GPT model on proprietary data.",
+        desc: "During my job search, I set out to showcase my ability to quickly adapt to emerging technologies and apply them in practical ways. After OpenAI's release of ChatGPT in late 2023, I enrolled in an AI and prompt engineering course to deepen my understanding of integration possibilities. Having followed OpenAI's GPT models since 2020, I leveraged the newly launched Assistants API to build custom AI tools trained on proprietary data.",
+        scannable:
+          "Leveraged OpenAI's Assistants API to build custom AI tools, showcasing adaptability to emerging technologies.",
       },
       {
         id: 1,
         image: media.projectImages.judeGPT.playground,
-        desc: "I created an OpenAI assistant, and trained it on my resume, my website, and some other documents related to my professional background. I wrote and refined instructions for the assistant to improve the accuracy and efficiency of its responses. I also conducted beta testing with former colleagues and hiring managers to learn how I could further improve its performance.",
+        // desc: "I created an OpenAI assistant, and trained it on my resume, my website, and some other documents related to my professional background. I wrote and refined instructions for the assistant to improve the accuracy and efficiency of its responses. I also conducted beta testing with former colleagues and hiring managers to learn how I could further improve its performance.",
+        desc: "I created a custom OpenAI assistant trained on my résumé, website, and professional documents. I refined its instructions to improve accuracy and efficiency, and conducted beta testing with colleagues and hiring managers to gather feedback and enhance performance.",
+        scannable:
+          "Built and refined an OpenAI assistant trained on proprietary professional data, tested with colleagues and hiring managers for accuracy.",
       },
       {
         id: 2,
         image: media.projectImages.judeGPT.docs,
-        desc: "The biggest challenge for me was integrating it into a functional chatbot that stores conversations for me to review later in a database. The Assistants API was still in beta, so there were not a lot of available resources on the internet. It took me two weeks of trial and error, researching alternate solutions, reading documentation, and replatforming to Next.js to accommodate my newly built Node backend with a MongoDB database.",
+        // desc: "The biggest challenge for me was integrating it into a functional chatbot that stores conversations for me to review later in a database. The Assistants API was still in beta, so there were not a lot of available resources on the internet. It took me two weeks of trial and error, researching alternate solutions, reading documentation, and replatforming to Next.js to accommodate my newly built Node backend with a MongoDB database.",
+        desc: "Finally, I overcame the challenge of integrating my assistant into a functional chatbot with persistent conversation storage in a database. With limited resources available during the Assistants API beta, I spent two weeks testing alternate solutions, studying documentation, and ultimately replatforming to Next.js with a Node backend and MongoDB database.",
+        scannable:
+          "Integrated AI assistant into a chatbot with persistent storage using Next.js, Node, and MongoDB—navigating limited resources during the Assistants API beta.",
       },
     ],
     tags: [
@@ -616,11 +641,12 @@ export const projects = [
       "Express Js",
       "OpenAI",
       "Assistants API",
-      "ChatGPT",
       "MongoDB",
-      "Postman",
       "CSS",
       "JavaScript",
+      "Typescript",
+      "AI",
+      "Retrieval-Augmented Generation (RAG)",
     ],
     category: "web app",
     github: "https://github.com/Jude-Clarke/judeclarke",
@@ -700,12 +726,12 @@ export const projects = [
     title: "RoyalTea",
     date: "September 2024 - April 2025",
     description:
-      "I architected and engineered a full-stack MVP for a client to solve a need he had with tracking royaltees for his company. He now has this to demonstrate to investors to secure funding and partnerships.",
+      "I architected and engineered a full-stack MVP that enables a client to track company royalties, providing a polished product he now uses to attract investors and secure partnerships.",
     slides: [
       {
         id: 0,
         image: media.projectImages.royaltea.homepage,
-        desc: "I had the pleasure of working with Gynell as the architect for his vision. He came to me with an idea and a design that wasn't quite there yet. After consultations, product planning, and progress demos, we were able to develop the vision he had in mind the correct way. I chose the technologies to build in based on scalability, modularity, and future features that he wanted to implement.",
+        desc: "Here, I collaborated with my client to refine and execute his product vision. Through consultations, product planning, and iterative demos, I transformed his early design into a scalable solution. I architected the system, built the backend API, and delivered a minimal user interface choosing technologies with scalability, modularity, and future features in mind.",
       },
     ],
     tags: [

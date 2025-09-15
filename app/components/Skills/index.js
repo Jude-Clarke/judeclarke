@@ -2,16 +2,15 @@ import React from "react";
 import { skills } from "../../data/constants";
 import styles from "./index.module.css";
 import Image from "next/image";
-import yearsSince2020 from "@/app/utils/calcExp";
 
 const Skills = () => {
   return (
     <div id="skills" className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.title}>Skills</div>
+        <div className={styles.title}>Skills & Tools</div>
         <div className={styles.desc}>
-          Here are some skills I've been building over the past{" "}
-          {yearsSince2020()} years of my career.
+          I bring the following skills, developed and refined through years of
+          hands-on experience:
         </div>
         <div className={styles["skills-container"]}>
           {skills.map((item, index) => (

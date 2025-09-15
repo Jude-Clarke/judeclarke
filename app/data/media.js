@@ -50,6 +50,7 @@ import reactNativeIcon from "./link-icons/react-native-icon.webp";
 import firebaseIcon from "./link-icons/firebase-icon.webp";
 import styledComponentsIcon from "./link-icons/styled-components-icon.webp";
 import sassIcon from "./link-icons/sass-icon.webp";
+import openaiIcon from "./link-icons/openai-icon.webp";
 
 //contributors
 import judeClarke from "./project-images/contributors/judeClarkeProfile.jpg";
@@ -110,6 +111,7 @@ const skillIcons = {
   firebaseIcon: firebaseIcon,
   styledComponentsIcon: styledComponentsIcon,
   sassIcon: sassIcon,
+  openaiIcon: openaiIcon,
 };
 
 const experienceIcons = {
@@ -198,6 +200,10 @@ const projectImages = {
   royaltea: {
     homepage:
       "https://res.cloudinary.com/ddsywkqnf/image/upload/v1744248761/projects/royaltea/Screenshot_2025-04-08_at_10.33.02_AM_kbsx3a.png",
+  },
+  creatorsA2Z: {
+    homepage:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1757947794/projects/CreatorsA2Z/Screenshot_2025-07-16_at_10.06.39_AM_gwliw7.png",
   },
 };
 
