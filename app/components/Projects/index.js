@@ -63,13 +63,13 @@ const Projects = ({ openModal, setOpenModal }) => {
           </div>
           <div className={styles.divider} />
           <div
-            value="agentic ai"
+            value="ai"
             className={
               styles["toggle-button"] + " " + (toggle === "AI" && styles.active)
             }
             onClick={() => handleToggleClick("AI")}
           >
-            agentic ai
+            ai
           </div>
         </div>
         <div className={styles["card-container"]}>
