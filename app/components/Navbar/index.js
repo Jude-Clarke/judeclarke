@@ -70,7 +70,7 @@ const Navbar = ({ navLogo }) => {
               alt="logo"
               className={styles["key-logo"]}
             />
-            <span className={styles["logo-text"]}>Portfolio</span>
+            <span className={styles["logo-text"]}>Jude Clarke</span>
           </span>
         </a>
         <div
@@ -82,9 +82,6 @@ const Navbar = ({ navLogo }) => {
           <FaBars />
         </div>
         <ul className={styles["nav-items"]}>
-          <a href="#" className={styles["nav-link"]}>
-            Home
-          </a>
           <a href="#skills" className={styles["nav-link"]}>
             Skills
           </a>

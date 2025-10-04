@@ -13,7 +13,7 @@ div.navbar {
 }
 div.nav-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   height: 60px;
   z-index: 2;
@@ -22,7 +22,6 @@ div.nav-container {
   max-width: 1200px;
 }
 .nav-logo {
-  width: 80%;
   padding: 0 6px;
   display: flex;
   justify-content: start;
@@ -39,6 +38,7 @@ span.logo-text {
   padding: 0 4px;
   font-weight: bold;
   font-size: 18px;
+  width: max-content;
 }
 
 ul.nav-items {
@@ -65,7 +65,6 @@ a.nav-link .active {
 }
 
 div.button-container {
-  width: 80%;
   height: 100%;
   display: flex;
   justify-content: end;
@@ -171,6 +170,9 @@ a.mobile-link .active {
 }
 
 @media screen and (max-width: 768px) {
+  .nav-logo {
+    width: 80%;
+  }
   ul.nav-items {
     display: none;
   }
