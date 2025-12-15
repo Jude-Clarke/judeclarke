@@ -199,7 +199,7 @@ const projectImages = {
   },
   royaltea: {
     homepage:
-      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1744248761/projects/royaltea/Screenshot_2025-04-08_at_10.33.02_AM_kbsx3a.png",
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765751104/projects/royaltea/Screenshot_2025-12-14_at_5.11.10_PM_xxzijl.png",
   },
   creatorsA2Z: {
     homepage:

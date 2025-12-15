@@ -26,33 +26,35 @@ export async function POST(request, { params: { threadId } }) {
       assistant_id: assistantId,
     });
     messageStream = stream
-    
+
     return new Response(stream.toReadableStream());
-  } catch(error) {
+  } catch (error) {
     console.error("Error: ", error);
-    return new Response("Error occured", {status: 500 });
-  } 
+    return new Response("Error occured", { status: 500 });
+  }
   finally {
 
     // DATABASE LOGIC
     const MONGODB_URI = process.env.MONGODB_URI;
 
+
+
     // Connect to MongoDB
     mongoose.connect(MONGODB_URI, {
-        // dbName: 'clarkebotDB' // Specify the database name
-        dbName: process.env.DB // DB for testing
+      // dbName: 'clarkebotDB' // Specify the database name
+      dbName: process.env.DB // DB for testing
     });
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'MongoDB connection error:'));
     db.once('open', () => {
-        console.log('Connected to MongoDB');
+      console.log('Connected to MongoDB');
     });
 
     // MongoDB Schema and Model
     const threadSchema = new mongoose.Schema({
-        userMessage: String,
-        threadId: String,
-        messages: [{ role: String, content: String, timeStamp: String}],
+      userMessage: String,
+      threadId: String,
+      messages: [{ role: String, content: String, timeStamp: String }],
     });
 
     // Specify the collection name explicitly
@@ -64,8 +66,8 @@ export async function POST(request, { params: { threadId } }) {
     // Save the user message to the database
     const content = messageContent;
     const stream = messageStream;
-    const updateUserMessage = async ()=> {
-    await Thread.updateOne(
+    const updateUserMessage = async () => {
+      await Thread.updateOne(
         { threadId },
         { $push: { messages: { role: "user", content, timeStamp: moment.utc() || new Date() } } },
         { upsert: true }

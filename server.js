@@ -1,8 +1,8 @@
 // app.js
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-require('dotenv').config();
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -14,27 +14,18 @@ app.use(bodyParser.json());
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI, {
-    dbName: process.env.DB // DB for testing
+  dbName: process.env.DB, // DB for testing
 });
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-    console.log('Connected to MongoDB');
-
-
-
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.once("open", () => {
+  console.log("Connected to MongoDB");
 });
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-
-
-
-
-
 
 //     // MongoDB Schema and Model
 // const threadSchema = new mongoose.Schema({
@@ -56,4 +47,3 @@ app.listen(PORT, () => {
 //     test.save()
 //         .then(() => console.log('Test thread created'))
 //         .catch(error => console.error('Error creating test thread:', error));
-

@@ -435,6 +435,40 @@ const contributorJude = {
 
 export const projects = [
   {
+    id: 5,
+    title: "RoyalTea",
+    date: "September 2024 - April 2025",
+    description:
+      "I architected and built a foundational REST API with a database and simple UI for a royalty tracking system, which enabled my client to demo the product to investors and successfully secure a partnership with a more established organization in the industry.",
+    slides: [
+      {
+        id: 0,
+        image: media.projectImages.royaltea.homepage,
+        desc: "Here, I collaborated with my client to refine and execute his product vision. Through consultations, product planning, and iterative demos, I transformed his early design into a scalable solution. I architected the system, built the backend API, and delivered a minimal user interface choosing technologies with scalability, modularity, and future features in mind.",
+      },
+    ],
+    tags: [
+      "React",
+      "Node Js",
+      "Express Js",
+      "Firebase",
+      "MongoDB",
+      "CSS",
+      "JavaScript",
+    ],
+    category: "web app",
+    webapp: "https://royalty.technology/",
+    contributors: [
+      contributorJude,
+      {
+        name: "Gynell Journigan",
+        img: media.contributors.journey,
+        linkedin: "https://www.linkedin.com/in/journ3y/",
+        role: "Founder/Product Owner",
+      },
+    ],
+  },
+  {
     id: 6,
     title: "CreatorsA2Z",
     date: "January 2025 - March 2025",
@@ -720,40 +754,6 @@ export const projects = [
         img: media.contributors.rodericBrame,
         linkedin: "https://www.linkedin.com/in/roderic-brame-261b0a170/",
         role: "Educational Consultant",
-      },
-    ],
-  },
-  {
-    id: 5,
-    title: "RoyalTea",
-    date: "September 2024 - April 2025",
-    description:
-      "I architected and engineered a full-stack MVP that enables a client to track company royalties, providing a polished product he now uses to attract investors and secure partnerships.",
-    slides: [
-      {
-        id: 0,
-        image: media.projectImages.royaltea.homepage,
-        desc: "Here, I collaborated with my client to refine and execute his product vision. Through consultations, product planning, and iterative demos, I transformed his early design into a scalable solution. I architected the system, built the backend API, and delivered a minimal user interface choosing technologies with scalability, modularity, and future features in mind.",
-      },
-    ],
-    tags: [
-      "React",
-      "Node Js",
-      "Express Js",
-      "Firebase",
-      "MongoDB",
-      "CSS",
-      "JavaScript",
-    ],
-    category: "web app",
-    webapp: "https://royalty.technology/",
-    contributors: [
-      contributorJude,
-      {
-        name: "Gynell Journigan",
-        img: media.contributors.journey,
-        linkedin: "https://www.linkedin.com/in/journ3y/",
-        role: "Founder/Product Owner",
       },
     ],
   },
