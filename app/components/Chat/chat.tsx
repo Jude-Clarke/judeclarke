@@ -8,6 +8,7 @@ import { AssistantStreamEvent } from "openai/resources/beta/assistants/assistant
 import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/runs/runs";
 import CustomMarkdown from "./CustomMarkdown";
 import { PulseLoader } from "react-spinners";
+import { FaPaperPlane } from "react-icons/fa";
 
 type MessageProps = {
   role: "user" | "assistant" | "code";
@@ -277,7 +278,7 @@ const Chat = ({
               className={styles.button}
               disabled={inputDisabled}
             >
-              Send
+              <FaPaperPlane />
             </button>
           </form>
         </>
