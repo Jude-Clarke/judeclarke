@@ -278,7 +278,7 @@ const Chat = ({
               className={styles.button}
               disabled={inputDisabled}
             >
-              <FaPaperPlane />
+              <FaPaperPlane className={styles.repositionIcon} />
             </button>
           </form>
         </>
