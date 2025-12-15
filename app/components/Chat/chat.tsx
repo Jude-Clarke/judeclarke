@@ -14,42 +14,28 @@ type MessageProps = {
   text: string;
 };
 
+const removeAnnotations = (text: string) => text.replace(/【.*?】/g, "");
 
-const removeAnnotations = (text: string)=> {
-  // Use regex to find and remove all annotations in the form 【...】
-  return text.replace(/【.*?】/g, '');
-}
-
-
-
-
-const UserMessage = ({ text }: { text: string }) => {
-  return <div className={styles.userMessage}>{text}</div>;
-};
-
-const AssistantMessage = ({ text }: { text: string }) => {
-  return (
-    <div className={styles.assistantMessage}>
-      <CustomMarkdown markdown={text} />
-    </div>
-  );
-};
-
-const CodeMessage = ({ text }: { text: string }) => {
-  return (
-    <div className={styles.codeMessage}>
-      {text.split("\n").map((line, index) => (
-        <div key={index}>
-          <span>{`${index + 1}. `}</span>
-          {line}
-        </div>
-      ))}
-    </div>
-  );
-};
+const UserMessage = ({ text }: { text: string }) => (
+  <div className={styles.userMessage}>{text}</div>
+);
+const AssistantMessage = ({ text }: { text: string }) => (
+  <div className={styles.assistantMessage}>
+    <CustomMarkdown markdown={text} />
+  </div>
+);
+const CodeMessage = ({ text }: { text: string }) => (
+  <div className={styles.codeMessage}>
+    {text.split("\n").map((line, index) => (
+      <div key={index}>
+        <span>{`${index + 1}. `}</span>
+        {line}
+      </div>
+    ))}
+  </div>
+);
 
 const Message = ({ role, text }: MessageProps) => {
-  
   switch (role) {
     case "user":
       return <UserMessage text={text} />;
@@ -68,56 +54,72 @@ type ChatProps = {
   ) => Promise<string>;
 };
 
-
-
 const Chat = ({
-  functionCallHandler = () => Promise.resolve(""), // default to return empty string
+  functionCallHandler = () => Promise.resolve(""),
 }: ChatProps) => {
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [inputDisabled, setInputDisabled] = useState(false);
   const [threadId, setThreadId] = useState("");
 
-  // loading variables
+  // store last assistant message in a ref to avoid React state timing issues
+  const lastAssistantRef = useRef("");
+
+  // saving functions
+  const saveUserMessage = async (text: string) => {
+    if (!threadId) return;
+    try {
+      await fetch("/api/messages/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ threadId, role: "user", content: text }),
+      });
+    } catch (err) {
+      console.error("Failed to save user message:", err);
+    }
+  };
+
+  const saveAssistantMessage = async (text: string) => {
+    if (!threadId || !text) return;
+    try {
+      await fetch("/api/messages/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ threadId, role: "assistant", content: text }),
+      });
+    } catch (err) {
+      console.error("Failed to save assistant message:", err);
+    }
+  };
+
+  // loading refs for scrolling
   const [loading, setLoading] = useState(false);
-  const loadingRef = useRef(null); // Reference for the loading div
-  const loadingBottomRef = useRef(null)
-
-
-  // automatically scroll to bottom of chat
+  const loadingRef = useRef(null);
+  const loadingBottomRef = useRef(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     if (loading && loadingRef.current) {
       loadingBottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-}, [loading, messages]);
-  // const scrollToBottom = () => {
-  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  // };
-  // useEffect(() => {
-  //   scrollToBottom();
-  // }, [messages]);
+  }, [loading, messages]);
 
-  // create a new threadID when chat component created
+  // create a new thread ID when chat mounts
   useEffect(() => {
     const createThread = async () => {
-      const res = await fetch(`/api/assistants/threads`, {
-        method: "POST",
-      });
+      const res = await fetch("/api/assistants/threads", { method: "POST" });
       const data = await res.json();
       setThreadId(data.threadId);
     };
     createThread();
   }, []);
 
-  const sendMessage = async (text) => {
+  const sendMessage = async (text: string) => {
     const response = await fetch(
       `/api/assistants/threads/${threadId}/messages`,
       {
         method: "POST",
-        body: JSON.stringify({
-          content: text,
-        }),
+        body: JSON.stringify({ content: text }),
       }
     );
     const stream = AssistantStream.fromReadableStream(response.body);
@@ -129,13 +131,8 @@ const Chat = ({
       `/api/assistants/threads/${threadId}/actions`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          runId: runId,
-          toolCallOutputs: toolCallOutputs,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ runId, toolCallOutputs }),
       }
     );
     const stream = AssistantStream.fromReadableStream(response.body);
@@ -145,57 +142,51 @@ const Chat = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!userInput.trim()) return;
+
+    // save user immediately
+    saveUserMessage(userInput);
+
     sendMessage(userInput);
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { role: "user", text: userInput },
-    ]);
+    setMessages((prev) => [...prev, { role: "user", text: userInput }]);
     setUserInput("");
     setInputDisabled(true);
     setLoading(true);
-    // scrollToBottom();
   };
 
-  
   /* Stream Event Handlers */
-
-  // textCreated - create new assistant message
   const handleTextCreated = () => {
     appendMessage("assistant", "");
+    lastAssistantRef.current = "";
   };
 
-  // textDelta - append text to last assistant message
   const handleTextDelta = (delta) => {
     if (delta.value != null) {
       appendToLastMessage(delta.value);
-    };
+      lastAssistantRef.current += delta.value;
+    }
   };
 
-  // imageFileDone - show image in chat
   const handleImageFileDone = (image) => {
     appendToLastMessage(`\n![${image.file_id}](/api/files/${image.file_id})\n`);
-  }
+    lastAssistantRef.current += `\n![${image.file_id}](/api/files/${image.file_id})\n`;
+  };
 
-  // toolCallCreated - log new tool call
   const toolCallCreated = (toolCall) => {
-    if (toolCall.type != "code_interpreter") return;
+    if (toolCall.type !== "code_interpreter") return;
     appendMessage("code", "");
   };
 
-  // toolCallDelta - log delta and snapshot for the tool call
-  const toolCallDelta = (delta, snapshot) => {
-    if (delta.type != "code_interpreter") return;
-    if (!delta.code_interpreter.input) return;
+  const toolCallDelta = (delta) => {
+    if (delta.type !== "code_interpreter" || !delta.code_interpreter.input)
+      return;
     appendToLastMessage(delta.code_interpreter.input);
   };
 
-  // handleRequiresAction - handle function call
   const handleRequiresAction = async (
     event: AssistantStreamEvent.ThreadRunRequiresAction
   ) => {
     const runId = event.data.id;
     const toolCalls = event.data.required_action.submit_tool_outputs.tool_calls;
-    // loop over tool calls and call function handler
     const toolCallOutputs = await Promise.all(
       toolCalls.map(async (toolCall) => {
         const result = await functionCallHandler(toolCall);
@@ -206,24 +197,22 @@ const Chat = ({
     submitActionResult(runId, toolCallOutputs);
   };
 
-  // handleRunCompleted - re-enable the input form
-  const handleRunCompleted = async () => {   
+  const handleRunCompleted = async () => {
     setInputDisabled(false);
+
+    // save the last assistant message from the ref
+    await saveAssistantMessage(lastAssistantRef.current);
+    lastAssistantRef.current = "";
+
+    setLoading(false);
   };
 
   const handleReadableStream = (stream: AssistantStream) => {
-    // messages
     stream.on("textCreated", handleTextCreated);
     stream.on("textDelta", handleTextDelta);
-
-    // image
     stream.on("imageFileDone", handleImageFileDone);
-
-    // code interpreter
     stream.on("toolCallCreated", toolCallCreated);
     stream.on("toolCallDelta", toolCallDelta);
-
-    // events without helpers yet (e.g. requires_action and run.done)
     stream.on("event", (event) => {
       if (event.event === "thread.run.requires_action")
         handleRequiresAction(event);
@@ -231,75 +220,66 @@ const Chat = ({
     });
   };
 
-  /*
-    =======================
-    === Utility Helpers ===
-    =======================
-  */
-
-  const appendToLastMessage = (text) => {
-    setMessages((prevMessages) => {
-      setLoading(false);
-      
-      const lastMessage = prevMessages[prevMessages.length - 1];
-      const updatedLastMessage = {
-        ...lastMessage,
-        text: lastMessage.text + text,
-      };
-      return [...prevMessages.slice(0, -1), updatedLastMessage];
+  /* Utility helpers */
+  const appendToLastMessage = (text: string) => {
+    setMessages((prev) => {
+      const last = prev[prev.length - 1];
+      if (!last) return prev;
+      const updated = { ...last, text: last.text + text };
+      return [...prev.slice(0, -1), updated];
     });
   };
 
-  const appendMessage = (role, text) => {
-    setMessages((prevMessages) => {
-      const updatedMessages = [...prevMessages, { role, text }];
-      return updatedMessages;
-    })
+  const appendMessage = (role: "user" | "assistant" | "code", text: string) => {
+    setMessages((prev) => [...prev, { role, text }]);
   };
 
-
-  const [isOpen, setIsOpen] = useState(false); // State to toggle chat window
-
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={styles.chatContainer + " " + (isOpen && styles.open)}>
-      <button 
+    <div className={`${styles.chatContainer} ${isOpen ? styles.open : ""}`}>
+      <button
         className={styles.toggleButton}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {isOpen ? 'Close Chat' : 'Ask JudeGPT'}
+        {isOpen ? "Close Chat" : "Ask JudeGPT"}
       </button>
       {isOpen && (
         <>
-        <div id="messagesDiv" className={styles.messages}>
-          {messages.map((msg, index) => (
-            <Message key={index} role={msg.role} text={msg.text} />
-          ))}
-          {loading && <div ref={loadingRef} className={styles.loading}>
-            <PulseLoader />
-            <div id="loadingBottom" ref={loadingBottomRef} className={styles.loadingBottom}> </div>
-          </div>}
-          <div id="endRef" ref={messagesEndRef} />
-        </div>
-        <form
-          onSubmit={handleSubmit}
-          className={`${styles.inputForm} ${styles.clearfix}`}
-        >
-        <input
-          type="text"
-          className={styles.input}
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-          placeholder="Enter your question"
-        />
-        <button
-          type="submit"
-          className={styles.button}
-          disabled={inputDisabled}
-        >
-          Send
-        </button>
-      </form>
+          <div className={styles.messages}>
+            {messages.map((msg, idx) => (
+              <Message key={idx} role={msg.role} text={msg.text} />
+            ))}
+            {loading && (
+              <div ref={loadingRef} className={styles.loading}>
+                <PulseLoader />
+                <div
+                  ref={loadingBottomRef}
+                  className={styles.loadingBottom}
+                ></div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+          <form
+            onSubmit={handleSubmit}
+            className={`${styles.inputForm} ${styles.clearfix}`}
+          >
+            <input
+              type="text"
+              className={styles.input}
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              placeholder="Enter your question"
+            />
+            <button
+              type="submit"
+              className={styles.button}
+              disabled={inputDisabled}
+            >
+              Send
+            </button>
+          </form>
         </>
       )}
     </div>
@@ -307,6 +287,3 @@ const Chat = ({
 };
 
 export default Chat;
-
-
-// Next, add purple gradient to toggle button and user text like resume button on judeclarke.com
