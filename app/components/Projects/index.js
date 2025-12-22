@@ -70,6 +70,7 @@ const Projects = ({ openModal, setOpenModal }) => {
             onClick={() => handleToggleClick("AI")}
           >
             ai
+            <span className={styles["new-badge"]}>NEW!</span>
           </div>
         </div>
         <div className={styles["card-container"]}>

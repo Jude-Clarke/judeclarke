@@ -1,98 +1,123 @@
 div.container {
-    background: linear-gradient(343.07deg, rgba(132, 59, 206, 0.06) 5.71%, rgba(132, 59, 206, 0) 64.83%);
-    padding-top: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-    align-items: center;
-    clip-path: polygon(0 0, 100% 0, 100% 100%,100% 98%, 0 100%);
+  background: linear-gradient(
+    343.07deg,
+    rgba(132, 59, 206, 0.06) 5.71%,
+    rgba(132, 59, 206, 0) 64.83%
+  );
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 98%, 0 100%);
 }
 div.wrapper {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1350px;
-    padding: 10px 16px 100px 16px;
-    gap: 12px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1350px;
+  padding: 10px 16px 100px 16px;
+  gap: 12px;
 }
 div.title {
-    font-size: 42px;
-    text-align: center;
-    font-weight: 600;
-    margin-top: 20px;
-    color: #F2F3F4;
+  font-size: 42px;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 20px;
+  color: #f2f3f4;
 }
 div.desc {
-    font-size: 18px;
-    text-align: center;
-    max-width: 600px;
-    color: #b1b2b3;
+  font-size: 18px;
+  text-align: center;
+  max-width: 600px;
+  color: #b1b2b3;
 }
 div.toggle-button-group {
-    display: flex;
-    border: 1.5px solid #854CE6;
-    color: #854CE6;
-    font-size: 16px;
-    border-radius: 12px;
-    font-weight: 500;
-    margin: 22px 0px;
+  display: flex;
+  border: 1.5px solid #854ce6;
+  color: #854ce6;
+  font-size: 16px;
+  border-radius: 12px;
+  font-weight: 500;
+  margin: 22px 0px;
 }
 div.toggle-button {
-    padding: 8px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    text-transform: uppercase;
-    user-select: none; /* standard syntax */
-    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
-    -moz-user-select: none; /* mozilla browsers */
-    -khtml-user-select: none; /* webkit (konqueror) browsers */
-    -ms-user-select: none; /* IE10+ */
+  position: relative;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  user-select: none; /* standard syntax */
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
 }
 div.toggle-button.active {
-    background: #854CE620;
+  background: #854ce620;
 }
 div.divider {
-    width: 1.5px;
-    background: #854CE6;
+  width: 1.5px;
+  background: #854ce6;
 }
 div.card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 28px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
 }
 
+.new-badge {
+  position: absolute;
+  top: -8px;
+  right: -20px;
+  background: linear-gradient(135deg, #c8a53d 0%, #d1a83b 100%);
+  color: #191825;
+  font-size: 9px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation: pulse 2s ease-in-out infinite;
+}
 
-
-
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
 
 @media (max-width: 768px) {
-    div.title {
-        margin-top: 12px;
-        font-size: 32px;
-    }
-    div.desc {
-            margin-top: 12px;
-            font-size: 16px;
-    }
-    div.toggle-button-group {
-        font-size: 12px;
-    }
-    div.toggle-button {
-        padding: 6px 8px;
-        border-radius: 4px;
-    }
+  div.title {
+    margin-top: 12px;
+    font-size: 32px;
+  }
+  div.desc {
+    margin-top: 12px;
+    font-size: 16px;
+  }
+  div.toggle-button-group {
+    font-size: 12px;
+  }
+  div.toggle-button {
+    padding: 6px 8px;
+    border-radius: 4px;
+  }
 }
 
 @media (max-width: 960px) {
-    div.wrapper {
-        flex-direction: column;
-    }
+  div.wrapper {
+    flex-direction: column;
+  }
 }
-
