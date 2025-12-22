@@ -65,6 +65,7 @@ import jennGnuyen from "./project-images/contributors/jennNguyenProfile.webp";
 import gregOxsen from "./project-images/contributors/gregOxsenProfile.webp";
 import kyleMiller from "./project-images/contributors/kyleMillerProfile.webp";
 import journey from "./project-images/contributors/journeyProfile.webp";
+import richHultman from "./project-images/contributors/richHultmanProfile.webp";
 
 const skillIcons = {
   htmlIcon: htmlIcon,
@@ -205,6 +206,80 @@ const projectImages = {
     homepage:
       "https://res.cloudinary.com/ddsywkqnf/image/upload/v1757947794/projects/CreatorsA2Z/Screenshot_2025-07-16_at_10.06.39_AM_gwliw7.png",
   },
+  aIforUX: {
+    slide1:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765686/projects/AIforUX/Capstone_Project_-_Jude_Clarke-1_j9kcqp.webp",
+    slide2:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765687/projects/AIforUX/Capstone_Project_-_Jude_Clarke-2_lo4vge.webp",
+    slide3:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765688/projects/AIforUX/Capstone_Project_-_Jude_Clarke-3_w7dvg5.webp",
+    slide4:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765686/projects/AIforUX/Capstone_Project_-_Jude_Clarke-4_mv0yny.webp",
+    slide5:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1766256442/projects/AIforUX/LinguaChat-5_plcfhe.webp",
+    slide6:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765687/projects/AIforUX/Capstone_Project_-_Jude_Clarke-6_rs6dzp.webp",
+    slide7:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1766443990/projects/AIforUX/LinguaChat-7_ohqtlp.webp",
+    slide8:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765689/projects/AIforUX/Capstone_Project_-_Jude_Clarke-8_q4pp4d.webp",
+    slide9:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765691/projects/AIforUX/Capstone_Project_-_Jude_Clarke-9_ixocrx.webp",
+    slide10:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765692/projects/AIforUX/Capstone_Project_-_Jude_Clarke-10_bqjckm.webp",
+    slide11:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765691/projects/AIforUX/Capstone_Project_-_Jude_Clarke-11_b9avvo.webp",
+    slide12:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765693/projects/AIforUX/Capstone_Project_-_Jude_Clarke-12_fvklhc.webp",
+    slide13:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765694/projects/AIforUX/Capstone_Project_-_Jude_Clarke-13_wuinct.webp",
+    slide14:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765695/projects/AIforUX/Capstone_Project_-_Jude_Clarke-14_aqxfoq.webp",
+    slide15:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765696/projects/AIforUX/Capstone_Project_-_Jude_Clarke-15_aqtglj.webp",
+    slide16:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765697/projects/AIforUX/Capstone_Project_-_Jude_Clarke-16_bfwttk.webp",
+    slide17:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765697/projects/AIforUX/Capstone_Project_-_Jude_Clarke-17_nek6c4.webp",
+    slide18:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765699/projects/AIforUX/Capstone_Project_-_Jude_Clarke-18_yvprax.webp",
+    slide19:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765700/projects/AIforUX/Capstone_Project_-_Jude_Clarke-19_nkf4nn.webp",
+    slide20:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765701/projects/AIforUX/Capstone_Project_-_Jude_Clarke-20_fppztp.webp",
+    slide21:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765702/projects/AIforUX/Capstone_Project_-_Jude_Clarke-21_os63ge.webp",
+    slide22:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765702/projects/AIforUX/Capstone_Project_-_Jude_Clarke-22_tygfpk.webp",
+    slide23:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765704/projects/AIforUX/Capstone_Project_-_Jude_Clarke-23_qtcrz6.webp",
+    slide24:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765704/projects/AIforUX/Capstone_Project_-_Jude_Clarke-24_fmbdy6.webp",
+    slide25:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765706/projects/AIforUX/Capstone_Project_-_Jude_Clarke-25_zqt9vd.webp",
+    slide26:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765706/projects/AIforUX/Capstone_Project_-_Jude_Clarke-26_a8fkwg.webp",
+    slide27:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765708/projects/AIforUX/Capstone_Project_-_Jude_Clarke-27_iwtcqd.webp",
+    slide28:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765709/projects/AIforUX/Capstone_Project_-_Jude_Clarke-28_jvzwpt.webp",
+    slide29:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765710/projects/AIforUX/Capstone_Project_-_Jude_Clarke-29_fgxiff.webp",
+    slide30:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765711/projects/AIforUX/Capstone_Project_-_Jude_Clarke-30_gguuy8.webp",
+    slide31:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765712/projects/AIforUX/Capstone_Project_-_Jude_Clarke-31_ntvv6o.webp",
+    slide32:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765713/projects/AIforUX/Capstone_Project_-_Jude_Clarke-32_titdfs.webp",
+    slide33:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765719/projects/AIforUX/Capstone_Project_-_Jude_Clarke-33_yvgmoc.webp",
+    slide34:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765719/projects/AIforUX/Capstone_Project_-_Jude_Clarke-34_wycqip.webp",
+    slide35:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765720/projects/AIforUX/Capstone_Project_-_Jude_Clarke-35_ebgjp0.webp",
+    slide36:
+      "https://res.cloudinary.com/ddsywkqnf/image/upload/v1765765721/projects/AIforUX/Capstone_Project_-_Jude_Clarke-36_izlxsq.webp",
+  },
 };
 
 const contributors = {
@@ -220,6 +295,7 @@ const contributors = {
   gregOxsen: gregOxsen,
   kyleMiller: kyleMiller,
   journey: journey,
+  richHultman: richHultman,
 };
 
 export const media = {

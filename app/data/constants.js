@@ -435,6 +435,151 @@ const contributorJude = {
 
 export const projects = [
   {
+    id: 7,
+    title: "AI for UX Design",
+    date: "August 2025 - October 2025",
+    description:
+      "A 9-week course led by Rich Hultman, Senior Innovation Designer at IBM",
+    slides: [
+      {
+        id: 0,
+        image: media.projectImages.aIforUX.slide1,
+        desc: "As AI-powered development tools continue to accelerate, I believe strong UI/UX skills will become a key differentiator for software engineers building user-facing products. Acting on this insight, I applied and was accepted into a 9-week course offered by ELVTR, taught by Rich Hultman, Senior Innovation Designer at IBM. Throughout the course, I learned how to leverage AI tools to enhance and streamline the UX design process while maintaining strong design fundamentals. This capstone project represents the culmination of those tools, workflows, and design principles applied to a real product concept.",
+      },
+      { id: 1, image: media.projectImages.aIforUX.slide2, desc: "" },
+      { id: 2, image: media.projectImages.aIforUX.slide3, desc: "" },
+      { id: 3, image: media.projectImages.aIforUX.slide4, desc: "" },
+      {
+        id: 4,
+        image: media.projectImages.aIforUX.slide5,
+        desc: "I chose language learning as the problem space because it naturally lends itself to conversational interaction and immediate feedback, making it a strong fit for AI-assisted experiences.\n\nWith a background in Spanish education, this domain allowed me to design from lived experience and learner empathy rather than abstraction, grounding early decisions in real-world learning challenges.",
+      },
+      { id: 5, image: media.projectImages.aIforUX.slide6, desc: "" },
+      { id: 6, image: media.projectImages.aIforUX.slide7, desc: "" },
+      { id: 7, image: media.projectImages.aIforUX.slide8, desc: "" },
+      {
+        id: 8,
+        image: media.projectImages.aIforUX.slide9,
+        desc: "I treated prompt engineering as a way to scaffold my discovery process rather than outsource it. The prompt shown here reflects how I structured the interaction to support research thinking by clearly defining the desired outcome, guiding the model through a step-by-step reasoning process, and shaping the response through role framing and output constraints.\n\nBy setting these parameters upfront, I was able to use AI to pressure-test assumptions and surface blind spots, while keeping research judgment and synthesis firmly in my control.",
+      },
+      {
+        id: 9,
+        image: media.projectImages.aIforUX.slide10,
+        desc: "By setting these parameters upfront and positioning ChatGPT as a senior research mentor, I was able to pressure-test assumptions, surface blind spots, and slow the process down. This equipped me to ask better questions while keeping research judgment, synthesis, and alignment to the original problem firmly in my control.",
+      },
+      { id: 10, image: media.projectImages.aIforUX.slide11, desc: "" },
+      {
+        id: 11,
+        image: media.projectImages.aIforUX.slide12,
+        desc: "I treated the proto-persona as a working hypothesis rather than a source of truth. Its role was to externalize early assumptions, align my thinking around a likely user profile, and create a concrete reference point before engaging in deeper research.\n\nThis helped me approach interviews and subsequent design decisions with clearer intent, while staying open to revising or discarding assumptions as new insights emerged.",
+      },
+      {
+        id: 12,
+        image: media.projectImages.aIforUX.slide13,
+        desc: "I used AI to generate an initial question set, but the real value came from the refinement process. I reviewed each question for clarity, bias, and relevance, removing anything that felt leading or redundant and adjusting tone to encourage open-ended responses.\n\nThis ensured the final interview guide supported meaningful qualitative insights rather than simply validating my early assumptions.",
+      },
+      {
+        id: 13,
+        image: media.projectImages.aIforUX.slide14,
+        desc: "The mind maps and summaries helped surface patterns across interviews, but I consistently cross-referenced insights against the original recordings to preserve context and nuance.\n\nThis approach allowed me to move efficiently while still grounding findings in real participant language and behavior.",
+      },
+      {
+        id: 14,
+        image: media.projectImages.aIforUX.slide15,
+        desc: "Structuring interview insights in a comparative format helped me move from raw observations to clearer patterns around shared needs, pain points, and expectations.\n\nThis synthesis step gave me confidence that the emerging themes were consistent enough to inform the next phase of work, allowing me to transition into competitor research and heuristic evaluation with a grounded understanding of user priorities.",
+      },
+      {
+        id: 15,
+        image: media.projectImages.aIforUX.slide16,
+        desc: "",
+      },
+      {
+        id: 16,
+        image: media.projectImages.aIforUX.slide17,
+        desc: "I chose to have participants demo competitor apps because observing real interactions often reveals subtle usability patterns that interviews alone can miss. While Duolingo was the most familiar reference point, I focused on Talkpal’s conversational role play because its feedback panel closely mirrored the interaction flow I wanted to explore. This helped me ground my design in realistic user expectations rather than abstract assumptions.",
+      },
+      {
+        id: 17,
+        image: media.projectImages.aIforUX.slide18,
+        desc: "Applying Nielsen’s heuristics at this stage allowed me to evaluate competitors through both a user-informed and principles-based lens. Because the observations were grounded in real participant behavior, the heuristic analysis felt less abstract and more actionable.\n\nI treated the AI-generated findings as a structured first pass, reviewing them critically and focusing on patterns that aligned with user friction points careful not to take every heuristic flag at face value.",
+      },
+      { id: 18, image: media.projectImages.aIforUX.slide19, desc: "" },
+      {
+        id: 19,
+        image: media.projectImages.aIforUX.slide20,
+        desc: "This was a key synthesis moment in the project. While users consistently valued both immersion and feedback, their preferences around timing often conflicted.",
+      },
+      {
+        id: 20,
+        image: media.projectImages.aIforUX.slide21,
+        desc: "The dual-chat system emerged as a way to reconcile competing user preferences without compromising conversational flow. By separating immersion from reflection, the experience supports both immediate engagement and thoughtful review, allowing users to control when and how feedback appears.\n\nInsights from competitor analysis reinforced this direction. While Duolingo emphasized gamification and visibility at the expense of depth, and TalkPal prioritized realism with limited flexibility, my design intentionally combines immersive interaction with adaptable, user-directed feedback.\n\nThis framing positions the user as an active participant in their own learning. The student is supported rather than corrected, and guided rather than gamified.",
+      },
+      { id: 21, image: media.projectImages.aIforUX.slide22, desc: "" },
+      {
+        id: 22,
+        image: media.projectImages.aIforUX.slide23,
+        desc: "I framed the business objective around confidence-building rather than correctness alone. Fluency is as much about emotional comfort as it is about technical accuracy, so the core tasks were designed to support realistic practice without overwhelming users.\n\nGiving users control over feedback timing and depth was a deliberate choice to respect different learning styles and moments of readiness, reinforcing autonomy while still providing structured guidance.",
+      },
+      { id: 23, image: media.projectImages.aIforUX.slide24, desc: "" },
+      { id: 24, image: media.projectImages.aIforUX.slide25, desc: "" },
+      {
+        id: 25,
+        image: media.projectImages.aIforUX.slide26,
+        desc: "I intentionally defined success beyond accuracy to reflect the emotional and experiential dimensions of language learning. If feedback feels disruptive or discouraging, users may disengage even if corrections are technically correct.\n\nBy pairing qualitative perception metrics with behavioral signals like session length and continuation, I aimed to evaluate whether the experience felt supportive, engaging, and worth returning to.",
+      },
+      { id: 26, image: media.projectImages.aIforUX.slide27, desc: "" },
+      { id: 27, image: media.projectImages.aIforUX.slide28, desc: "" },
+      {
+        id: 28,
+        image: media.projectImages.aIforUX.slide29,
+        desc: "I treated this initial mockup as a low-commitment exploration rather than a validated solution. The goal was to externalize the dual-chat concept quickly and identify obvious layout and interaction questions before layering in research-driven refinements.\n\nBy acknowledging that this version reflected my assumptions, I was able to use it as a reference point for iteration.",
+      },
+      { id: 29, image: media.projectImages.aIforUX.slide30, desc: "" },
+      {
+        id: 30,
+        image: media.projectImages.aIforUX.slide31,
+        desc: "This phase forced me to confront the difference between a concept that works in theory and one that feels natural in practice. User feedback pushed me to prioritize conversational flow over feature visibility, even when that meant pulling instructional elements further into the background.",
+      },
+      {
+        id: 31,
+        image: media.projectImages.aIforUX.slide32,
+        desc: "I treated feedback as something users should discover rather than endure. Designing these interactions became less about signaling correctness and more about preserving psychological safety, curiosity, and momentum during conversation.",
+      },
+      { id: 32, image: media.projectImages.aIforUX.slide33, desc: "" },
+      {
+        id: 33,
+        image: media.projectImages.aIforUX.slide34,
+        desc: "Designing an experience that feels human also increases the risk of users treating it as one. This slide reflects a tension I had to actively manage. Realism builds trust, but unchecked immersion can lead to oversharing.\n\nI see ethical design here not as a constraint, but as an extension of UX responsibility. This includes setting clear boundaries, protecting user data, and ensuring that familiarity never comes at the cost of safety or accessibility.",
+      },
+      { id: 34, image: media.projectImages.aIforUX.slide35, desc: "" },
+      {
+        id: 35,
+        image: media.projectImages.aIforUX.slide36,
+        desc: "AI did not replace my design process. It accelerated the parts that slow iteration while forcing me to stay more intentional about judgment. The speed gains were real, but so were the accuracy gaps, which meant I had to stay present, validate outputs, and synthesize insights myself.\n\nWhere AI helped most was in scaffolding. It supported organizing raw data, surfacing patterns, and visualizing ideas early. The responsibility for interpretation, prioritization, and decision-making remained mine. That balance is what made the workflow effective.",
+      },
+    ],
+    tags: [
+      "AI",
+      "Figma",
+      "ChatGPT",
+      "NotebookLM",
+      "Case Study",
+      "UI/UX Design",
+    ],
+    category: "case study",
+    slideDeck:
+      "https://docs.google.com/presentation/d/e/2PACX-1vT-h5MEuYMgXqT9R9s_uTfRMhfdcL4OI06cAuHSUL9RE5Isz42xtbn1terLBqZW2KpED7zpCQFgNCEW/pub?start=true&loop=false&delayms=120000&slide=id.g389552280cb_0_295",
+    contributors: [
+      contributorJude,
+      {
+        name: "Rich Hultman",
+        img: media.contributors.richHultman,
+        linkedin: "https://www.linkedin.com/in/richhultman/",
+        role: "Course Instructor",
+      },
+    ],
+  },
+  {
     id: 5,
     title: "RoyalTea",
     date: "September 2024 - April 2025",

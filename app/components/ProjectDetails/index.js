@@ -73,6 +73,15 @@ const index = ({ openModal, setOpenModal }) => {
                 View Live App
               </a>
             )}
+            {project?.slideDeck && (
+              <a
+                className={styles.button}
+                href={project?.slideDeck}
+                target="new"
+              >
+                View Slide Deck
+              </a>
+            )}
           </div>
           {project.contributors && (
             <>
