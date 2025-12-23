@@ -51,6 +51,8 @@ import firebaseIcon from "./link-icons/firebase-icon.webp";
 import styledComponentsIcon from "./link-icons/styled-components-icon.webp";
 import sassIcon from "./link-icons/sass-icon.webp";
 import openaiIcon from "./link-icons/openai-icon.webp";
+import whartonIcon from "./link-icons/wharton-icon.webp";
+import elvtrLogo from "./link-icons/elvtr-logo.webp";
 
 //contributors
 import judeClarke from "./project-images/contributors/judeClarkeProfile.jpg";
@@ -126,6 +128,8 @@ const educationIcons = {
   leeLogo: leeLogo,
   udemyIcon: udemyIcon,
   metaIcon: metaIcon,
+  whartonIcon: whartonIcon,
+  elvtrLogo: elvtrLogo,
 };
 
 const projectImages = {
