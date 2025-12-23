@@ -22,8 +22,8 @@ const Projects = ({ openModal, setOpenModal }) => {
       <div className={styles.wrapper}>
         <div className={styles.title}>Career Highlights</div>
         <div className={styles.desc}>
-          From concept to deployment, I've built a wide range of applications.
-          Here are some highlights:
+          From concept to deployment, I've designed and built a wide range of
+          applications. Here are some highlights:
         </div>
         <div className={styles["toggle-button-group"]}>
           <div
@@ -70,7 +70,6 @@ const Projects = ({ openModal, setOpenModal }) => {
             onClick={() => handleToggleClick("AI")}
           >
             ai
-            <span className={styles["new-badge"]}>NEW!</span>
           </div>
         </div>
         <div className={styles["card-container"]}>

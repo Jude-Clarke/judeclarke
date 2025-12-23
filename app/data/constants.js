@@ -440,6 +440,7 @@ export const projects = [
     date: "August 2025 - October 2025",
     description:
       "A 9-week course led by Rich Hultman, Senior Innovation Designer at IBM",
+    new: true,
     slides: [
       {
         id: 0,

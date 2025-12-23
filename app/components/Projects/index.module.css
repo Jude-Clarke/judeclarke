@@ -73,31 +73,6 @@ div.card-container {
   flex-wrap: wrap;
 }
 
-.new-badge {
-  position: absolute;
-  top: -8px;
-  right: -20px;
-  background: linear-gradient(135deg, #c8a53d 0%, #d1a83b 100%);
-  color: #191825;
-  font-size: 9px;
-  font-weight: 500;
-  padding: 2px 6px;
-  border-radius: 10px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
 @media (max-width: 768px) {
   div.title {
     margin-top: 12px;
