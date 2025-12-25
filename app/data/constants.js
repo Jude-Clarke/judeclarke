@@ -432,7 +432,7 @@ export const education = [
     id: 4,
     img: media.educationIcons.udemyIcon,
     school: "Udemy",
-    date: "In Progress",
+    date: "2022",
     desc: "22.5 hours of AI prompt engineering, and generative AI",
     degree: "ChatGPT Complete Guide: Learn Midjourney, ChatGPT 4 & More",
     link: "https://www.udemy.com/course/complete-ai-guide/",
@@ -614,8 +614,8 @@ export const projects = [
       "Figma",
       "ChatGPT",
       "NotebookLM",
-      "Case Study",
       "UI/UX Design",
+      "Case Study",
     ],
     category: "case study",
     slideDeck:

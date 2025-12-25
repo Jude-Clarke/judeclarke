@@ -59,7 +59,8 @@ div.toggle-button {
   -ms-user-select: none; /* IE10+ */
 }
 div.toggle-button.active {
-  background: #854ce620;
+  background: #854ce625;
+  font-weight: 600;
 }
 div.divider {
   width: 1.5px;
