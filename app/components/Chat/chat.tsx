@@ -238,51 +238,55 @@ const Chat = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={`${styles.chatContainer} ${isOpen ? styles.open : ""}`}>
+    <div
+      className={`${styles.chatContainer} ${
+        isOpen ? styles.open : styles.closed
+      }`}
+    >
       <button
         className={styles.toggleButton}
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? "Close Chat" : "Ask JudeGPT"}
       </button>
-      {isOpen && (
-        <>
-          <div className={styles.messages}>
-            {messages.map((msg, idx) => (
-              <Message key={idx} role={msg.role} text={msg.text} />
-            ))}
-            {loading && (
-              <div ref={loadingRef} className={styles.loading}>
-                <PulseLoader />
-                <div
-                  ref={loadingBottomRef}
-                  className={styles.loadingBottom}
-                ></div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-          <form
-            onSubmit={handleSubmit}
-            className={`${styles.inputForm} ${styles.clearfix}`}
+      {/* {isOpen && ( */}
+      <>
+        <div className={styles.messages}>
+          {messages.map((msg, idx) => (
+            <Message key={idx} role={msg.role} text={msg.text} />
+          ))}
+          {loading && (
+            <div ref={loadingRef} className={styles.loading}>
+              <PulseLoader />
+              <div
+                ref={loadingBottomRef}
+                className={styles.loadingBottom}
+              ></div>
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+        <form
+          onSubmit={handleSubmit}
+          className={`${styles.inputForm} ${styles.clearfix}`}
+        >
+          <input
+            type="text"
+            className={styles.input}
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            placeholder="Enter your question"
+          />
+          <button
+            type="submit"
+            className={styles.button}
+            disabled={inputDisabled}
           >
-            <input
-              type="text"
-              className={styles.input}
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-              placeholder="Enter your question"
-            />
-            <button
-              type="submit"
-              className={styles.button}
-              disabled={inputDisabled}
-            >
-              <FaPaperPlane className={styles.repositionIcon} />
-            </button>
-          </form>
-        </>
-      )}
+            <FaPaperPlane className={styles.repositionIcon} />
+          </button>
+        </form>
+      </>
+      {/* )} */}
     </div>
   );
 };
