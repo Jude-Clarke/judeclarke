@@ -491,6 +491,7 @@ export const projects = [
     description:
       "A 9-week course led by Rich Hultman, Senior Innovation Designer at IBM",
     new: true,
+    roleOverride: "UX Researcher",
     slides: [
       {
         id: 0,

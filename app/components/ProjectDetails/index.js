@@ -112,7 +112,12 @@ const index = ({ openModal, setOpenModal }) => {
                       </div>
                     </div>
                     <div className={styles["contributor-container"]}>
-                      <div className={styles.role}>{contributor.role}</div>
+                      <div className={styles.role}>
+                        {project.roleOverride &&
+                        contributor.name === "Jude Clarke"
+                          ? project.roleOverride
+                          : contributor.role}
+                      </div>
                     </div>
                   </div>
                 ))}
