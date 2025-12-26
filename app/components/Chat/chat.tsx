@@ -199,13 +199,11 @@ const Chat = ({
   };
 
   const handleRunCompleted = async () => {
+    setLoading(false);
     setInputDisabled(false);
-
     // save the last assistant message from the ref
     await saveAssistantMessage(lastAssistantRef.current);
     lastAssistantRef.current = "";
-
-    setLoading(false);
   };
 
   const handleReadableStream = (stream: AssistantStream) => {
