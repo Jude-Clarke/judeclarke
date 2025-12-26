@@ -204,11 +204,12 @@
 }
 
 .resumeCta {
-  -webkit-appearance: button;
-  -moz-appearance: button;
-  appearance: button;
   text-decoration: none;
-  width: 95%;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 90%;
+  margin: 15px auto;
+  clear: both;
   text-align: center;
   margin: 20px;
   padding: 16px 0;
