@@ -98,6 +98,12 @@ const Chat = ({
   const loadingRef = useRef(null);
   const loadingBottomRef = useRef(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const messagesRef = useRef([]);
+
+  // Keep the ref in sync with state whenever messages change
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
 
   useEffect(() => {
     if (loading && loadingRef.current) {
@@ -201,9 +207,31 @@ const Chat = ({
   const handleRunCompleted = async () => {
     setLoading(false);
     setInputDisabled(false);
-    // save the last assistant message from the ref
-    await saveAssistantMessage(lastAssistantRef.current);
+
+    const assistantMessageContent = lastAssistantRef.current;
+
+    // Use the REF here instead of the state variable
+    const currentMessages = messagesRef.current;
+    const lastUserMessage =
+      currentMessages.filter((m) => m.role === "user").pop()?.text || "";
+
+    // Logic for first message check using the ref
+    const isFirst =
+      currentMessages.filter((m) => m.role === "user").length === 1;
+
+    await saveAssistantMessage(assistantMessageContent);
     lastAssistantRef.current = "";
+
+    await fetch("/api/notifications/pushover", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userMessage: lastUserMessage,
+        assistantMessage: assistantMessageContent,
+        threadId,
+        isFirstMessage: isFirst,
+      }),
+    });
   };
 
   const handleReadableStream = (stream: AssistantStream) => {
