@@ -143,12 +143,13 @@
   flex-direction: column;
   order: 2;
   white-space: pre-wrap;
-  transition: height ease 150ms;
+  transition: height ease 150ms, padding 150ms ease;
 }
 .open .messages {
   height: 48vh;
   padding: 10px;
-  animation: openbounce 150ms ease;
+  transition: none;
+  animation: openbounce 150ms ease forwards;
 }
 .closed .messages {
   height: 0;
