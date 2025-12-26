@@ -1,0 +1,38 @@
+.mediaWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
+  max-width: 400px; /* Match your existing design constraints */
+  border-radius: 50%; /* If you have a circular profile */
+  object-fit: cover;
+}
+
+.heroVideo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: opacity 0.4s ease-in-out;
+  pointer-events: none; /* Allows clicks to pass through if needed */
+}
+
+.visible {
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
+}
