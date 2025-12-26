@@ -15,6 +15,7 @@
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   overflow: hidden;
   z-index: 50;
+  transition: max-width ease 150ms;
 }
 .toggleButton {
   width: 100%;
@@ -138,6 +139,7 @@
 
 .messages {
   overflow-y: auto;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   order: 2;
@@ -145,7 +147,7 @@
   transition: height ease 150ms;
 }
 .open .messages {
-  height: 65vh;
+  height: 45vh;
   padding: 10px;
   animation: openbounce 200ms ease;
 }
@@ -231,12 +233,12 @@
     height: 0;
   }
   50% {
-    height: 70vh; /* Overshoot */
+    height: 47vh; /* Overshoot */
   }
   80% {
-    height: 63vh; /* Slight undershoot */
+    height: 44vh; /* Slight undershoot */
   }
   100% {
-    height: 65vh; /* Final resting height */
+    height: 45vh; /* Final resting height */
   }
 }
