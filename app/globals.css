@@ -1,32 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-
 /* width */
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background:#222A35;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #575C66;
-    border-radius: 6px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #626970;
-  }
+/* Track */
+::-webkit-scrollbar-track {
+  background: #222a35;
+}
 
-  @media (max-width: 500px) {
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #575c66;
+  border-radius: 6px;
+}
 
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #626970;
+}
+
+@media (max-width: 500px) {
   .mobile-min-content {
     width: min-content;
   }
@@ -37,10 +35,19 @@
   width: 100%;
   height: auto;
 }
+.swiper-button-next {
+  transition: opacity 100ms ease;
+}
+.swiper-button-prev {
+  transition: opacity 100ms ease;
+}
+.swiper-button-disabled {
+  opacity: 0 !important;
+}
 
-@media only screen and (max-width: 500px){
-  .swiper-button-prev:after, .swiper-button-next:after {
-  
+@media only screen and (max-width: 500px) {
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
     position: absolute;
     bottom: 145px;
   }
@@ -83,24 +90,23 @@ pre {
 }
 
 /* width */
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background:#222A35;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #575C66;
-    border-radius: 6px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #626970;
-  }
+/* Track */
+::-webkit-scrollbar-track {
+  background: #222a35;
+}
 
-  @media (max-width: 500px) {
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #575c66;
+  border-radius: 6px;
+}
 
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #626970;
+}
+
+@media (max-width: 500px) {
   .mobile-min-content {
     width: min-content;
   }
