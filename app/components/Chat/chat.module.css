@@ -149,7 +149,7 @@
 .open .messages {
   height: 48vh;
   padding: 10px;
-  animation: mobilebounce 150ms ease;
+  animation: openbounce 150ms ease;
 }
 .closed .messages {
   height: 0;
@@ -220,9 +220,6 @@
   .toggleButton {
     padding: 16px 0;
   }
-  /* .open .messages {
-    animation: openbounce 150ms ease;
-  } */
 }
 
 @media (min-width: 1024px) {
@@ -232,21 +229,6 @@
 }
 
 @keyframes openbounce {
-  0% {
-    height: 0;
-  }
-  50% {
-    height: 51vh; /* Overshoot */
-  }
-  80% {
-    height: 48vh; /* Slight undershoot */
-  }
-  100% {
-    height: 49vh; /* Final resting height */
-  }
-}
-
-@keyframes mobilebounce {
   0% {
     height: 0;
   }
