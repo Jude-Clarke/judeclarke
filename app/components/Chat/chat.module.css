@@ -143,19 +143,17 @@
   flex-direction: column;
   order: 2;
   white-space: pre-wrap;
-  transition: height ease 150ms, padding 150ms ease;
 }
 .open .messages {
-  height: 48vh;
+  height: 61vh;
   padding: 10px;
-  transition-duration: none;
-  animation: openbounce 150ms ease forwards;
+  animation: openbouncemobile 150ms ease forwards;
 }
 .closed .messages {
   height: 0;
   padding: 0;
   overflow: hidden;
-  animation: closeslide 150ms ease forwards;
+  animation: closeslidemobile 150ms ease forwards;
 }
 
 .userMessage,
@@ -218,6 +216,13 @@
   .toggleButton {
     padding: 16px 0;
   }
+  .open .messages {
+    height: 48vh;
+    animation: openbounce 150ms ease forwards;
+  }
+  .closed .messages {
+    animation: closeslide 150ms ease forwards;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -226,6 +231,17 @@
   }
 }
 
+@keyframes openbouncemobile {
+  0% {
+    height: 0;
+  }
+  60% {
+    height: 62vh; /* Overshoot height */
+  }
+  100% {
+    height: 61vh; /* Final resting height */
+  }
+}
 @keyframes openbounce {
   0% {
     height: 0;
@@ -235,6 +251,14 @@
   }
   100% {
     height: 48vh; /* Final resting height */
+  }
+}
+@keyframes closeslidemobile {
+  0% {
+    height: 61vh;
+  }
+  100% {
+    height: 0; /* Final resting height */
   }
 }
 @keyframes closeslide {
