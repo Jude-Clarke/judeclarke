@@ -139,7 +139,6 @@
 
 .messages {
   overflow-y: auto;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   order: 2;
@@ -210,9 +209,6 @@
   .chatContainer {
     max-width: 448px;
     right: 16px;
-  }
-  .messages {
-    height: 384px;
   }
   .button {
     flex-grow: 0;
