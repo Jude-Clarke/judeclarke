@@ -73,7 +73,7 @@ const Hero = ({ CTA }) => {
       // Fallback to standard
       timer = setTimeout(() => {
         setDisplayImage(HeroImage);
-      }, 601);
+      }, 2000);
     }
 
     return () => {
