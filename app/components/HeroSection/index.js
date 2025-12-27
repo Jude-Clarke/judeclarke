@@ -23,6 +23,7 @@ const Hero = ({ CTA }) => {
   const [readyToPreload, setReadyToPreload] = useState(false);
   // using state to manage delayed image swap
   const [displayImage, setDisplayImage] = useState(HeroImage);
+  const heroRef = useRef(null);
 
   useEffect(() => {
     const lastVisit = localStorage.getItem("lastVisit");
@@ -32,9 +33,7 @@ const Hero = ({ CTA }) => {
     if (lastVisit && now - parseInt(lastVisit) > ONE_DAY) {
       setIsReturning(true);
       // Trigger "Welcome Back" video
-      const videoTimer = setTimeout(() => {
-        triggerVideo(HERO_ANIMATIONS.WELCOME_BACK);
-      }, 1500);
+      triggerVideo(HERO_ANIMATIONS.WELCOME_BACK);
 
       // RESET LOGIC:
       // After the video has had time to play (adjust 4000ms to your video length + buffer)
@@ -42,10 +41,9 @@ const Hero = ({ CTA }) => {
       const resetTimer = setTimeout(() => {
         setIsReturning(false);
         // This will cause your other useEffect to swap the image back to HeroImage
-      }, 2500);
+      }, 500);
 
       return () => {
-        clearTimeout(videoTimer);
         clearTimeout(resetTimer);
       };
     } else if (!lastVisit) {
@@ -93,7 +91,7 @@ const Hero = ({ CTA }) => {
     if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
 
     // SHIELD: If chat is open, Jude stays static to save performance
-  if (isChatOpen) return;
+    if (isChatOpen) return;
 
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
     const delay = isMobile ? 8000 : 15000;
@@ -116,7 +114,7 @@ const Hero = ({ CTA }) => {
         HERO_ANIMATIONS.STRETCH,
         HERO_ANIMATIONS.BRB,
       ];
-      if(isMobile) options.push(HERO_ANIMATIONS.PEACE),;
+      if (isMobile) options.push(HERO_ANIMATIONS.PEACE);
 
       const randomAnim = options[Math.floor(Math.random() * options.length)];
 
@@ -142,7 +140,19 @@ const Hero = ({ CTA }) => {
       }
     };
     const handleScroll = () => {
-      if (window.scrollY > 1 && !isChatOpen) {triggerVideo(HERO_ANIMATIONS.LOOK_DOWN, true)};
+      const scrollPosition = window.scrollY;
+      const heroHeight = heroRef.current?.offsetHeight || 800; // Fallback to 800px
+
+      // TRIGGER LOGIC:
+      // 1. Chat must be closed
+      // 2. Must be scrolled more than 1px
+      // 3. Must be ABOVE the fold (scrollPosition < heroHeight)
+      // 4. Use safeTriggerVideo (no override) so it doesn't cut off other clips
+      if (!isChatOpen) {
+        if (scrollPosition > 1 && scrollPosition < heroHeight) {
+          safeTriggerVideo(HERO_ANIMATIONS.LOOK_DOWN);
+        }
+      }
     };
 
     window.addEventListener("mousemove", resetIdleTimer);
@@ -164,7 +174,7 @@ const Hero = ({ CTA }) => {
   }, [resetIdleTimer]); // Now depends on the stable callback
 
   return (
-    <div id="about" className={styles["hero-container"]}>
+    <div id="about" ref={heroRef} className={styles["hero-container"]}>
       <div className={styles["hero-bg"]}>
         <HeroBgAnimation />
       </div>
