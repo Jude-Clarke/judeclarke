@@ -38,14 +38,10 @@ const Hero = ({ CTA }) => {
       // RESET LOGIC:
       // After the video has had time to play (adjust 4000ms to your video length + buffer)
       // we flip isReturning back to false so the UI returns to "Standard" mode.
-      const resetTimer = setTimeout(() => {
+      setTimeout(() => {
         setIsReturning(false);
-        // This will cause your other useEffect to swap the image back to HeroImage
-      }, 500);
-
-      return () => {
-        clearTimeout(resetTimer);
-      };
+      }, 2500);
+      localStorage.setItem("lastVisit", now.toString());
     } else if (!lastVisit) {
       // First time visitor ever? Set the initial timestamp so they
       // can become a "returning" visitor tomorrow.
@@ -58,25 +54,25 @@ const Hero = ({ CTA }) => {
 
   // using effect to handle the delayed transition logic
   useEffect(() => {
-    let timer;
     if (isChatOpen) {
       // Switch to ChatOpen immediately when opened
-      timer = setTimeout(() => {
+      const timer = setTimeout(() => {
         setDisplayImage(ChatOpen);
-      }, 601);
-    } else if (isReturning) {
-      // Show the "Welcome Back" image if they are a returning visitor
-      setDisplayImage(WelcomeBack);
-    } else {
-      // Fallback to standard
-      timer = setTimeout(() => {
-        setDisplayImage(HeroImage);
-      }, 2000);
+      }, 600);
+      return () => clearTimeout(timer);
     }
 
-    return () => {
-      if (timer) clearTimeout(timer);
-    };
+    if (isReturning) {
+      // Show the "Welcome Back" image if they are a returning visitor
+      setDisplayImage(WelcomeBack);
+    }
+
+    // Fallback to standard after a delay
+    const timer = setTimeout(() => {
+      setDisplayImage(HeroImage);
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, [isChatOpen, isReturning]);
 
   const idleTimerRef = useRef(null);
@@ -221,6 +217,7 @@ const Hero = ({ CTA }) => {
             onFinished={() => {
               setActiveVideo(null); // Clear current video
               resetIdleTimer(); // Start the next idle countdown!
+              resetIdleTimer();
             }}
             isReturning={isReturning}
             alt={`Photo of ${Bio.name}`}
