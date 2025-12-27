@@ -112,6 +112,7 @@ const Hero = ({ CTA }) => {
         HERO_ANIMATIONS.LOOK_AROUND,
         HERO_ANIMATIONS.STRETCH,
         HERO_ANIMATIONS.BRB,
+        isMobile && HERO_ANIMATIONS.PEACE,
       ];
       const randomAnim = options[Math.floor(Math.random() * options.length)];
 
