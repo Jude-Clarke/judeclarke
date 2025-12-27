@@ -130,7 +130,13 @@ const Hero = ({ CTA }) => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") resetIdleTimer();
     };
-
+    const handleMouseOut = (e) => {
+      const isHeadingForTabs = e.clientY <= 5;
+      // This check now respects the "Finish First" rule
+      if (!e.relatedTarget && !e.toElement && isHeadingForTabs) {
+        safeTriggerVideo(HERO_ANIMATIONS.BYE);
+      }
+    };
     const handleScroll = () => {
       if (window.scrollY > 1) triggerVideo(HERO_ANIMATIONS.LOOK_DOWN, true);
     };
@@ -138,6 +144,7 @@ const Hero = ({ CTA }) => {
     window.addEventListener("mousemove", resetIdleTimer);
     window.addEventListener("touchstart", resetIdleTimer);
     window.addEventListener("scroll", handleScroll, { passive: true });
+    document.addEventListener("mouseout", handleMouseOut);
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     resetIdleTimer(); // Initial start
@@ -147,6 +154,7 @@ const Hero = ({ CTA }) => {
       window.removeEventListener("mousemove", resetIdleTimer);
       window.removeEventListener("touchstart", resetIdleTimer);
       window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mouseout", handleMouseOut);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [resetIdleTimer]); // Now depends on the stable callback
