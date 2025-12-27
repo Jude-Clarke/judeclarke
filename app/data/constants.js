@@ -7,9 +7,10 @@ export const Bio = {
   name: "Jude",
   roles: [
     "Software Engineer",
-    "Tech Consultant",
+    "UI/UX Designer",
+    "Full Stack Dev",
     "UI/UX Engineer",
-    "Full Stack Developer",
+    "Tech Consultant",
   ],
   description: `I develop engaging and scalable full-stack applications. Previously at a New York startup, I executed a full replatform and redesign in React. By collaborating with designers to build their design system, I was able to enhance product usability, brand consistency, and company efficiency. Ask me to demo my work! I'd love to deliver value for your team.`,
   github: "https://github.com/jude-clarke",
