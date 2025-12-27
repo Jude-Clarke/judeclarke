@@ -30,23 +30,23 @@ const Hero = ({ CTA }) => {
     const now = Date.now();
     const ONE_DAY = 24 * 60 * 60 * 1000;
 
-    if (lastVisit && now - parseInt(lastVisit) > ONE_DAY) {
-      setIsReturning(true);
-      // Trigger "Welcome Back" video
-      triggerVideo(HERO_ANIMATIONS.WELCOME_BACK);
+    // if (lastVisit && now - parseInt(lastVisit) > ONE_DAY) {
+    //   setIsReturning(true);
+    //   // Trigger "Welcome Back" video
+    //   triggerVideo(HERO_ANIMATIONS.WELCOME_BACK);
 
-      // RESET LOGIC:
-      // After the video has had time to play (adjust 4000ms to your video length + buffer)
-      // we flip isReturning back to false so the UI returns to "Standard" mode.
-      setTimeout(() => {
-        setIsReturning(false);
-      }, 2500);
-      localStorage.setItem("lastVisit", now.toString());
-    } else if (!lastVisit) {
-      // First time visitor ever? Set the initial timestamp so they
-      // can become a "returning" visitor tomorrow.
-      localStorage.setItem("lastVisit", now.toString());
-    }
+    //   // RESET LOGIC:
+    //   // After the video has had time to play (adjust 4000ms to your video length + buffer)
+    //   // we flip isReturning back to false so the UI returns to "Standard" mode.
+    //   setTimeout(() => {
+    //     setIsReturning(false);
+    //   }, 2500);
+    //   localStorage.setItem("lastVisit", now.toString());
+    // } else if (!lastVisit) {
+    //   // First time visitor ever? Set the initial timestamp so they
+    //   // can become a "returning" visitor tomorrow.
+    //   localStorage.setItem("lastVisit", now.toString());
+    // }
 
     // Note: If they visit twice in 5 hours, we do nothing and
     // don't update the timestamp, preserving their "Original" 24-hour window.

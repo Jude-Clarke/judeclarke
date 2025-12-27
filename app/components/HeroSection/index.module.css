@@ -86,11 +86,13 @@ div.hero-right-container {
   transition: opacity 0.6s ease-in-out;
 }
 
+.animation-delay {
+  animation-delay: 1.3s; /* Optional: wait for layout to settle */
+}
+
 .hero-right-container {
-  /* ... your existing styles ... */
   opacity: 0;
   animation: fadeInHero 1.2s ease-out forwards;
-  animation-delay: 1.3s; /* Optional: wait for layout to settle */
 }
 
 @keyframes fadeInHero {
