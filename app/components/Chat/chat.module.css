@@ -17,11 +17,17 @@
   z-index: 50;
   transition: max-width ease 150ms;
 }
-.chatContainer.initial,
+.chatContainer.initial {
+  height: auto;
+  background-color: transparent;
+  box-shadow: none;
+}
+
 .chatContainer.closed {
   height: auto;
-  background-color: transparent; /* Optional: hides the white box when closed */
-  box-shadow: none; /* Optional: hides shadow when closed */
+  background-color: #fff;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .toggleButton {
@@ -157,20 +163,19 @@
   flex-direction: column;
   order: 2;
   white-space: pre-wrap;
-  height: 0;
 }
+
 .initial .messages {
   height: 0;
-  padding: 0;
 }
+
 .open .messages {
   padding: 10px;
   animation: openbouncemobile 150ms ease forwards;
 }
 .closed .messages {
-  height: 0;
   padding: 0;
-  animation: closeslidemobile 150ms ease forwards;
+  animation: closeslidemobile 150ms ease;
 }
 
 .userMessage,

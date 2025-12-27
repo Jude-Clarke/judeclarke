@@ -68,10 +68,10 @@ const Chat = ({
 
   const toggleChat = () => {
     if (isInitial) setIsInitial(false); // once clicked, it's no longer the initial render
-    if (!isChatOpen) {
-    } else {
+    if (isChatOpen) {
       triggerVideo("/videos/hero/phone.mp4");
     }
+
     setIsChatOpen(!isChatOpen);
   };
 
