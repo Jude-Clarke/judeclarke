@@ -92,6 +92,9 @@ const Hero = ({ CTA }) => {
   const resetIdleTimer = useCallback(() => {
     if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
 
+    // SHIELD: If chat is open, Jude stays static to save performance
+  if (isChatOpen) return;
+
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
     const delay = isMobile ? 8000 : 15000;
 
@@ -112,14 +115,15 @@ const Hero = ({ CTA }) => {
         HERO_ANIMATIONS.LOOK_AROUND,
         HERO_ANIMATIONS.STRETCH,
         HERO_ANIMATIONS.BRB,
-        isMobile && HERO_ANIMATIONS.PEACE,
       ];
+      if(isMobile) options.push(HERO_ANIMATIONS.PEACE),;
+
       const randomAnim = options[Math.floor(Math.random() * options.length)];
 
       // Use the override we just created in Context
       triggerVideo(randomAnim, true);
     }, delay);
-  }, [triggerVideo]); // triggerVideo is stable from context
+  }, [triggerVideo, isChatOpen]); // triggerVideo is stable from context
 
   useEffect(() => {
     activeVideoRef.current = activeVideo;
@@ -138,7 +142,7 @@ const Hero = ({ CTA }) => {
       }
     };
     const handleScroll = () => {
-      if (window.scrollY > 1) triggerVideo(HERO_ANIMATIONS.LOOK_DOWN, true);
+      if (window.scrollY > 1 && !isChatOpen) {triggerVideo(HERO_ANIMATIONS.LOOK_DOWN, true)};
     };
 
     window.addEventListener("mousemove", resetIdleTimer);

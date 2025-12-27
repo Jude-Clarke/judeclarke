@@ -15,11 +15,20 @@ const HeroMedia = ({
   const [isLocked, setIsLocked] = useState(false);
   const videoRef = useRef(null);
 
-  // 1. Resync on Focus (Emergency release if tab was switched)
+  // 1. Resync on Focus (Emergency release ONLY if video is stuck/paused)
   useEffect(() => {
     const handleFocus = () => {
       const video = videoRef.current;
-      if (isLocked && video && video.paused) {
+      // ONLY release the lock if the video is actually stuck (paused)
+      // and we are supposed to be playing something.
+      if (
+        isLocked &&
+        video &&
+        video.paused &&
+        video.currentTime > 0 &&
+        !video.ended
+      ) {
+        console.log("Emergency release: Video was stuck on focus");
         setIsVisible(false);
         setIsLocked(false);
         if (onFinished) onFinished();
