@@ -3,6 +3,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 import Chat from "./components/Chat/chat";
 import yearsSince2020 from "./utils/calcExp";
+import { MediaProvider } from "./contexts/MediaContext";
 
 export const metadata = {
   title: "Hire Jude Clarke | Full Stack Engineer | React | UI Engineer",
@@ -13,10 +14,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {children}
-        <div className="centerChat">
-          <Chat />
-        </div>
+        <MediaProvider>
+          {children}
+          <div className="centerChat">
+            <Chat />
+          </div>
+        </MediaProvider>
       </body>
     </html>
   );

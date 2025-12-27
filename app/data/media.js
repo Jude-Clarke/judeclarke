@@ -69,6 +69,21 @@ import kyleMiller from "./project-images/contributors/kyleMillerProfile.webp";
 import journey from "./project-images/contributors/journeyProfile.webp";
 import richHultman from "./project-images/contributors/richHultmanProfile.webp";
 
+const HERO_ANIMATIONS = {
+  LOOK_DOWN: "/videos/hero/looking-down.mp4",
+  SMILE: "/videos/hero/smile.mp4",
+  PEACE: "/videos/hero/peace.mp4",
+  GO_AHEAD: "/videos/hero/go-ahead.mp4",
+  CHECK_ME_OUT: "/videos/hero/check-me-out.mp4",
+  TURN_AROUND: "/videos/hero/turn-around.mp4",
+  WELCOME_BACK: "/videos/hero/back.mp4",
+  LOOK_AROUND: "/videos/hero/look-around.mp4",
+  PHONE: "/videos/hero/phone.mp4",
+  STRETCH: "/videos/hero/stretch.mp4",
+  BRB: "/videos/hero/brb.mp4",
+  BYE: "/videos/hero/bye.mp4",
+};
+
 const skillIcons = {
   htmlIcon: htmlIcon,
   cssIcon: cssIcon,
@@ -303,6 +318,7 @@ const contributors = {
 };
 
 export const media = {
+  HERO_ANIMATIONS: HERO_ANIMATIONS,
   skillIcons: skillIcons,
   experienceIcons: experienceIcons,
   educationIcons: educationIcons,

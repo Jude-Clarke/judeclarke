@@ -5,12 +5,24 @@ import Image from "next/image";
 import { FaBars } from "react-icons/fa";
 import { Bio } from "../../data/constants";
 import styles from "./index.module.css";
+import { useMedia } from "../../contexts/MediaContext";
 
 const Navbar = ({ navLogo }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { triggerVideo, activeVideo } = useMedia();
 
   const mobileNavRef = useRef();
   const toggleButtonRef = useRef();
+
+  const handleLogoHover = () => {
+    triggerVideo("/videos/hero/look-around.mp4");
+  };
+  const handleLinkHover = () => {
+    triggerVideo("/videos/hero/check-me-out.mp4");
+  };
+  const handleCtaHover = () => {
+    triggerVideo("/videos/hero/smile.mp4");
+  };
 
   useEffect(() => {
     const handler = (e) => {
@@ -61,7 +73,11 @@ const Navbar = ({ navLogo }) => {
   return (
     <div id="navbar" className={styles.navbar}>
       <div className={styles["nav-container"]}>
-        <a href="#" className={styles["nav-logo"]}>
+        <a
+          href="#"
+          className={styles["nav-logo"]}
+          onMouseEnter={handleLogoHover}
+        >
           <span className={styles["logo-span"]}>
             <Image
               src={navLogo}
@@ -82,20 +98,39 @@ const Navbar = ({ navLogo }) => {
           <FaBars />
         </div>
         <ul className={styles["nav-items"]}>
-          <a href="#skills" className={styles["nav-link"]}>
+          <a
+            href="#skills"
+            className={styles["nav-link"]}
+            onMouseEnter={handleLinkHover}
+          >
             Skills
           </a>
-          <a href="#experience" className={styles["nav-link"]}>
+          <a
+            href="#experience"
+            className={styles["nav-link"]}
+            onMouseEnter={handleLinkHover}
+          >
             Experience
           </a>
-          <a href="#projects" className={styles["nav-link"]}>
+          <a
+            href="#projects"
+            className={styles["nav-link"]}
+            onMouseEnter={handleLinkHover}
+          >
             Projects
           </a>
-          <a href="#education" className={styles["nav-link"]}>
+          <a
+            href="#education"
+            className={styles["nav-link"]}
+            onMouseEnter={handleLinkHover}
+          >
             Education
           </a>
         </ul>
-        <div className={styles["button-container"]}>
+        <div
+          className={styles["button-container"]}
+          onMouseOver={handleCtaHover}
+        >
           <a href={Bio.resume} target="_blank" className={styles["cta-button"]}>
             Resume
           </a>

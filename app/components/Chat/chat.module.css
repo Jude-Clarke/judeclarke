@@ -17,6 +17,13 @@
   z-index: 50;
   transition: max-width ease 150ms;
 }
+.chatContainer.initial,
+.chatContainer.closed {
+  height: auto;
+  background-color: transparent; /* Optional: hides the white box when closed */
+  box-shadow: none; /* Optional: hides shadow when closed */
+}
+
 .toggleButton {
   width: 100%;
   font-weight: bold;
@@ -82,16 +89,22 @@
   row-gap: 10px;
   column-gap: 6px;
   width: 100%;
-  padding: 10px 10px 20px 10px;
   box-shadow: 0 -2px 4px -5px #191924ee;
   z-index: 20;
   order: 1;
-  transition: height ease 100ms;
+  overflow: hidden;
 }
+.initial .inputForm,
 .closed .inputForm {
   height: 0;
   padding: 0;
   overflow: hidden;
+  border: none;
+}
+
+.open .inputForm {
+  height: auto;
+  padding: 10px 10px 20px 10px;
 }
 
 .input {
@@ -143,16 +156,19 @@
   flex-direction: column;
   order: 2;
   white-space: pre-wrap;
+  height: 0;
+}
+.initial .messages {
+  height: 0;
+  padding: 0;
 }
 .open .messages {
-  height: 61vh;
   padding: 10px;
   animation: openbouncemobile 150ms ease forwards;
 }
 .closed .messages {
   height: 0;
   padding: 0;
-  overflow: hidden;
   animation: closeslidemobile 150ms ease forwards;
 }
 

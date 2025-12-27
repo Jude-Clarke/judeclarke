@@ -9,6 +9,7 @@ import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/ru
 import CustomMarkdown from "./CustomMarkdown";
 import { PulseLoader } from "react-spinners";
 import { FaPaperPlane } from "react-icons/fa";
+import { useMedia } from "../../contexts/MediaContext";
 
 type MessageProps = {
   role: "user" | "assistant" | "code";
@@ -58,10 +59,27 @@ type ChatProps = {
 const Chat = ({
   functionCallHandler = () => Promise.resolve(""),
 }: ChatProps) => {
+  const { triggerVideo, activeVideo, isChatOpen, setIsChatOpen } = useMedia();
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [inputDisabled, setInputDisabled] = useState(false);
   const [threadId, setThreadId] = useState("");
+  const [isInitial, setIsInitial] = useState(true); // track first render
+
+  const toggleChat = () => {
+    if (isInitial) setIsInitial(false); // once clicked, it's no longer the initial render
+    if (!isChatOpen) {
+    } else {
+      triggerVideo("/videos/hero/phone.mp4");
+    }
+    setIsChatOpen(!isChatOpen);
+  };
+
+  const handleButtonHover = () => {
+    if (!activeVideo && !isChatOpen) {
+      triggerVideo("/videos/hero/go-ahead.mp4");
+    }
+  };
 
   // store last assistant message in a ref to avoid React state timing issues
   const lastAssistantRef = useRef("");
@@ -261,21 +279,16 @@ const Chat = ({
     setMessages((prev) => [...prev, { role, text }]);
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div
       className={`${styles.chatContainer} ${
-        isOpen ? styles.open : styles.closed
+        isInitial ? styles.initial : isChatOpen ? styles.open : styles.closed
       }`}
+      onMouseEnter={handleButtonHover}
     >
-      <button
-        className={styles.toggleButton}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {isOpen ? "Close Chat" : "Ask JudeGPT"}
+      <button className={styles.toggleButton} onClick={toggleChat}>
+        {isChatOpen ? "Close Chat" : "Ask JudeGPT"}
       </button>
-      {/* {isOpen && ( */}
       <>
         <div className={styles.messages}>
           {messages.map((msg, idx) => (
@@ -312,7 +325,6 @@ const Chat = ({
           </button>
         </form>
       </>
-      {/* )} */}
     </div>
   );
 };

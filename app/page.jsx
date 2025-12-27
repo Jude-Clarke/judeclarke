@@ -13,6 +13,7 @@ import ResumeButton from "./components/ResumeButton";
 import { Bio } from "./data/constants.js";
 import styles from "./page.module.css";
 import NavLogo from "./images/MKDS-logo.svg";
+import { MediaProvider } from "./contexts/MediaContext";
 
 const Home = () => {
   const [openModal, setOpenModal] = useState({ state: false, project: null });

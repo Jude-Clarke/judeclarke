@@ -85,6 +85,10 @@ div.hero-right-container {
   transition: opacity 0.6s ease-in-out;
 }
 
+.no-transition {
+  transition: none !important;
+}
+
 .visible {
   opacity: 1;
 }
