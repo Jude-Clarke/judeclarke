@@ -3,13 +3,29 @@ import { Bio } from "../../data/constants";
 import Typewriter from "typewriter-effect";
 import HeroImage from "../../images/judeProfile.webp";
 import ChatOpen from "../../images/chat-open.webp";
-import WelcomeBack from "../../images/back.webp";
 import HeroMedia from "./HeroMedia";
 import HeroBgAnimation from "../HeroBgAnimation";
 import styles from "./index.module.css";
 import { useMedia } from "../../contexts/MediaContext";
 import { media } from "../../data/media";
 const { HERO_ANIMATIONS } = media;
+
+const options = [
+  HERO_ANIMATIONS.TURN_AROUND,
+  HERO_ANIMATIONS.LOOK_DOWN,
+  HERO_ANIMATIONS.CHECK_ME_OUT,
+  HERO_ANIMATIONS.GO_AHEAD,
+  HERO_ANIMATIONS.SMILE,
+  HERO_ANIMATIONS.LOOK_AROUND,
+  HERO_ANIMATIONS.STRETCH,
+  HERO_ANIMATIONS.BRB,
+];
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+if (isMobile) options.push(HERO_ANIMATIONS.PEACE);
+
+const randomAnim = () => {
+  return options[Math.floor(Math.random() * options.length)];
+};
 
 const Hero = ({ CTA }) => {
   const {
@@ -30,23 +46,24 @@ const Hero = ({ CTA }) => {
     const now = Date.now();
     const ONE_DAY = 24 * 60 * 60 * 1000;
 
-    // if (lastVisit && now - parseInt(lastVisit) > ONE_DAY) {
-    //   setIsReturning(true);
-    //   // Trigger "Welcome Back" video
-    //   triggerVideo(HERO_ANIMATIONS.WELCOME_BACK);
+    if (lastVisit && now - parseInt(lastVisit) > ONE_DAY) {
+      setIsReturning(true);
+      // Trigger random "Welcome Back" animation
+      triggerVideo(randomAnim(), true);
+      console.log("HIT!!");
 
-    //   // RESET LOGIC:
-    //   // After the video has had time to play (adjust 4000ms to your video length + buffer)
-    //   // we flip isReturning back to false so the UI returns to "Standard" mode.
-    //   setTimeout(() => {
-    //     setIsReturning(false);
-    //   }, 2500);
-    //   localStorage.setItem("lastVisit", now.toString());
-    // } else if (!lastVisit) {
-    //   // First time visitor ever? Set the initial timestamp so they
-    //   // can become a "returning" visitor tomorrow.
-    //   localStorage.setItem("lastVisit", now.toString());
-    // }
+      // RESET LOGIC:
+      // After the video has had time to play (adjust 4000ms to your video length + buffer)
+      // we flip isReturning back to false so the UI returns to "Standard" mode.
+      setTimeout(() => {
+        setIsReturning(false);
+      }, 2500);
+      localStorage.setItem("lastVisit", now.toString());
+    } else if (!lastVisit) {
+      // First time visitor ever? Set the initial timestamp so they
+      // can become a "returning" visitor tomorrow.
+      localStorage.setItem("lastVisit", now.toString());
+    }
 
     // Note: If they visit twice in 5 hours, we do nothing and
     // don't update the timestamp, preserving their "Original" 24-hour window.
@@ -60,11 +77,6 @@ const Hero = ({ CTA }) => {
         setDisplayImage(ChatOpen);
       }, 600);
       return () => clearTimeout(timer);
-    }
-
-    if (isReturning) {
-      // Show the "Welcome Back" image if they are a returning visitor
-      setDisplayImage(WelcomeBack);
     }
 
     // Fallback to standard after a delay
@@ -89,7 +101,6 @@ const Hero = ({ CTA }) => {
     // SHIELD: If chat is open, Jude stays static to save performance
     if (isChatOpen) return;
 
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
     const delay = isMobile ? 8000 : 15000;
 
     idleTimerRef.current = setTimeout(() => {
@@ -100,22 +111,8 @@ const Hero = ({ CTA }) => {
         return;
       }
 
-      const options = [
-        HERO_ANIMATIONS.TURN_AROUND,
-        HERO_ANIMATIONS.LOOK_DOWN,
-        HERO_ANIMATIONS.CHECK_ME_OUT,
-        HERO_ANIMATIONS.GO_AHEAD,
-        HERO_ANIMATIONS.SMILE,
-        HERO_ANIMATIONS.LOOK_AROUND,
-        HERO_ANIMATIONS.STRETCH,
-        HERO_ANIMATIONS.BRB,
-      ];
-      if (isMobile) options.push(HERO_ANIMATIONS.PEACE);
-
-      const randomAnim = options[Math.floor(Math.random() * options.length)];
-
-      // Use the override we just created in Context
-      triggerVideo(randomAnim, true);
+      // Use the override created in Context
+      triggerVideo(randomAnim(), true);
     }, delay);
   }, [triggerVideo, isChatOpen]); // triggerVideo is stable from context
 
