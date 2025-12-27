@@ -50,7 +50,6 @@ const Hero = ({ CTA }) => {
       setIsReturning(true);
       // Trigger random "Welcome Back" animation
       triggerVideo(randomAnim(), true);
-      console.log("HIT!!");
 
       // RESET LOGIC:
       // After the video has had time to play (adjust 4000ms to your video length + buffer)
