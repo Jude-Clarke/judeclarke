@@ -8,18 +8,13 @@ export const MediaProvider = ({ children }) => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isReturning, setIsReturning] = useState(false);
 
-  const triggerVideo = (src) => {
-    // console.log("Context: Attempting to trigger", src);
+  const triggerVideo = (src, override = false) => {
     setActiveVideo((current) => {
-      if (current !== null) {
-        // console.log(
-        //   "Context: Trigger blocked, video already playing:",
-        //   current
-        // );
-        return current;
+      // If override is true, or nothing is playing, set the new video
+      if (override || current === null) {
+        return src;
       }
-      // console.log("Context: Trigger SUCCESS");
-      return src;
+      return current;
     });
   };
 

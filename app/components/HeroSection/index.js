@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Bio } from "../../data/constants";
 import Typewriter from "typewriter-effect";
 import HeroImage from "../../images/judeProfile.webp";
@@ -89,16 +89,20 @@ const Hero = ({ CTA }) => {
     if (activeVideoRef.current) return;
     triggerVideo(src);
   };
-
-  useEffect(() => {
-    activeVideoRef.current = activeVideo;
-  }, [activeVideo]);
-  // Logic to handle Idle animations
-  const resetIdleTimer = () => {
+  const resetIdleTimer = useCallback(() => {
     if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
 
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const delay = isMobile ? 8000 : 15000;
+
     idleTimerRef.current = setTimeout(() => {
-      // Pick a random animation.
+      // Check our REF to see if a video is TRULY active
+      // (not just the fallback LOOK_AROUND)
+      if (activeVideoRef.current) {
+        resetIdleTimer();
+        return;
+      }
+
       const options = [
         HERO_ANIMATIONS.TURN_AROUND,
         HERO_ANIMATIONS.LOOK_DOWN,
@@ -111,50 +115,40 @@ const Hero = ({ CTA }) => {
       ];
       const randomAnim = options[Math.floor(Math.random() * options.length)];
 
-      // Only trigger if the user isn't currently interacting
-      if (!activeVideo) triggerVideo(randomAnim);
-    }, 15000); // 15 seconds of inactivity
-  };
+      // Use the override we just created in Context
+      triggerVideo(randomAnim, true);
+    }, delay);
+  }, [triggerVideo]); // triggerVideo is stable from context
+
   useEffect(() => {
-    // 1. Lazy Preload Timer
-    const preloadTimer = setTimeout(() => setReadyToPreload(true), 2500);
+    activeVideoRef.current = activeVideo;
+  }, [activeVideo]);
+  // Logic to handle Idle animations
 
-    // 2. Event Listeners
-    const handleWindowFocus = () => setActiveVideo(null);
-
-    const handleMouseOut = (e) => {
-      const isHeadingForTabs = e.clientY <= 5;
-      // This check now respects the "Finish First" rule
-      if (!e.relatedTarget && !e.toElement && isHeadingForTabs) {
-        safeTriggerVideo(HERO_ANIMATIONS.BYE);
-      }
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") resetIdleTimer();
     };
-    // This triggers when the user scrolls down past the Hero section
+
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      if (scrollPosition > 1) {
-        safeTriggerVideo(HERO_ANIMATIONS.LOOK_DOWN);
-      }
+      if (window.scrollY > 1) triggerVideo(HERO_ANIMATIONS.LOOK_DOWN, true);
     };
 
-    // 3. Listen for any movement to reset the idle timer
-    window.addEventListener("focus", handleWindowFocus);
     window.addEventListener("mousemove", resetIdleTimer);
-    document.addEventListener("mouseout", handleMouseOut);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("touchstart", resetIdleTimer);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
-    // Start initial timer
-    resetIdleTimer();
+    resetIdleTimer(); // Initial start
 
     return () => {
-      clearTimeout(preloadTimer);
       if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-      window.removeEventListener("focus", handleWindowFocus);
       window.removeEventListener("mousemove", resetIdleTimer);
-      document.removeEventListener("mouseout", handleMouseOut);
+      window.removeEventListener("touchstart", resetIdleTimer);
       window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [resetIdleTimer]); // Now depends on the stable callback
 
   return (
     <div id="about" className={styles["hero-container"]}>
@@ -201,7 +195,10 @@ const Hero = ({ CTA }) => {
             imageSrc={displayImage}
             videoSrc={activeVideo || HERO_ANIMATIONS.LOOK_AROUND}
             isTriggered={!!activeVideo}
-            onFinished={() => setActiveVideo(null)}
+            onFinished={() => {
+              setActiveVideo(null); // Clear current video
+              resetIdleTimer(); // Start the next idle countdown!
+            }}
             isReturning={isReturning}
             alt={`Photo of ${Bio.name}`}
           />

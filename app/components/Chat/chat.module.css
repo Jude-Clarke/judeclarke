@@ -126,7 +126,9 @@
 }
 
 .inputForm .button {
+  width: 48px;
   height: 48px;
+  flex-shrink: 0;
   background-color: #191924;
   color: white;
   border: none;
@@ -250,12 +252,6 @@
     hsla(271, 100%, 50%, 1) 0%,
     hsla(294, 100%, 50%, 1) 100%
   );
-}
-
-@media (max-width: 350px) {
-  .button {
-    flex-grow: 1;
-  }
 }
 
 @media (min-width: 768px) {
