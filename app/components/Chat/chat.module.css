@@ -174,6 +174,7 @@
   animation: openbouncemobile 150ms ease forwards;
 }
 .closed .messages {
+  height: 0;
   padding: 0;
   animation: closeslidemobile 150ms ease;
 }
