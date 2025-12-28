@@ -8,9 +8,10 @@ import HeroBgAnimation from "../HeroBgAnimation";
 import styles from "./index.module.css";
 import { useMedia } from "../../contexts/MediaContext";
 import { media } from "../../data/media";
+
 const { HERO_ANIMATIONS } = media;
 
-const options = [
+const BASE_OPTIONS = [
   HERO_ANIMATIONS.TURN_AROUND,
   HERO_ANIMATIONS.LOOK_DOWN,
   HERO_ANIMATIONS.CHECK_ME_OUT,
@@ -20,12 +21,8 @@ const options = [
   HERO_ANIMATIONS.STRETCH,
   HERO_ANIMATIONS.BRB,
 ];
-const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-if (isMobile) options.push(HERO_ANIMATIONS.PEACE);
 
-const randomAnim = () => {
-  return options[Math.floor(Math.random() * options.length)];
-};
+// Create a separate component for animation randomizer?
 
 const Hero = ({ CTA }) => {
   const {
@@ -41,6 +38,31 @@ const Hero = ({ CTA }) => {
   const [displayImage, setDisplayImage] = useState(HeroImage);
   const heroRef = useRef(null);
 
+  // Smart Randomizer Logic ---
+  const lastAnimRef = useRef(null);
+  const getRandomAnim = useCallback(() => {
+    // Wrapping getSmartRandomAnim in useCallback ensures that it doesn't change on every render. This is crucial because the resetIdleTimer and several useEffect hooks depend on it. If it weren't stable, the timers might reset unexpectedly.
+
+    // 1. Determine current options pool
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const currentOptions = isMobile
+      ? [...BASE_OPTIONS, HERO_ANIMATIONS.PEACE]
+      : BASE_OPTIONS;
+
+    // 2. Filter out the last animation to prevent back-to-back repeats
+    const filteredOptions = currentOptions.filter(
+      (anim) => anim !== lastAnimRef.current
+    );
+
+    // 3. Pick a random one from the remaining pool
+    const randomIndex = Math.floor(Math.random() * filteredOptions.length);
+    const selectedAnim = filteredOptions[randomIndex];
+
+    // 4. Update the ref for the next call
+    lastAnimRef.current = selectedAnim;
+    return selectedAnim;
+  }, []);
+
   useEffect(() => {
     const lastVisit = localStorage.getItem("lastVisit");
     const now = Date.now();
@@ -49,7 +71,7 @@ const Hero = ({ CTA }) => {
     if (lastVisit && now - parseInt(lastVisit) > ONE_DAY) {
       setIsReturning(true);
       // Trigger random "Welcome Back" animation
-      triggerVideo(randomAnim(), true);
+      triggerVideo(getRandomAnim(), true);
 
       // RESET LOGIC:
       // After the video has had time to play (adjust 4000ms to your video length + buffer)
@@ -100,6 +122,7 @@ const Hero = ({ CTA }) => {
     // SHIELD: If chat is open, Jude stays static to save performance
     if (isChatOpen) return;
 
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
     const delay = isMobile ? 8000 : 15000;
 
     idleTimerRef.current = setTimeout(() => {
@@ -111,7 +134,7 @@ const Hero = ({ CTA }) => {
       }
 
       // Use the override created in Context
-      triggerVideo(randomAnim(), true);
+      triggerVideo(getRandomAnim(), true);
     }, delay);
   }, [triggerVideo, isChatOpen]); // triggerVideo is stable from context
 
