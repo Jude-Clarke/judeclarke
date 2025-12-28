@@ -81,6 +81,7 @@ const HERO_ANIMATIONS = {
   STRETCH: "/videos/hero/stretch.mp4",
   BRB: "/videos/hero/brb.mp4",
   BYE: "/videos/hero/bye.mp4",
+  TEXTING: "/videos/hero/texting.mp4",
 };
 
 const skillIcons = {

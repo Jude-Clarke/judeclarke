@@ -176,6 +176,7 @@ const Chat = ({
     setUserInput("");
     setInputDisabled(true);
     setLoading(true);
+    triggerVideo("/videos/hero/texting.mp4");
   };
 
   /* Stream Event Handlers */

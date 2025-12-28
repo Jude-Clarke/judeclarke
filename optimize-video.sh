@@ -22,3 +22,5 @@ ffmpeg -i "$INPUT_FILE" \
 mv "$TEMP_FILE" "$INPUT_FILE"
 
 echo "✅ Optimization complete! $INPUT_FILE is now web-ready."
+
+# Run in terminal with: ./optimize-video.sh public/videos/hero/[file].mp4

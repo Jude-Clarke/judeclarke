@@ -35,3 +35,5 @@ if [ "$EXTENSION" == "mov" ]; then
 fi
 
 echo "✅ Success! Created: $OUTPUT_FILE"
+
+# Run in terminal with: ./convert-video.sh public/videos/hero/[file].MOV 
