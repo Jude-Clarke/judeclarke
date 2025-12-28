@@ -76,7 +76,6 @@ const HERO_ANIMATIONS = {
   GO_AHEAD: "/videos/hero/go-ahead.mp4",
   CHECK_ME_OUT: "/videos/hero/check-me-out.mp4",
   TURN_AROUND: "/videos/hero/turn-around.mp4",
-  WELCOME_BACK: "/videos/hero/back.mp4",
   LOOK_AROUND: "/videos/hero/look-around.mp4",
   PHONE: "/videos/hero/phone.mp4",
   STRETCH: "/videos/hero/stretch.mp4",

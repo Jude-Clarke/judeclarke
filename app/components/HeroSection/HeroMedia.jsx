@@ -51,7 +51,12 @@ const HeroMedia = ({
 
       video
         .play()
-        .then(() => setIsVisible(true))
+        .then(() =>
+          // Use requestAnimationFrame to ensure the hidden state is painted
+          requestAnimationFrame(() => {
+            setIsVisible(true);
+          })
+        )
         .catch((err) => {
           console.warn("Autoplay blocked", err);
           setIsLocked(false);
@@ -88,16 +93,16 @@ const HeroMedia = ({
         ref={videoRef}
         // IMPORTANT: We keep the video key linked to videoSrc
         // but it will only update once the lock is released
-        key={videoSrc}
         src={videoSrc}
         muted
         playsInline
+        autoPlay
         preload="auto"
         onCanPlay={() => setVideoLoaded(true)}
         onEnded={handleVideoEnd}
         className={`${styles["hero-video"]} ${
           isVisible ? styles["visible"] : styles["hidden"]
-        } ${isReturning ? styles["no-transition"] : ""}`}
+        }`}
       />
     </div>
   );

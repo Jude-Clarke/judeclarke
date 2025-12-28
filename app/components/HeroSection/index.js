@@ -8,6 +8,8 @@ import HeroBgAnimation from "../HeroBgAnimation";
 import styles from "./index.module.css";
 import { useMedia } from "../../contexts/MediaContext";
 import { media } from "../../data/media";
+import { useHeroTriggers } from "../../../hooks/useHeroTriggers";
+import { PreloadVideos } from "./PreloadVideos";
 
 const { HERO_ANIMATIONS } = media;
 
@@ -33,140 +35,73 @@ const Hero = ({ CTA }) => {
     isReturning,
     setIsReturning,
   } = useMedia();
-  const [readyToPreload, setReadyToPreload] = useState(false);
-  // using state to manage delayed image swap
   const [displayImage, setDisplayImage] = useState(HeroImage);
   const heroRef = useRef(null);
+  // 1. Visitor Tracking Logic
+  const hasTriggeredWelcome = useRef(false);
 
-  // Smart Randomizer Logic ---
-  const lastAnimRef = useRef(null);
-  const getRandomAnim = useCallback(() => {
-    // Wrapping getSmartRandomAnim in useCallback ensures that it doesn't change on every render. This is crucial because the resetIdleTimer and several useEffect hooks depend on it. If it weren't stable, the timers might reset unexpectedly.
+  // use custom hook
+  const { getRandomAnim, resetIdleTimer, idleTimerRef } = useHeroTriggers(
+    triggerVideo,
+    activeVideo,
+    isChatOpen,
+    HERO_ANIMATIONS
+  );
 
-    // 1. Determine current options pool
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-    const currentOptions = isMobile
-      ? [...BASE_OPTIONS, HERO_ANIMATIONS.PEACE]
-      : BASE_OPTIONS;
+  const [priorityVideo, setPriorityVideo] = useState(null);
 
-    // 2. Filter out the last animation to prevent back-to-back repeats
-    const filteredOptions = currentOptions.filter(
-      (anim) => anim !== lastAnimRef.current
-    );
-
-    // 3. Pick a random one from the remaining pool
-    const randomIndex = Math.floor(Math.random() * filteredOptions.length);
-    const selectedAnim = filteredOptions[randomIndex];
-
-    // 4. Update the ref for the next call
-    lastAnimRef.current = selectedAnim;
-    return selectedAnim;
-  }, []);
-
+  // 1. Visitor Tracking Logic
   useEffect(() => {
+    // Shield: Prevents this from running twice in Dev Mode
+    if (hasTriggeredWelcome.current) return;
+
     const lastVisit = localStorage.getItem("lastVisit");
     const now = Date.now();
     const ONE_DAY = 24 * 60 * 60 * 1000;
+    // DEBUG: Change ONE_DAY to 0 if you want to test it on every refresh
+    const isReturningVisitor = lastVisit && now - parseInt(lastVisit) > 0;
+    if (isReturningVisitor) {
+      const welcomeAnim = getRandomAnim();
 
-    if (lastVisit && now - parseInt(lastVisit) > ONE_DAY) {
+      console.log("Playing welcome animation:", welcomeAnim);
+
+      setPriorityVideo(welcomeAnim);
       setIsReturning(true);
-      // Trigger random "Welcome Back" animation
-      triggerVideo(getRandomAnim(), true);
+      triggerVideo(welcomeAnim, true);
 
-      // RESET LOGIC:
-      // After the video has had time to play (adjust 4000ms to your video length + buffer)
-      // we flip isReturning back to false so the UI returns to "Standard" mode.
-      setTimeout(() => {
-        setIsReturning(false);
-      }, 2500);
-      localStorage.setItem("lastVisit", now.toString());
-    } else if (!lastVisit) {
-      // First time visitor ever? Set the initial timestamp so they
-      // can become a "returning" visitor tomorrow.
-      localStorage.setItem("lastVisit", now.toString());
+      setTimeout(() => setIsReturning(false), 2500);
+
+      hasTriggeredWelcome.current = true;
     }
 
-    // Note: If they visit twice in 5 hours, we do nothing and
-    // don't update the timestamp, preserving their "Original" 24-hour window.
-  }, []); // Run exactly once on mount
+    localStorage.setItem("lastVisit", now.toString());
+  }, [getRandomAnim, triggerVideo, setIsReturning]);
 
-  // using effect to handle the delayed transition logic
+  // 2. Image Transition Logic
   useEffect(() => {
-    if (isChatOpen) {
-      // Switch to ChatOpen immediately when opened
-      const timer = setTimeout(() => {
-        setDisplayImage(ChatOpen);
-      }, 600);
-      return () => clearTimeout(timer);
-    }
-
-    // Fallback to standard after a delay
+    const delay = isChatOpen ? 600 : 1000;
     const timer = setTimeout(() => {
-      setDisplayImage(HeroImage);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [isChatOpen, isReturning]);
-
-  const idleTimerRef = useRef(null);
-  const activeVideoRef = useRef(activeVideo);
-
-  const safeTriggerVideo = (src) => {
-    // If a video is already playing or fading, ignore all new triggers
-    if (activeVideoRef.current) return;
-    triggerVideo(src);
-  };
-  const resetIdleTimer = useCallback(() => {
-    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-
-    // SHIELD: If chat is open, Jude stays static to save performance
-    if (isChatOpen) return;
-
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-    const delay = isMobile ? 8000 : 15000;
-
-    idleTimerRef.current = setTimeout(() => {
-      // Check our REF to see if a video is TRULY active
-      // (not just the fallback LOOK_AROUND)
-      if (activeVideoRef.current) {
-        resetIdleTimer();
-        return;
-      }
-
-      // Use the override created in Context
-      triggerVideo(getRandomAnim(), true);
+      setDisplayImage(isChatOpen ? ChatOpen : HeroImage);
     }, delay);
-  }, [triggerVideo, isChatOpen]); // triggerVideo is stable from context
+    return () => clearTimeout(timer);
+  }, [isChatOpen]);
 
+  // 3. Global Event Listeners
   useEffect(() => {
-    activeVideoRef.current = activeVideo;
-  }, [activeVideo]);
-  // Logic to handle Idle animations
-
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") resetIdleTimer();
-    };
-    const handleMouseOut = (e) => {
-      const isHeadingForTabs = e.clientY <= 5;
-      // This check now respects the "Finish First" rule
-      if (!e.relatedTarget && !e.toElement && isHeadingForTabs) {
-        safeTriggerVideo(HERO_ANIMATIONS.BYE);
+    const handleScroll = () => {
+      const scroll = window.scrollY;
+      if (
+        !isChatOpen &&
+        scroll > 1 &&
+        scroll < (heroRef.current?.offsetHeight || 800)
+      ) {
+        if (!activeVideo) triggerVideo(HERO_ANIMATIONS.LOOK_DOWN);
       }
     };
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const heroHeight = heroRef.current?.offsetHeight || 800; // Fallback to 800px
 
-      // TRIGGER LOGIC:
-      // 1. Chat must be closed
-      // 2. Must be scrolled more than 1px
-      // 3. Must be ABOVE the fold (scrollPosition < heroHeight)
-      // 4. Use safeTriggerVideo (no override) so it doesn't cut off other clips
-      if (!isChatOpen) {
-        if (scrollPosition > 1 && scrollPosition < heroHeight) {
-          safeTriggerVideo(HERO_ANIMATIONS.LOOK_DOWN);
-        }
+    const handleMouseOut = (e) => {
+      if (!e.relatedTarget && e.clientY <= 5 && !activeVideo) {
+        triggerVideo(HERO_ANIMATIONS.BYE);
       }
     };
 
@@ -174,9 +109,8 @@ const Hero = ({ CTA }) => {
     window.addEventListener("touchstart", resetIdleTimer);
     window.addEventListener("scroll", handleScroll, { passive: true });
     document.addEventListener("mouseout", handleMouseOut);
-    document.addEventListener("visibilitychange", handleVisibilityChange);
 
-    resetIdleTimer(); // Initial start
+    resetIdleTimer();
 
     return () => {
       if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
@@ -184,24 +118,14 @@ const Hero = ({ CTA }) => {
       window.removeEventListener("touchstart", resetIdleTimer);
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mouseout", handleMouseOut);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [resetIdleTimer]); // Now depends on the stable callback
+  }, [resetIdleTimer, isChatOpen, activeVideo, triggerVideo]);
 
   return (
     <div id="about" ref={heroRef} className={styles["hero-container"]}>
       <div className={styles["hero-bg"]}>
         <HeroBgAnimation />
       </div>
-
-      {readyToPreload && (
-        <div style={{ display: "none" }} aria-hidden="true">
-          {Object.values(HERO_ANIMATIONS).map((src) => (
-            <video key={src} src={src} preload="auto" muted />
-          ))}
-        </div>
-      )}
-
       <div className={styles["hero-inner-container"]}>
         <div className={styles["hero-left-container"]}>
           <div className={styles.title}>Hey, I'm {Bio.name}!</div>
@@ -243,6 +167,10 @@ const Hero = ({ CTA }) => {
           />
         </div>
       </div>
+      <PreloadVideos
+        animations={HERO_ANIMATIONS}
+        priorityVideo={priorityVideo || HERO_ANIMATIONS.PEACE}
+      />
     </div>
   );
 };

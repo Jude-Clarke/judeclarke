@@ -25,12 +25,8 @@
   max-width: 400px;
   border-radius: 50%;
   object-fit: cover;
-  transition: opacity 0.1s ease-in-out;
   pointer-events: none; /* Allows clicks to pass through if needed */
   transition: opacity 0.6s ease-in-out; /* Match your timeout */
-}
-.no-transition {
-  transition: none !important;
 }
 
 .visible {
