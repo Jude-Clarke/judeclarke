@@ -228,7 +228,7 @@
 
 .resumeCta {
   text-decoration: none;
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
   width: 90%;
   margin: 15px auto;
