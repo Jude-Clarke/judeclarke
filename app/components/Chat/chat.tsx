@@ -65,6 +65,14 @@ const Chat = ({
   const [inputDisabled, setInputDisabled] = useState(false);
   const [threadId, setThreadId] = useState("");
   const [isInitial, setIsInitial] = useState(true); // track first render
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile(); // Check on mount
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const toggleChat = () => {
     if (isInitial) setIsInitial(false); // once clicked, it's no longer the initial render
@@ -176,7 +184,10 @@ const Chat = ({
     setUserInput("");
     setInputDisabled(true);
     setLoading(true);
-    triggerVideo("/videos/hero/texting.mp4");
+
+    if (!isMobile) {
+      triggerVideo("/videos/hero/texting.mp4");
+    }
   };
 
   /* Stream Event Handlers */

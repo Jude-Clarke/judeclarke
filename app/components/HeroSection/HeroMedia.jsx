@@ -28,7 +28,7 @@ const HeroMedia = ({
         video.currentTime > 0 &&
         !video.ended
       ) {
-        console.log("Emergency release: Video was stuck on focus");
+        // console.log("Emergency release: Video was stuck on focus");
         setIsVisible(false);
         setIsLocked(false);
         if (onFinished) onFinished();
