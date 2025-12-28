@@ -83,7 +83,6 @@ div.hero-right-container {
   z-index: 2; /* Sits on top of the image */
   pointer-events: none; /* Mouse events pass through to the container */
   /* Match this time to the setTimeout in HeroMedia.jsx */
-  filter: brightness(0.9); /* To match image better */
   transition: opacity 0.6s ease-in-out;
   will-change: opacity; /* Prepares the GPU for the animation */
 }
@@ -159,6 +158,9 @@ div.cta-container {
   .media-wrapper {
     max-width: 400px;
     max-height: 400px;
+  }
+  .hero-video {
+    filter: brightness(0.9); /* To match image better */
   }
 }
 
