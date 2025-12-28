@@ -840,31 +840,28 @@ export const projects = [
     title: "JudeGPT",
     date: "July 2024",
     description:
-      "I trained and deployed an integrated chatbot using OpenAI's Assistants API to streamline the hiring process for recruiters and managers. Incorporated retrieval-augmented generation (RAG) to improve accuracy and relevance, while demonstrating my ability to quickly adapt to emerging AI technologies and trends.",
+      "Developed an AI-powered recruitment assistant using OpenAI's Assistants API that serves as a 24/7 digital representative for hiring conversations. Combined RAG, custom vector databases, and strategic prompt engineering to implement guardrails that minimize AI hallucinations and ensure accurate, document-grounded responses while rapidly prototyping with emerging AI technologies.",
     slides: [
       {
         id: 0,
         image: media.projectImages.judeGPT.homepage,
-        // desc: "During my job search, I wanted to showcase my ability to keep up with the latest technological trends, and find practical use cases for them. In November of 2023, OpenAI released ChatGPT, and it broke the internet. I bought a course on AI and Prompt engineering in December of 2023. Through it, I learned some of the possibilities for integrating AI into my workflow. I’d been keeping an eye on OpenAi’s gpt-3 since 2020, but with the launch of ChatGPT also came the Assistants API which enabled me to train my own GPT model on proprietary data.",
-        desc: "During my job search, I set out to showcase my ability to quickly adapt to emerging technologies and apply them in practical ways. After OpenAI's release of ChatGPT in late 2023, I enrolled in an AI and prompt engineering course to deepen my understanding of integration possibilities. Having followed OpenAI's GPT models since 2020, I leveraged the newly launched Assistants API to build custom AI tools trained on proprietary data.",
+        desc: "During my job search, I identified an opportunity to demonstrate practical AI skills rather than just list them on a resume. Having followed OpenAI's GPT models since 2020, I enrolled in AI and prompt engineering courses after ChatGPT's late 2023 release. When the Assistants API launched, I leveraged it to build a custom recruitment assistant trained on my professional documents—turning my job search into a portfolio piece.",
         scannable:
-          "Leveraged OpenAI's Assistants API to build custom AI tools, showcasing adaptability to emerging technologies.",
+          "Completed AI/prompt engineering courses and built custom recruitment assistant with Assistants API—turning job search into portfolio demonstration.",
       },
       {
         id: 1,
         image: media.projectImages.judeGPT.playground,
-        // desc: "I created an OpenAI assistant, and trained it on my resume, my website, and some other documents related to my professional background. I wrote and refined instructions for the assistant to improve the accuracy and efficiency of its responses. I also conducted beta testing with former colleagues and hiring managers to learn how I could further improve its performance.",
-        desc: "I created a custom OpenAI assistant trained on my résumé, website, and professional documents. I refined its instructions to improve accuracy and efficiency, and conducted beta testing with colleagues and hiring managers to gather feedback and enhance performance.",
+        desc: "The core challenge was ensuring accuracy. The assistant needed to represent my background authentically, not hallucinate credentials. To tackle this, I implemented RAG with vector search to ensure responses pulled from verified documents rather than generating generic answers. Through strategic prompt engineering, I added guardrails against hallucinations, which I validated through multiple testing sessions with actual hiring managers and recruiters.",
         scannable:
-          "Built and refined an OpenAI assistant trained on proprietary professional data, tested with colleagues and hiring managers for accuracy.",
+          "Solved accuracy challenges using RAG, vector search, and prompt engineering guardrails; validated authenticity through recruiter testing sessions.",
       },
       {
         id: 2,
         image: media.projectImages.judeGPT.docs,
-        // desc: "The biggest challenge for me was integrating it into a functional chatbot that stores conversations for me to review later in a database. The Assistants API was still in beta, so there were not a lot of available resources on the internet. It took me two weeks of trial and error, researching alternate solutions, reading documentation, and replatforming to Next.js to accommodate my newly built Node backend with a MongoDB database.",
-        desc: "Finally, I overcame the challenge of integrating my assistant into a functional chatbot with persistent conversation storage in a database. With limited resources available during the Assistants API beta, I spent two weeks testing alternate solutions, studying documentation, and ultimately replatforming to Next.js with a Node backend and MongoDB database.",
+        desc: "To complete the project, I integrated the assistant into a production chatbot with persistent conversation storage using Next.js, Node.js, and MongoDB. Despite limited documentation during the Assistants API beta, I navigated the integration through systematic testing and architectural iteration. The final system includes real-time push notifications that alert me to recruiter interactions, allowing me to monitor engagement patterns and stay responsive to hiring opportunities.",
         scannable:
-          "Integrated AI assistant into a chatbot with persistent storage using Next.js, Node, and MongoDB—navigating limited resources during the Assistants API beta.",
+          "Deployed production chatbot with Next.js/Node.js/MongoDB; real-time notifications provide visibility into recruiter engagement and opportunities.",
       },
     ],
     tags: [
