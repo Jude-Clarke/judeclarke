@@ -41,18 +41,34 @@ export const useHeroTriggers = (
   }, [HERO_ANIMATIONS]);
 
   const resetIdleTimer = useCallback(() => {
+    // 1. Always clear any existing timer first
     if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+
+    // 2. If chat is open, do not start a new timer
     if (isChatOpen) return;
 
-    const delay = window.innerWidth < 768 ? 8000 : 15000;
+    // 3. MOBILE CHECK: Re-evaluate width every time the timer resets
+    const currentWidth =
+      typeof window !== "undefined" ? window.innerWidth : 1024;
+    const delay = currentWidth < 768 ? 8000 : 15000;
+
     idleTimerRef.current = setTimeout(() => {
-      if (!activeVideoRef.current) {
+      // 4. Before triggering, ensure chat hasn't been opened while we were waiting and no video is playing
+      if (!activeVideoRef.current && !isChatOpen) {
         triggerVideo(getRandomAnim(), true);
-      } else {
+      } else if (!isChatOpen) {
+        // If a video is playing, check again after the delay
         resetIdleTimer();
       }
     }, delay);
   }, [triggerVideo, isChatOpen, getRandomAnim]);
+
+  // 5. AUTO-CLEANUP: If chat opens, kill the timer immediately
+  useEffect(() => {
+    if (isChatOpen && idleTimerRef.current) {
+      clearTimeout(idleTimerRef.current);
+    }
+  }, [isChatOpen]);
 
   return { getRandomAnim, resetIdleTimer, idleTimerRef };
 };
