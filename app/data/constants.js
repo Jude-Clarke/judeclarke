@@ -374,6 +374,7 @@ export const education = [
     img: media.educationIcons.udemyIcon,
     school: "Udemy",
     date: "2025",
+    grade: "Completed",
     desc: "10 hours of UX Design principles and best practices taught by 35 year Design Veteran Joe Natoli",
     degree: "User Experience Design Fundamentals",
     link: "https://www.udemy.com/certificate/UC-ff25befe-a321-4b6e-8982-e28c52977737/",
