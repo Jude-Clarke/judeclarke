@@ -360,7 +360,7 @@ export const education = [
     link: "https://drive.google.com/file/d/1QZ7Y81-wEOOE-ZG-A4ifvNs7OGNnonw1/view?usp=sharing",
   },
   {
-    id: 13,
+    id: 14,
     img: media.educationIcons.elvtrLogo,
     school: "ELVTR",
     date: "2025",
@@ -368,6 +368,15 @@ export const education = [
     desc: "Explored AI-powered design tools and workflows to enhance UX research and design processes, integrating advanced UX principles with technical development capabilities.",
     degree: "AI for UX/UI Designers",
     link: "https://elvtr.com/certificate/334119fc4c074430955582ee4775290b/",
+  },
+  {
+    id: 13,
+    img: media.educationIcons.udemyIcon,
+    school: "Udemy",
+    date: "2025",
+    desc: "10 hours of UX Design principles and best practices taught by 35 year Design Veteran Joe Natoli",
+    degree: "User Experience Design Fundamentals",
+    link: "https://www.udemy.com/certificate/UC-ff25befe-a321-4b6e-8982-e28c52977737/",
   },
   {
     id: 12,
