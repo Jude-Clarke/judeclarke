@@ -26,6 +26,7 @@ export const useHeroTriggers = (
       HERO_ANIMATIONS.LOOK_AROUND,
       HERO_ANIMATIONS.STRETCH,
       HERO_ANIMATIONS.BRB,
+      HERO_ANIMATIONS.SUP,
       ...(isMobile ? [HERO_ANIMATIONS.PEACE] : []),
     ];
 

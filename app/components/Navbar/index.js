@@ -5,7 +5,10 @@ import Image from "next/image";
 import { FaBars } from "react-icons/fa";
 import { Bio } from "../../data/constants";
 import styles from "./index.module.css";
+import { media } from "../../data/media";
 import { useMedia } from "../../contexts/MediaContext";
+
+const { HERO_ANIMATIONS } = media;
 
 const Navbar = ({ navLogo }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,13 +18,13 @@ const Navbar = ({ navLogo }) => {
   const toggleButtonRef = useRef();
 
   const handleLogoHover = () => {
-    triggerVideo("/videos/hero/look-around.mp4");
+    triggerVideo(HERO_ANIMATIONS.SUP);
   };
   const handleLinkHover = () => {
-    triggerVideo("/videos/hero/check-me-out.mp4");
+    triggerVideo(HERO_ANIMATIONS.CHECK_ME_OUT);
   };
   const handleCtaHover = () => {
-    triggerVideo("/videos/hero/smile.mp4");
+    triggerVideo(HERO_ANIMATIONS.SMILE);
   };
 
   useEffect(() => {

@@ -15,17 +15,6 @@ import { PreloadVideos } from "./PreloadVideos";
 
 const { HERO_ANIMATIONS } = media;
 
-const BASE_OPTIONS = [
-  HERO_ANIMATIONS.TURN_AROUND,
-  HERO_ANIMATIONS.LOOK_DOWN,
-  HERO_ANIMATIONS.CHECK_ME_OUT,
-  HERO_ANIMATIONS.GO_AHEAD,
-  HERO_ANIMATIONS.SMILE,
-  HERO_ANIMATIONS.LOOK_AROUND,
-  HERO_ANIMATIONS.STRETCH,
-  HERO_ANIMATIONS.BRB,
-];
-
 // Create a separate component for animation randomizer?
 
 const Hero = ({ CTA }) => {
