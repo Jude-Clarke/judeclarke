@@ -16,7 +16,7 @@ export const useVisitorTracking = (
     const ONE_DAY = 24 * 60 * 60 * 1000;
 
     // Set to > 0 for dev testing, > ONE_DAY for production
-    const isReturningVisitor = lastVisit && now - parseInt(lastVisit) > 0;
+    const isReturningVisitor = lastVisit && now - parseInt(lastVisit) > ONE_DAY;
 
     if (isReturningVisitor) {
       const welcomeAnim = getRandomAnim();
