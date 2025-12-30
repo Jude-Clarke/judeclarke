@@ -16,6 +16,13 @@ type MessageProps = {
   text: string;
 };
 
+const CHAT_SUGGESTIONS = [
+  "Can you tell me about your background?",
+  "What are your strengths as a developer?",
+  "How do you keep your design skills sharp?",
+  "What projects are you most proud of?",
+];
+
 const removeAnnotations = (text: string) => text.replace(/【.*?】/g, "");
 
 const UserMessage = ({ text }: { text: string }) => (
@@ -190,6 +197,22 @@ const Chat = ({
     }
   };
 
+  const handleSuggestionClick = (suggestion: string) => {
+    suggestion = suggestion;
+    // 1. Save and Send
+    saveUserMessage(suggestion);
+    sendMessage(suggestion);
+
+    // 2. Update UI
+    setMessages((prev) => [...prev, { role: "user", text: suggestion }]);
+    setInputDisabled(true);
+    setLoading(true);
+
+    if (!isMobile) {
+      triggerVideo("/videos/hero/texting.mp4");
+    }
+  };
+
   /* Stream Event Handlers */
   const handleTextCreated = () => {
     appendMessage("assistant", "");
@@ -303,6 +326,22 @@ const Chat = ({
       </button>
       <>
         <div className={styles.messages}>
+          {/* SUGGESTION BUTTONS */}
+          {messages.length === 0 && !loading && (
+            <div className={styles.suggestionsContainer}>
+              <p className={styles.suggestionHeader}>Conversation Starters</p>
+              {CHAT_SUGGESTIONS.map((text, i) => (
+                <button
+                  key={i}
+                  className={styles.suggestionButton}
+                  onClick={() => handleSuggestionClick(text)}
+                >
+                  {text}
+                </button>
+              ))}
+            </div>
+          )}
+
           {messages.map((msg, idx) => (
             <Message key={idx} role={msg.role} text={msg.text} />
           ))}
@@ -326,7 +365,11 @@ const Chat = ({
             className={styles.input}
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
-            placeholder="Enter your question"
+            placeholder={
+              messages.length === 0
+                ? "Or enter your question here..."
+                : "more details = better results"
+            }
           />
           <button
             type="submit"

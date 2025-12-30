@@ -260,6 +260,46 @@
   );
 }
 
+.suggestionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  align-items: flex-end;
+}
+
+.suggestionHeader {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.suggestionButton {
+  background: #1c1c27;
+  padding: 10px 15px;
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-align: left;
+  transition: all 0.2s ease;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: buttondance 2s infinite ease-in-out;
+}
+
+/* Stagger the "dance" so they don't all move in perfect unison */
+.suggestionButton:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+.suggestionButton:hover {
+  background: #8700ff;
+  border-color: #333;
+  animation-play-state: paused; /* Stop dancing when the user hovers to click */
+  transform: scale(1.05), translateY(-2px); /* Slight pop out on hover */
+}
+
 @media (min-width: 768px) {
   .chatContainer {
     max-width: 448px;
@@ -322,5 +362,17 @@
   }
   100% {
     height: 0; /* Final resting height */
+  }
+}
+@keyframes buttondance {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-4px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-2px) rotate(1deg);
   }
 }
