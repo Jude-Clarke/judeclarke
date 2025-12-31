@@ -20,7 +20,7 @@ const Projects = ({ openModal, setOpenModal }) => {
   return (
     <div id="projects" ref={projectsSectionRef} className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.title}>Career Highlights</div>
+        <div className={styles.title}>Projects</div>
         <div className={styles.desc}>
           From concept to deployment, I've designed and built a wide range of
           applications. Here are some highlights:

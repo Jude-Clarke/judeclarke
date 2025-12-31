@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Bio } from "../../data/constants";
 import Typewriter from "typewriter-effect";
 import HeroImage from "../../images/judeProfile.webp";
@@ -15,8 +15,6 @@ import { PreloadVideos } from "./PreloadVideos";
 
 const { HERO_ANIMATIONS } = media;
 
-// Create a separate component for animation randomizer?
-
 const Hero = ({ CTA }) => {
   const {
     activeVideo,
@@ -31,12 +29,12 @@ const Hero = ({ CTA }) => {
   const heroRef = useRef(null);
 
   // 1. Animation Logic (Randomizer and Idle)
-  const { getRandomAnim, resetIdleTimer, idleTimerRef } = useHeroTriggers(
+  const { getRandomAnim, resetIdleTimer, idleTimerRef } = useHeroTriggers({
     triggerVideo,
     activeVideo,
     isChatOpen,
-    HERO_ANIMATIONS
-  );
+    HERO_ANIMATIONS,
+  });
 
   // 2. Visitor Logic (Local Starage & Welcome)
   const { priorityVideo } = useVisitorTracking(

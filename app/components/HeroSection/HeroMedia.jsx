@@ -1,6 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
+import { useMedia } from "@/app/contexts/MediaContext";
+import { useHeroTriggers } from "@/hooks/useHeroTriggers";
+import { media } from "../../data/media";
+
+const { HERO_ANIMATIONS } = media;
 
 const HeroMedia = ({
   imageSrc,
@@ -14,6 +19,11 @@ const HeroMedia = ({
   const [isVisible, setIsVisible] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
   const videoRef = useRef(null);
+  const { triggerVideo, isChatOpen } = useMedia();
+  const { getRandomAnim } = useHeroTriggers({
+    triggerVideo,
+    HERO_ANIMATIONS,
+  });
 
   // 1. Resync on Focus (Emergency release ONLY if video is stuck/paused)
   useEffect(() => {
@@ -81,8 +91,12 @@ const HeroMedia = ({
     }, delay); // Must match CSS transition time
   };
 
+  const handleHeroMediaClick = () => {
+    !isChatOpen && triggerVideo(getRandomAnim());
+  };
+
   return (
-    <div className={styles["media-wrapper"]}>
+    <div className={styles["media-wrapper"]} onClick={handleHeroMediaClick}>
       <Image
         src={imageSrc}
         alt={alt}

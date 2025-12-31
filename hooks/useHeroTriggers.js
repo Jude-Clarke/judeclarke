@@ -1,11 +1,11 @@
 import { useRef, useCallback, useEffect } from "react";
 
-export const useHeroTriggers = (
+export const useHeroTriggers = ({
   triggerVideo,
-  activeVideo,
-  isChatOpen,
-  HERO_ANIMATIONS
-) => {
+  activeVideo = null,
+  isChatOpen = false,
+  HERO_ANIMATIONS,
+}) => {
   const lastAnimRef = useRef(null);
   const idleTimerRef = useRef(null);
   const activeVideoRef = useRef(activeVideo);

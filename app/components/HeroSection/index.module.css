@@ -71,6 +71,8 @@ div.hero-right-container {
   object-fit: cover;
   position: relative;
   z-index: 1;
+  cursor: pointer;
+  border-radius: 100%;
 }
 
 .hero-video {

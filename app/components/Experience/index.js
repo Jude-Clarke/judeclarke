@@ -13,7 +13,7 @@ const index = () => {
   return (
     <div id="experience" className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.title}>Career Timeline</div>
+        <div className={styles.title}>Experience</div>
         <div className={styles.desc}>
           Highlights from my experience in software engineering and application
           development

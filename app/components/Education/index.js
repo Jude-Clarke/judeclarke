@@ -13,7 +13,7 @@ const index = () => {
   return (
     <div id="education" className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.title}>Degrees and Certifications</div>
+        <div className={styles.title}>Education</div>
         <div className={styles.desc}>
           I'm a full-stack engineer equipped with an MBA to bring both technical
           expertise and business insight to your organization.
