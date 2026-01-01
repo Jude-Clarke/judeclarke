@@ -14,6 +14,7 @@ const EducationCard = ({ education }) => {
           src={education.img}
           alt="image"
           className={styles["education-image"]}
+          loading="lazy"
         />
         <div className={styles.body}>
           <div className={styles.header}>{education.degree}</div>

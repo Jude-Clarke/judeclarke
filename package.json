@@ -22,6 +22,7 @@
     "dotenv": "^16.4.5",
     "emailjs": "^4.0.2",
     "express": "^4.19.2",
+    "framer-motion": "^12.23.26",
     "gh-pages": "^3.2.3",
     "heroku": "^8.11.5",
     "lodash": "^4.17.21",
