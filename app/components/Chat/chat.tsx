@@ -179,6 +179,20 @@ const Chat = ({
     handleReadableStream(stream);
   };
 
+  // KeyDown handler to allow newlines
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter") {
+      // If Shift + Enter is pressed, allow default behavior (newline)
+      if (e.shiftKey) {
+        return;
+      }
+
+      // If only Enter is pressed, prevent newline and submit
+      e.preventDefault();
+      handleSubmit(e as unknown as React.FormEvent);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!userInput.trim()) return;
@@ -360,16 +374,19 @@ const Chat = ({
           onSubmit={handleSubmit}
           className={`${styles.inputForm} ${styles.clearfix}`}
         >
-          <input
-            type="text"
+          <textarea
             className={styles.input}
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder={
               messages.length === 0
                 ? "Or enter your question here..."
                 : "more details = better results"
             }
+            rows={1} // Start with one row
+            style={{ resize: "none" }}
+            disabled={inputDisabled}
           />
           <button
             type="submit"
