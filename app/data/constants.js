@@ -6,11 +6,12 @@ const resumeLink =
 export const Bio = {
   name: "Jude",
   roles: [
-    "Software Engineer",
-    "UI/UX Designer",
-    "Full Stack Dev",
-    "UI/UX Engineer",
-    "Tech Consultant",
+    "\u00A0Software Engineer",
+    "\u00A0UI/UX Designer",
+    "\u00A0Full Stack Dev",
+    "n AI Developer",
+    "\u00A0UI/UX Engineer",
+    "\u00A0Tech Consultant",
   ],
   description: `I develop engaging and scalable full-stack applications. Previously at a New York startup, I executed a full replatform and redesign in React. By collaborating with designers to build their design system, I was able to enhance product usability, brand consistency, and company efficiency. Ask me to demo my work! I'd love to deliver value for your team.`,
   github: "https://github.com/jude-clarke",
