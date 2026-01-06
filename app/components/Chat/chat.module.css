@@ -168,6 +168,10 @@
 .initial .messages {
   height: 0;
 }
+.messages ul,
+.messages ol {
+  padding-left: 20px;
+}
 
 .open .messages {
   padding: 10px;

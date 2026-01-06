@@ -16,8 +16,10 @@ type MessageProps = {
   text: string;
 };
 
+// Conversation starters
 const CHAT_SUGGESTIONS = [
   "Can you tell me about your background?",
+  "What's your Machine Learning/AI experience?",
   "What are your strengths as a developer?",
   "How do you keep your design skills sharp?",
   "What projects are you most proud of?",
