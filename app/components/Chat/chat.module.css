@@ -183,15 +183,30 @@
   animation: closeslidemobile 150ms ease;
 }
 
+.messageWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Take up full row width to allow alignment */
+}
+
 .userMessage,
 .assistantMessage,
 .codeMessage {
   margin: 8px 0;
   padding: 8px 14px;
-  align-self: flex-start;
   border-radius: 15px;
   max-width: 90%;
   overflow-wrap: break-word;
+}
+
+/* Tell the wrapper how to align the bubbles based on what is inside them */
+.messageWrapper:has(.userMessage) {
+  align-items: flex-end;
+}
+
+.messageWrapper:has(.assistantMessage),
+.messageWrapper:has(.codeMessage) {
+  align-items: flex-start;
 }
 
 .assistantMessage img {
