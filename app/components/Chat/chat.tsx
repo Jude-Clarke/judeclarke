@@ -18,11 +18,36 @@ type MessageProps = {
 
 // Conversation starters
 const CHAT_SUGGESTIONS = [
-  "Can you tell me about your background?",
-  "What's your Machine Learning/AI experience?",
-  "What are your strengths as a developer?",
-  "How do you keep your design skills sharp?",
-  "What projects are you most proud of?",
+  {
+    id: 1,
+    simple: "Can you tell me about your background?",
+    prompt:
+      'You are responding to the question, "Can you tell me about your background?" Please provide a comprehensive overview of your professional background, including your education, technical and design skills, years of experience, notable career transitions, AI focus, and any unique aspects that differentiate you as a software engineer. Highlight how these elements have shaped your approach to work and your fit for a full-stack or design-focused role.',
+  },
+  {
+    id: 2,
+    simple: "What's your Machine Learning/AI experience?",
+    prompt:
+      'You are responding to the question, "What\'s your Machine Learning/AI experience?" Describe your experience with Machine Learning and AI, including the specific projects you’ve worked on, tools and frameworks you’ve used, what you’ve learned over the past two years of study, your active participation (networking and presenting) in the Tampa AI Applications group, and how you’ve applied AI concepts in your work. Highlight both practical implementations (like JudeGPT or AI for UX Design) and any relevant coursework or self-driven learning that demonstrates your ability to deliver value in AI-powered roles.',
+  },
+  {
+    id: 3,
+    simple: "What are your strengths as a developer?",
+    prompt:
+      'You are responding to the question, "What are your strengths as a developer?" Detail your key strengths as a developer, drawing on specific examples from your projects and work experience. Explain how these strengths have contributed to successful project outcomes, your ability to learn new technologies, collaborate with others, solve complex problems, and deliver engaging user experiences. Highlight how your strengths make you a valuable asset to a team or company.',
+  },
+  {
+    id: 4,
+    simple: "How do you keep your design skills sharp?",
+    prompt:
+      'You are responding to the question, "How do you keep your design skills sharp?" Explain the specific steps you take to maintain and improve your design skills, including any ongoing education, courses, self-directed projects, or professional experiences. Describe how you integrate new design trends, tools, or methodologies into your workflow, and provide examples of how this continual development has benefited your recent projects. Emphasize how your commitment to design excellence adds value to your work.',
+  },
+  {
+    id: 5,
+    simple: "What projects are you most proud of?",
+    prompt:
+      'You are responding to the question, "What projects are you most proud of?" For each project you list, provide a paragraph explaining what made it significant, your specific contributions, the challenges you faced, and the practical skills you applied or developed. Highlight how these projects demonstrate your technical abilities, design thinking, and overall impact as a developer. If possible, include how each project contributed to your growth or set you apart from others in your field.',
+  },
 ];
 
 const removeAnnotations = (text: string) => text.replace(/【.*?】/g, "");
@@ -46,18 +71,28 @@ const CodeMessage = ({ text }: { text: string }) => (
   </div>
 );
 
-const Message = ({ role, text }: MessageProps) => {
-  switch (role) {
-    case "user":
-      return <UserMessage text={text} />;
-    case "assistant":
-      return <AssistantMessage text={removeAnnotations(text)} />;
-    case "code":
-      return <CodeMessage text={text} />;
-    default:
-      return null;
+const Message = React.forwardRef<HTMLDivElement, MessageProps>(
+  ({ role, text }, ref) => {
+    const renderContent = () => {
+      switch (role) {
+        case "user":
+          return <UserMessage text={text} />;
+        case "assistant":
+          return <AssistantMessage text={removeAnnotations(text)} />;
+        case "code":
+          return <CodeMessage text={text} />;
+        default:
+          return null;
+      }
+    };
+    return (
+      <div ref={ref} className={styles.messageWrapper}>
+        {renderContent()}
+      </div>
+    );
   }
-};
+);
+Message.displayName = "Message";
 
 type ChatProps = {
   functionCallHandler?: (
@@ -75,6 +110,7 @@ const Chat = ({
   const [threadId, setThreadId] = useState("");
   const [isInitial, setIsInitial] = useState(true); // track first render
   const [isMobile, setIsMobile] = useState(false);
+  const [isAutoScrollDisabled, setIsAutoScrollDisabled] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -131,20 +167,75 @@ const Chat = ({
   // loading refs for scrolling
   const [loading, setLoading] = useState(false);
   const loadingRef = useRef(null);
-  const loadingBottomRef = useRef(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const messagesRef = useRef([]);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   // Keep the ref in sync with state whenever messages change
   useEffect(() => {
     messagesRef.current = messages;
   }, [messages]);
 
+  const lastMessageRef = useRef<HTMLDivElement | null>(null);
+
+  // Disable auto scroll into view when user is scrolling
   useEffect(() => {
-    if (loading && loadingRef.current) {
-      loadingBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const isAtBottom =
+        container.scrollHeight - container.scrollTop <=
+        container.clientHeight + 50;
+
+      // If the user scrolls up, disable auto-scroll
+      // If they scroll back to the very bottom, re-enable it
+      if (!isAtBottom) {
+        setIsAutoScrollDisabled(true);
+      } else {
+        setIsAutoScrollDisabled(false);
+      }
+    };
+
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Scroll message into view
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    const lastMsg = lastMessageRef.current;
+    if (!container || !lastMsg || isAutoScrollDisabled) return; // Stop if user is scrolling
+
+    const lastMessageData = messages[messages.length - 1];
+
+    // 1. If user just sent a message, scroll to bottom to see their bubble
+    if (lastMessageData?.role === "user") {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      return;
     }
-  }, [loading, messages]);
+
+    // 2. Logic for Assistant Streaming
+    if (
+      lastMessageData?.role === "assistant" ||
+      lastMessageData?.role === "code"
+    ) {
+      const containerRect = container.getBoundingClientRect();
+      const msgRect = lastMsg.getBoundingClientRect();
+
+      // Check if the top of the message has reached or passed the top of the container
+      const isTopReached = msgRect.top <= containerRect.top;
+
+      if (!isTopReached) {
+        // If the message is still "below" the top, scroll to keep the bottom in view
+        // or use 'start' to snap the top of the message to the top of the container
+        // but 'nearest' usually handles the growth best until the top hits.
+        lastMsg.scrollIntoView({ behavior: "auto", block: "nearest" });
+      }
+      // If isTopReached is true, we do nothing, effectively "pinning" the scroll
+      // so the user can read from the start while text generates below.
+    }
+  }, [messages, isAutoScrollDisabled]);
 
   // create a new thread ID when chat mounts
   useEffect(() => {
@@ -206,6 +297,7 @@ const Chat = ({
     setMessages((prev) => [...prev, { role: "user", text: userInput }]);
     setUserInput("");
     setInputDisabled(true);
+    setIsAutoScrollDisabled(false);
     setLoading(true);
 
     if (!isMobile) {
@@ -213,15 +305,17 @@ const Chat = ({
     }
   };
 
-  const handleSuggestionClick = (suggestion: string) => {
-    suggestion = suggestion;
+  const handleSuggestionClick = (suggestionID: number) => {
+    const suggestion = CHAT_SUGGESTIONS.find((sug) => sug.id === suggestionID);
+    console.log(suggestion.prompt);
     // 1. Save and Send
-    saveUserMessage(suggestion);
-    sendMessage(suggestion);
+    saveUserMessage(suggestion.prompt);
+    sendMessage(suggestion.prompt);
 
     // 2. Update UI
-    setMessages((prev) => [...prev, { role: "user", text: suggestion }]);
+    setMessages((prev) => [...prev, { role: "user", text: suggestion.simple }]);
     setInputDisabled(true);
+    setIsAutoScrollDisabled(false);
     setLoading(true);
 
     if (!isMobile) {
@@ -341,33 +435,37 @@ const Chat = ({
         {isChatOpen ? "Close Chat" : "Ask JudeGPT"}
       </button>
       <>
-        <div className={styles.messages}>
+        <div className={styles.messages} ref={scrollContainerRef}>
           {/* SUGGESTION BUTTONS */}
           {messages.length === 0 && !loading && (
             <div className={styles.suggestionsContainer}>
               <p className={styles.suggestionHeader}>Conversation Starters</p>
-              {CHAT_SUGGESTIONS.map((text, i) => (
+              {CHAT_SUGGESTIONS.map((sug, i) => (
                 <button
                   key={i}
                   className={styles.suggestionButton}
-                  onClick={() => handleSuggestionClick(text)}
+                  onClick={() => handleSuggestionClick(sug.id)}
                 >
-                  {text}
+                  {sug.simple}
                 </button>
               ))}
             </div>
           )}
 
-          {messages.map((msg, idx) => (
-            <Message key={idx} role={msg.role} text={msg.text} />
-          ))}
+          {messages.map((msg, idx) => {
+            const isLast = idx === messages.length - 1;
+            return (
+              <Message
+                key={idx}
+                role={msg.role}
+                text={msg.text}
+                ref={isLast ? lastMessageRef : null}
+              />
+            );
+          })}
           {loading && (
             <div ref={loadingRef} className={styles.loading}>
               <PulseLoader />
-              <div
-                ref={loadingBottomRef}
-                className={styles.loadingBottom}
-              ></div>
             </div>
           )}
           <div ref={messagesEndRef} />

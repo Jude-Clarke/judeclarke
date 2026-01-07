@@ -91,7 +91,7 @@ const CustomMarkdown = ({ markdown }) => {
     <ReactMarkdown
       rehypePlugins={[
         rehypeRaw,
-        [rehypeExternalLinks, { target: "_blank", rel: "noopener noreferrer" }],
+        [rehypeExternalLinks, { rel: "noopener noreferrer" }],
       ]}
       components={{
         a: LinkRenderer,
