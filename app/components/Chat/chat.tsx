@@ -28,7 +28,7 @@ const CHAT_SUGGESTIONS = [
     id: 2,
     simple: "What's your Machine Learning/AI experience?",
     prompt:
-      'You are responding to the question, "What\'s your Machine Learning/AI experience?" Describe your experience with Machine Learning and AI, including the specific projects you’ve worked on, tools and frameworks you’ve used, what you’ve learned over the past two years of study, your active participation (networking and presenting) in the Tampa AI Applications group, and how you’ve applied AI concepts in your work. Highlight both practical implementations (like JudeGPT or AI for UX Design) and any relevant coursework or self-driven learning that demonstrates your ability to deliver value in AI-powered roles.',
+      'You are responding to the question, "What experience do you have in Machine Learning/AI?" Describe your experience with Machine Learning and AI, including the specific projects you’ve worked on, tools and frameworks you’ve used, what you’ve learned over the past two years of study, your active participation (networking and presenting) in the Tampa AI Applications group, and how you’ve applied AI concepts in your work. Highlight both practical implementations (like JudeGPT or AI for UX Design) and any relevant coursework or self-driven learning that demonstrates your ability to deliver value in AI-powered roles.',
   },
   {
     id: 3,
