@@ -53,6 +53,7 @@ import sassIcon from "./link-icons/sass-icon.webp";
 import openaiIcon from "./link-icons/openai-icon.webp";
 import whartonIcon from "./link-icons/wharton-icon.webp";
 import elvtrLogo from "./link-icons/elvtr-logo.webp";
+import datacampLogo from "./link-icons/datacamp-logo.webp";
 
 //contributors
 import judeClarke from "./project-images/contributors/judeClarkeProfile.jpg";
@@ -146,6 +147,7 @@ const educationIcons = {
   metaIcon: metaIcon,
   whartonIcon: whartonIcon,
   elvtrLogo: elvtrLogo,
+  datacampLogo: datacampLogo,
 };
 
 const projectImages = {

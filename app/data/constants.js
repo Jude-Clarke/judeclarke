@@ -371,6 +371,16 @@ export const education = [
     link: "https://elvtr.com/certificate/334119fc4c074430955582ee4775290b/",
   },
   {
+    id: 15,
+    img: media.educationIcons.datacampLogo,
+    school: "Datacamp",
+    date: "January, 2026",
+    grade: "Completed",
+    desc: "26 hours of applied AI engineering program covering OpenAI API development, prompt engineering, Hugging Face workflows, LLMOps fundamentals, embeddings and vector databases (ChromaDB, Pinecone), Python software engineering best practices, and end‑to‑end LLM application development with LangChain.",
+    degree: "Associate AI Engineer for Developers Career Track",
+    link: "https://www.datacamp.com/completed/statement-of-accomplishment/track/6a551e5aca3b047ce63bf57eb7a2a3289eb97990",
+  },
+  {
     id: 13,
     img: media.educationIcons.udemyIcon,
     school: "Udemy",
