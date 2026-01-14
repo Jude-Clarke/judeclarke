@@ -34,8 +34,6 @@ const Education = () => {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
-      position: "relative",
-      right: "-8px",
       y: 0,
       transition: { type: "spring", stiffness: 300, damping: 24 },
     },
@@ -78,29 +76,16 @@ const Education = () => {
                   {professionalDevelopment.map((edu, index) => (
                     <motion.div key={edu.id} variants={itemVariants}>
                       <TimelineItem>
-                        <TimelineContent
-                          sx={{ py: "12px", px: 2 }}
-                          className={styles["pd-card"]}
-                        >
+                        <TimelineContent sx={{ py: "12px", px: 2 }}>
                           <EducationCard education={edu} />
                         </TimelineContent>
                         <TimelineSeparator>
                           <TimelineDot
                             variant="outlined"
+                            color="secondary"
                             sx={{ padding: "2px", borderColor: "#854CE6" }}
                             onClick={() => setIsOpen(false)}
-                          >
-                            <img
-                              src={edu.img.src}
-                              style={{
-                                width: "20px",
-                                height: "20px",
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                              }}
-                              alt=""
-                            />
-                          </TimelineDot>
+                          ></TimelineDot>
                           {index !== professionalDevelopment.length - 1 && (
                             <TimelineConnector
                               style={{ background: "#854CE6" }}

@@ -43,10 +43,6 @@ div.timeline-section {
   gap: 12px;
 }
 
-.pd-card {
-  padding-right: 8px;
-}
-
 .buttonContainer {
   display: flex;
   justify-content: center;
