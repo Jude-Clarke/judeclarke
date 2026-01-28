@@ -77,6 +77,7 @@ a.cta-button {
   display: flex;
   align-items: center;
   height: 70%;
+  width: max-content;
   border-radius: 20px;
   color: #854ce6;
   cursor: pointer;
@@ -185,6 +186,10 @@ a.mobile-link .active {
   a.cta-button {
     font-size: 14px;
     margin-left: -4px;
+  }
+  .cta-button.mobile-cta {
+    position: relative;
+    left: -17px;
   }
   div.mobile-icon {
     display: flex;

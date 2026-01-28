@@ -135,7 +135,7 @@ const Navbar = ({ navLogo }) => {
           onMouseOver={handleCtaHover}
         >
           <a href={Bio.resume} target="_blank" className={styles["cta-button"]}>
-            Resume
+            Contact Me
           </a>
         </div>
       </div>
@@ -196,8 +196,12 @@ const Navbar = ({ navLogo }) => {
           >
             Education
           </a>
-          <a href={Bio.resume} target="_blank" className={styles["cta-button"]}>
-            Resume
+          <a
+            href={Bio.resume}
+            target="_blank"
+            className={`${styles["cta-button"]} ${styles["mobile-cta"]}`}
+          >
+            Contact Me
           </a>
         </div>
       }
