@@ -3,9 +3,9 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeExternalLinks from "rehype-external-links";
 import styles from "./chat.module.css";
+import { Bio } from "../../data/constants";
 
-const TARGET_DRIVE_LINK =
-  "https://drive.google.com/file/d/1W8K12743oCt_U8gFR0h3WIaxI5mi_uD7/view?usp=sharing";
+const TARGET_DRIVE_LINK = Bio.resume;
 
 const CustomMarkdown = ({ markdown }) => {
   // This handles [View My Resume](DRIVE_LINK)
@@ -41,9 +41,9 @@ const CustomMarkdown = ({ markdown }) => {
             const combinedRegex = new RegExp(
               `(${TARGET_DRIVE_LINK.replace(
                 /[.*+?^${}()|[\]\\]/g,
-                "\\$&"
+                "\\$&",
               )}|[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]{2,})`,
-              "gi"
+              "gi",
             );
 
             if (!combinedRegex.test(child)) return child;
@@ -65,7 +65,7 @@ const CustomMarkdown = ({ markdown }) => {
               }
               if (
                 /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]{2,}/i.test(
-                  part
+                  part,
                 )
               ) {
                 return (
