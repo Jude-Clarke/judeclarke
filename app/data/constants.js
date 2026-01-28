@@ -1,15 +1,15 @@
 import { media } from "./media";
 
 const resumeLink =
-  "https://drive.google.com/file/d/1W8K12743oCt_U8gFR0h3WIaxI5mi_uD7/view?usp=sharing";
+  "https://drive.google.com/file/d/1iAINaRHjivsOnezgiE0S4jRoQZfNaQEO/view?usp=sharing";
 
 export const Bio = {
   name: "Jude",
   roles: [
+    "n AI Engineer",
     "\u00A0Software Engineer",
     "\u00A0UI/UX Designer",
     "\u00A0Full Stack Dev",
-    "n AI Developer",
     "\u00A0UI/UX Engineer",
     "\u00A0Tech Consultant",
   ],
@@ -101,6 +101,21 @@ export const skills = [
         link: "https://expressjs.com/",
       },
       {
+        name: "Python",
+        image: media.skillIcons.pythonIcon,
+        link: "https://www.python.org/",
+      },
+      {
+        name: "FastAPI",
+        image: media.skillIcons.fastapiLogo,
+        link: "https://fastapi.tiangolo.com/",
+      },
+      {
+        name: "LangChain",
+        image: media.skillIcons.langchainLogo,
+        link: "https://www.langchain.com/",
+      },
+      {
         name: "OpenAI APIs",
         image: media.skillIcons.aiIcon,
         link: "https://openai.com/api/",
@@ -109,11 +124,6 @@ export const skills = [
         name: "Firebase",
         image: media.skillIcons.firebaseIcon,
         link: "https://firebase.google.com/",
-      },
-      {
-        name: "Python",
-        image: media.skillIcons.pythonIcon,
-        link: "https://www.python.org/",
       },
       {
         name: "MongoDB",

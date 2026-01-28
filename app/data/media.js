@@ -2,6 +2,8 @@
 import htmlIcon from "./link-icons/html5-icon.webp";
 import cssIcon from "./link-icons/CSS3-icon.webp";
 import pythonIcon from "./link-icons/Python-icon.webp";
+import fastapiLogo from "./link-icons/fastapi-logo.webp";
+import langchainLogo from "./link-icons/langchain-logo.webp";
 import typescriptIcon from "./link-icons/Typescript-icon.webp";
 import ejsIcon from "./link-icons/ejs-icon.webp";
 import figmaIcon from "./link-icons/figma-icon.webp";
@@ -90,6 +92,8 @@ const skillIcons = {
   htmlIcon: htmlIcon,
   cssIcon: cssIcon,
   pythonIcon: pythonIcon,
+  fastapiLogo: fastapiLogo,
+  langchainLogo: langchainLogo,
   reactNativeIcon: reactNativeIcon,
   typescriptIcon: typescriptIcon,
   ejsIcon: ejsIcon,
