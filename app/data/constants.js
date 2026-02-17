@@ -1,7 +1,7 @@
 import { media } from "./media";
 
 const resumeLink =
-  "https://drive.google.com/file/d/1iAINaRHjivsOnezgiE0S4jRoQZfNaQEO/view?usp=sharing";
+  "https://drive.google.com/file/d/1bnc5Z9zYkEqLoIQ0uciPAweAFFj7WE3P/view?usp=sharing";
 
 export const Bio = {
   name: "Jude",
