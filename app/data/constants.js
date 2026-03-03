@@ -130,11 +130,11 @@ export const skills = [
         image: media.skillIcons.mongoDBIcon,
         link: "https://www.mongodb.com/",
       },
-      {
-        name: "Graph Ql",
-        image: media.skillIcons.graphQLIcon,
-        link: "https://graphql.org/",
-      },
+      // {
+      //   name: "Graph QL",
+      //   image: media.skillIcons.graphQLIcon,
+      //   link: "https://graphql.org/",
+      // },
       {
         name: "Passport.js",
         image: media.skillIcons.passportIcon,
@@ -522,7 +522,6 @@ export const projects = [
     date: "August 2025 - October 2025",
     description:
       "A 9-week course led by Rich Hultman, Senior Innovation Designer at IBM",
-    new: true,
     roleOverride: "UX Researcher",
     slides: [
       {
@@ -876,7 +875,7 @@ export const projects = [
       {
         id: 0,
         image: media.projectImages.judeGPT.homepage,
-        desc: "During my job search, I identified an opportunity to demonstrate practical AI skills rather than just list them on a resume. Having followed OpenAI's GPT models since 2020, I enrolled in AI and prompt engineering courses after ChatGPT's late 2023 release. When the Assistants API launched, I leveraged it to build a custom recruitment assistant trained on my professional documents—turning my job search into a portfolio piece.",
+        desc: "During my job search, I identified an opportunity to demonstrate practical AI skills rather than just list them on a resume. Having followed OpenAI's GPT models since 2020, I enrolled in AI and prompt engineering courses after ChatGPT's late 2023 release. When the Assistants API launched, I leveraged it to build a custom recruitment assistant trained on my professional documents, turning my job search into a portfolio piece.",
         scannable:
           "Completed AI/prompt engineering courses and built custom recruitment assistant with Assistants API—turning job search into portfolio demonstration.",
       },
