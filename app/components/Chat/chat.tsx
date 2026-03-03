@@ -38,9 +38,9 @@ const CHAT_SUGGESTIONS = [
   },
   {
     id: 4,
-    simple: "How do you keep your design skills sharp?",
+    simple: "How do you keep your UX skills sharp?",
     prompt:
-      'You are responding to the question, "How do you keep your design skills sharp?" Explain the specific steps you take to maintain and improve your design skills, including any ongoing education, courses, self-directed projects, or professional experiences. Describe how you integrate new design trends, tools, or methodologies into your workflow, and provide examples of how this continual development has benefited your recent projects. Emphasize how your commitment to design excellence adds value to your work.',
+      'You are responding to the question, "How do you keep your UX skills sharp?" Explain the specific steps you take to maintain and improve your design skills, including any ongoing education, courses, self-directed projects, or professional experiences. Describe how you integrate new design trends, tools, or methodologies into your workflow, and provide examples of how this continual development has benefited your recent projects. Emphasize how your commitment to design excellence adds value to your work.',
   },
   {
     id: 5,
@@ -90,13 +90,13 @@ const Message = React.forwardRef<HTMLDivElement, MessageProps>(
         {renderContent()}
       </div>
     );
-  }
+  },
 );
 Message.displayName = "Message";
 
 type ChatProps = {
   functionCallHandler?: (
-    toolCall: RequiredActionFunctionToolCall
+    toolCall: RequiredActionFunctionToolCall,
   ) => Promise<string>;
 };
 
@@ -253,7 +253,7 @@ const Chat = ({
       {
         method: "POST",
         body: JSON.stringify({ content: text }),
-      }
+      },
     );
     const stream = AssistantStream.fromReadableStream(response.body);
     handleReadableStream(stream);
@@ -266,7 +266,7 @@ const Chat = ({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ runId, toolCallOutputs }),
-      }
+      },
     );
     const stream = AssistantStream.fromReadableStream(response.body);
     handleReadableStream(stream);
@@ -353,7 +353,7 @@ const Chat = ({
   };
 
   const handleRequiresAction = async (
-    event: AssistantStreamEvent.ThreadRunRequiresAction
+    event: AssistantStreamEvent.ThreadRunRequiresAction,
   ) => {
     const runId = event.data.id;
     const toolCalls = event.data.required_action.submit_tool_outputs.tool_calls;
@@ -361,7 +361,7 @@ const Chat = ({
       toolCalls.map(async (toolCall) => {
         const result = await functionCallHandler(toolCall);
         return { output: result, tool_call_id: toolCall.id };
-      })
+      }),
     );
     setInputDisabled(true);
     submitActionResult(runId, toolCallOutputs);
