@@ -1,17 +1,17 @@
 import { media } from "./media";
 
 const resumeLink =
-  "https://drive.google.com/file/d/1bnc5Z9zYkEqLoIQ0uciPAweAFFj7WE3P/view?usp=sharing";
+  "https://drive.google.com/file/d/1QUgJQuBXV52gAj-zF_8rw-MZg-p1OEx-/view?usp=sharing";
 
 export const Bio = {
   name: "Jude",
   roles: [
     "n AI Engineer",
     "\u00A0Software Engineer",
-    "\u00A0UI/UX Designer",
-    "\u00A0Full Stack Dev",
     "\u00A0UI/UX Engineer",
     "\u00A0Tech Consultant",
+    "\u00A0Backend Engineer",
+    "\u00A0Full Stack Dev",
   ],
   description: `I develop engaging and scalable full-stack applications. Previously at a New York startup, I executed a full replatform and redesign in React. By collaborating with designers to build their design system, I was able to enhance product usability, brand consistency, and company efficiency. Ask me to demo my work! I'd love to deliver value for your team.`,
   github: "https://github.com/jude-clarke",
