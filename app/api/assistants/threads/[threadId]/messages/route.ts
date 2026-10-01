@@ -1,37 +1,53 @@
-import { assistantId } from "@/app/assistant-config";
 import { openai } from "@/app/openai";
+import { systemInstructions } from "@/app/instructions";
+import { getVectorStoreId } from "@/app/vector-store";
 
 export const runtime = "nodejs";
 
-// Send a new message to a thread (STREAM ONLY)
-export async function POST(
-  request: Request,
-  { params: { threadId } }: { params: { threadId: string } }
-) {
+// Send a new message and stream the response (STREAM ONLY)
+export async function POST(request: Request) {
   try {
-    const { content } = await request.json();
+    const { content, history = [] } = await request.json();
+    const vectorStoreId = await getVectorStoreId();
 
-    // 1. Add user message to the thread
-    await openai.beta.threads.messages.create(threadId, {
-      role: "user",
-      content,
+    const stream = await openai.responses.create({
+      model: process.env.OPENAI_MODEL,
+      instructions: systemInstructions,
+      input: [...history, { role: "user", content }],
+      tools: [
+        { type: "file_search", vector_store_ids: [vectorStoreId], max_num_results: 8 },
+      ],
+      stream: true,
     });
 
-    // 2. Start assistant run as a stream
-    const stream = openai.beta.threads.runs.stream(threadId, {
-      assistant_id: assistantId,
+    const encoder = new TextEncoder();
+    const readable = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const event of stream) {
+            controller.enqueue(encoder.encode(JSON.stringify(event) + "\n"));
+          }
+        } catch (err) {
+          controller.enqueue(
+            encoder.encode(
+              JSON.stringify({ type: "response.failed", message: String(err) }) + "\n"
+            )
+          );
+        } finally {
+          controller.close();
+        }
+      },
     });
 
-    // 3. Return stream directly — NOTHING ELSE
-    return new Response(stream.toReadableStream(), {
+    return new Response(readable, {
       headers: {
-        "Content-Type": "text/event-stream",
+        "Content-Type": "application/x-ndjson",
         "Cache-Control": "no-cache",
         Connection: "keep-alive",
       },
     });
   } catch (error) {
-    console.error("Assistant stream error:", error);
-    return new Response("Failed to start assistant stream", { status: 500 });
+    console.error("Response stream error:", error);
+    return new Response("Failed to start response stream", { status: 500 });
   }
 }
