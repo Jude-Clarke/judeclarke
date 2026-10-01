@@ -16,9 +16,9 @@ export default function RootLayout({ children }) {
       <body>
         <MediaProvider>
           {children}
-          {/* <div className="centerChat">
+          <div className="centerChat">
             <Chat />
-          </div> */}
+          </div>
         </MediaProvider>
       </body>
     </html>
