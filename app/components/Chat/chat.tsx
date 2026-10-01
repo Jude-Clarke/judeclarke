@@ -2,10 +2,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./chat.module.css";
-import { AssistantStream } from "openai/lib/AssistantStream";
-// @ts-expect-error - no types for this yet
-import { AssistantStreamEvent } from "openai/resources/beta/assistants/assistants";
-import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/runs/runs";
 import CustomMarkdown from "./CustomMarkdown";
 import { PulseLoader } from "react-spinners";
 import { FaPaperPlane } from "react-icons/fa";
@@ -94,15 +90,7 @@ const Message = React.forwardRef<HTMLDivElement, MessageProps>(
 );
 Message.displayName = "Message";
 
-type ChatProps = {
-  functionCallHandler?: (
-    toolCall: RequiredActionFunctionToolCall,
-  ) => Promise<string>;
-};
-
-const Chat = ({
-  functionCallHandler = () => Promise.resolve(""),
-}: ChatProps) => {
+const Chat = () => {
   const { triggerVideo, activeVideo, isChatOpen, setIsChatOpen } = useMedia();
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState([]);
@@ -237,39 +225,24 @@ const Chat = ({
     }
   }, [messages, isAutoScrollDisabled]);
 
-  // create a new thread ID when chat mounts
+  // create a local session ID when chat mounts
   useEffect(() => {
-    const createThread = async () => {
-      const res = await fetch("/api/assistants/threads", { method: "POST" });
-      const data = await res.json();
-      setThreadId(data.threadId);
-    };
-    createThread();
+    setThreadId(crypto.randomUUID());
   }, []);
 
   const sendMessage = async (text: string) => {
+    const history = messagesRef.current
+      .filter((m) => m.role === "user" || m.role === "assistant")
+      .map((m) => ({ role: m.role, content: m.text }));
+
     const response = await fetch(
       `/api/assistants/threads/${threadId}/messages`,
       {
         method: "POST",
-        body: JSON.stringify({ content: text }),
+        body: JSON.stringify({ content: text, history }),
       },
     );
-    const stream = AssistantStream.fromReadableStream(response.body);
-    handleReadableStream(stream);
-  };
-
-  const submitActionResult = async (runId, toolCallOutputs) => {
-    const response = await fetch(
-      `/api/assistants/threads/${threadId}/actions`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ runId, toolCallOutputs }),
-      },
-    );
-    const stream = AssistantStream.fromReadableStream(response.body);
-    handleReadableStream(stream);
+    handleReadableStream(response.body);
   };
 
   // KeyDown handler to allow newlines
@@ -307,7 +280,6 @@ const Chat = ({
 
   const handleSuggestionClick = (suggestionID: number) => {
     const suggestion = CHAT_SUGGESTIONS.find((sug) => sug.id === suggestionID);
-    console.log(suggestion.prompt);
     // 1. Save and Send
     saveUserMessage(suggestion.prompt);
     sendMessage(suggestion.prompt);
@@ -324,49 +296,6 @@ const Chat = ({
   };
 
   /* Stream Event Handlers */
-  const handleTextCreated = () => {
-    appendMessage("assistant", "");
-    lastAssistantRef.current = "";
-  };
-
-  const handleTextDelta = (delta) => {
-    if (delta.value != null) {
-      appendToLastMessage(delta.value);
-      lastAssistantRef.current += delta.value;
-    }
-  };
-
-  const handleImageFileDone = (image) => {
-    appendToLastMessage(`\n![${image.file_id}](/api/files/${image.file_id})\n`);
-    lastAssistantRef.current += `\n![${image.file_id}](/api/files/${image.file_id})\n`;
-  };
-
-  const toolCallCreated = (toolCall) => {
-    if (toolCall.type !== "code_interpreter") return;
-    appendMessage("code", "");
-  };
-
-  const toolCallDelta = (delta) => {
-    if (delta.type !== "code_interpreter" || !delta.code_interpreter.input)
-      return;
-    appendToLastMessage(delta.code_interpreter.input);
-  };
-
-  const handleRequiresAction = async (
-    event: AssistantStreamEvent.ThreadRunRequiresAction,
-  ) => {
-    const runId = event.data.id;
-    const toolCalls = event.data.required_action.submit_tool_outputs.tool_calls;
-    const toolCallOutputs = await Promise.all(
-      toolCalls.map(async (toolCall) => {
-        const result = await functionCallHandler(toolCall);
-        return { output: result, tool_call_id: toolCall.id };
-      }),
-    );
-    setInputDisabled(true);
-    submitActionResult(runId, toolCallOutputs);
-  };
-
   const handleRunCompleted = async () => {
     setLoading(false);
     setInputDisabled(false);
@@ -397,17 +326,43 @@ const Chat = ({
     });
   };
 
-  const handleReadableStream = (stream: AssistantStream) => {
-    stream.on("textCreated", handleTextCreated);
-    stream.on("textDelta", handleTextDelta);
-    stream.on("imageFileDone", handleImageFileDone);
-    stream.on("toolCallCreated", toolCallCreated);
-    stream.on("toolCallDelta", toolCallDelta);
-    stream.on("event", (event) => {
-      if (event.event === "thread.run.requires_action")
-        handleRequiresAction(event);
-      if (event.event === "thread.run.completed") handleRunCompleted();
-    });
+  const handleReadableStream = async (body: ReadableStream<Uint8Array>) => {
+    const reader = body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let started = false;
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split("\n");
+      buffer = lines.pop() ?? "";
+
+      for (const line of lines) {
+        if (!line.trim()) continue;
+        const event = JSON.parse(line);
+
+        if (event.type === "response.output_text.delta") {
+          if (!started) {
+            appendMessage("assistant", "");
+            lastAssistantRef.current = "";
+            started = true;
+          }
+          appendToLastMessage(event.delta);
+          lastAssistantRef.current += event.delta;
+        }
+
+        if (event.type === "response.completed") {
+          await handleRunCompleted();
+        }
+
+        if (event.type === "response.failed" || event.type === "error") {
+          setLoading(false);
+          setInputDisabled(false);
+        }
+      }
+    }
   };
 
   /* Utility helpers */
