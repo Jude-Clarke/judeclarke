@@ -14,7 +14,9 @@ export async function POST(request: Request) {
       model: process.env.OPENAI_MODEL,
       instructions: systemInstructions,
       input: [...history, { role: "user", content }],
-      tools: [{ type: "file_search", vector_store_ids: [vectorStoreId] }],
+      tools: [
+        { type: "file_search", vector_store_ids: [vectorStoreId], max_num_results: 8 },
+      ],
       stream: true,
     });
 
